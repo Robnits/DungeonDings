@@ -8,6 +8,7 @@ public class Player_behjaviour : MonoBehaviour
     public Rigidbody2D rb;
     public Weapon weapon;
     public GameObject scenenwechsel;
+    public Animator anim;
     
     private float damage;
     private float movespeed = 5f;
@@ -46,6 +47,18 @@ public class Player_behjaviour : MonoBehaviour
         {
             weapon.fire();
         }
+        if (move_x != 0 || move_y != 0)
+        {
+            Debug.Log("läuft");
+            anim.SetBool("isMoving", true);
+        }
+        else
+        {
+            Debug.Log("steht");
+            anim.SetBool("isMoving", false);
+        }
+
+
 
         moveDirection = new Vector2(move_x, move_y).normalized;
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -75,6 +88,5 @@ public class Player_behjaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
             life -= collision.gameObject.GetComponent<Enemy_behaviour>().GetDamage();
-        else { }
     }
 }

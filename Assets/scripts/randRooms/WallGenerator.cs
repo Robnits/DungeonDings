@@ -6,7 +6,7 @@ using UnityEngine;
 public static class WallGenerator
 {
    
-    public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualiser tilemapVisualiser)
+    /*public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualiser tilemapVisualiser)
     {
         var basicWallPositions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionList);
     }
@@ -21,5 +21,5 @@ public static class WallGenerator
                 var neighbours = position + direction;
             }
         }
-    }
+    }*/
 }

@@ -17,7 +17,7 @@ public class Enemy_behaviour : MonoBehaviour
 
     private float life = 10f;
     private float damage = 3f;
-    private float movementspeed = 0.1f;
+    //private float movementspeed = 0.1f;
     private float value = 10f;
     private bool playerIsInRange;
     private Quaternion targetRotation;

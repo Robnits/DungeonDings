@@ -3719,6 +3719,7 @@ GameObject:
   - component: {fileID: 218992938}
   - component: {fileID: 218992937}
   - component: {fileID: 218992936}
+  - component: {fileID: 218992941}
   m_Layer: 0
   m_Name: Zeri-2
   m_TagString: Player
@@ -3785,9 +3786,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008418202, y: -0.0007546544}
+  m_Offset: {x: 0.00005658468, y: -0.00075463456}
   serializedVersion: 2
-  m_Radius: 0.50585616
+  m_Radius: 0.16304128
 --- !u!114 &218992938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3803,6 +3804,7 @@ MonoBehaviour:
   rb: {fileID: 218992936}
   weapon: {fileID: 1809925740}
   scenenwechsel: {fileID: 375478619}
+  anim: {fileID: 218992941}
   upgradeSO: {fileID: 11400000, guid: 519b717bee398e645957e370422e7abd, type: 2}
 --- !u!212 &218992939
 SpriteRenderer:
@@ -3845,7 +3847,7 @@ SpriteRenderer:
   m_SortingLayerID: 1172353363
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 830517a89b326a341bd352f38996e447, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6a668f91ba27544ca9fa959452ab177, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3866,12 +3868,33 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.09, y: -3.51, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1809925738}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &218992941
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218992935}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fa482fe4458b89e49a7b787705597fdf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &227942881
 GameObject:
   m_ObjectHideFlags: 0
@@ -9884,8 +9907,8 @@ Transform:
   m_GameObject: {fileID: 1809925737}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.9, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.6, z: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalScale: {x: 0.04, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 227942882}
