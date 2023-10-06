@@ -43,7 +43,7 @@ public class Rats : MonoBehaviour
         }
     }
 
-        void Death()
+    void Death()
     {
         ScoreSO.NewMoney += value;
         Destroy(gameObject);  
@@ -53,13 +53,10 @@ public class Rats : MonoBehaviour
     {
         return damage;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
-        {
             life -= player.GetComponent<Player_behjaviour>().GetDamage();
-            Debug.Log(life);
-        }
     }
-
 }
