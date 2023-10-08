@@ -6,20 +6,27 @@ using UnityEngine;
 public static class WallGenerator
 {
    
-    /*public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualiser tilemapVisualiser)
+    public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualiser tilemapVisualiser)
     {
         var basicWallPositions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionList);
+        foreach (var position in basicWallPositions) 
+        {
+            tilemapVisualiser.PaintSingleBasicWall(position);
+        }
     }
 
-    private static object FindWallsInDirections(HashSet<Vector2Int> floorPositions, List<Vector2Int> cardinalDirectionList)
+    private static HashSet<Vector2Int> FindWallsInDirections(HashSet<Vector2Int> floorPositions, List<Vector2Int> directionList)
     {
         HashSet<Vector2Int> wallPositions = new HashSet<Vector2Int>();
         foreach (var position in floorPositions)
         {
             foreach (var direction in directionList)
             {
-                var neighbours = position + direction;
+                var neighbourPosition = position + direction;
+                if(floorPositions.Contains(neighbourPosition) == false)
+                    wallPositions.Add(neighbourPosition);
             }
         }
-    }*/
+        return wallPositions;
+    }
 }
