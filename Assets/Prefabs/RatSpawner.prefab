@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 33416204058506315}
   - component: {fileID: 8171273910580897129}
   - component: {fileID: 2840355951319684218}
-  - component: {fileID: 1884749839253797886}
   - component: {fileID: 4894755632837252627}
   - component: {fileID: 2366262648491459896}
   m_Layer: 0
@@ -85,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &2840355951319684218
@@ -117,7 +116,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -133,47 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!68 &1884749839253797886
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7542046107334347594}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.5, y: 0}
-  - {x: 0.5, y: 0}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!50 &4894755632837252627
 Rigidbody2D:
   serializedVersion: 4
@@ -213,8 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d8a8acf95ebfcd4f8eb71500bc3bacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 6976622902134554275, guid: 387519f8887a1bf43965856f930c0a58, type: 3}
-  ScoreSO: {fileID: 11400000, guid: abea99c760a736541abaa2385cd48339, type: 2}
+  player: {fileID: 0}
+  ScoreSO: {fileID: 11400000, guid: ae5c460e141021840a1fe50e6ab8b93c, type: 2}
   SpawnrateRats: 5
   RatPrefab: {fileID: 5052793950568914181, guid: 782fa4dc782bc024e80e3bc958639704, type: 3}
-  RatSpawnerRB: {fileID: 4894755632837252627}

@@ -8,6 +8,7 @@ TagManager:
   - Rooms
   - Bullet
   - Enemy
+  - Rats
   layers:
   - Default
   - TransparentFX
