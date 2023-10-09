@@ -10520,7 +10520,11 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3129571541122177930, guid: a0cb919a6af4fcf46bb4a69338519ad7, type: 3}
   firepoint: {fileID: 227942882}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1001 &1912186977
+=======
+--- !u!1001 &1820192850
+>>>>>>> d22a0fe5543a27464fe1f759f828ccb2f337813b
 =======
 --- !u!1001 &1820192850
 >>>>>>> d22a0fe5543a27464fe1f759f828ccb2f337813b
@@ -10531,6 +10535,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< HEAD
 <<<<<<< HEAD
     - target: {fileID: 2307541807259303530, guid: 02af3337ed995e440b95dc044239d852, type: 3}
       propertyPath: target
@@ -10589,6 +10594,8 @@ PrefabInstance:
       addedObject: {fileID: 139965871}
   m_SourcePrefab: {fileID: 100100000, guid: 02af3337ed995e440b95dc044239d852, type: 3}
 =======
+=======
+>>>>>>> d22a0fe5543a27464fe1f759f828ccb2f337813b
     - target: {fileID: 33416204058506315, guid: e7e5a495684746c489acdb39478d9f21, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -10719,6 +10726,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7e5a495684746c489acdb39478d9f21, type: 3}
+<<<<<<< HEAD
+>>>>>>> d22a0fe5543a27464fe1f759f828ccb2f337813b
+=======
 >>>>>>> d22a0fe5543a27464fe1f759f828ccb2f337813b
 --- !u!1001 &4874082126486700433
 PrefabInstance:
@@ -10888,8 +10898,13 @@ SceneRoots:
   - {fileID: 4874082126486700433}
   - {fileID: 218992940}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 1912186977}
   - {fileID: 1126117476}
+=======
+  - {fileID: 1820192850}
+  - {fileID: 1718883232}
+>>>>>>> d22a0fe5543a27464fe1f759f828ccb2f337813b
 =======
   - {fileID: 1820192850}
   - {fileID: 1718883232}
