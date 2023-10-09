@@ -16,14 +16,6 @@ public class EnemysHauptklasse : MonoBehaviour
     protected float value;
     protected float damage;
 
-    void Update()
-    {
-        //player = GameObject.Find("Player");
-
-        if (life <= 0)
-            Death();
-    }
-
     protected void Death()
     {
         ScoreSO.NewMoney += value;
