@@ -17,24 +17,26 @@ public class RatSpawner : MonoBehaviour
     private float value = 10f;
     private float damage = 3f;
     [SerializeField]  
-    float SpawnrateRats = 1f;
-    private bool playerIsInRange;
+    private float SpawnrateRats = 10f;
+    private bool test = true;
 
     public GameObject RatPrefab;
-    private Rigidbody2D RatSpawnerRB;
-
 
     private void Start()
     {
-        player = GameObject.Find("Player");
-        RatSpawnerRB = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player");        
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision == gameObject.CompareTag("Player")) 
-            playerIsInRange = true;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (test)
+                StartCoroutine(SpawnRatsTimer());
+            test = false;
+        }
     }
+
     void Update()
     {
         if (life <= 0)
@@ -51,32 +53,28 @@ public class RatSpawner : MonoBehaviour
     {
         return damage;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
-        {
             life -= player.GetComponent<Player_behjaviour>().GetDamage();
-            Debug.Log(life);
-        }
     }
 
     IEnumerator SpawnRatsTimer()
     {
-       
-        while (playerIsInRange)
-        {
-            yield return new WaitForSeconds(SpawnrateRats);
-            SpawnRats();
-        }
+        print("ienum");
+        yield return new WaitForSeconds(SpawnrateRats);
+        print("spawn");
+        SpawnRats();
+
+        StartCoroutine(SpawnRatsTimer());
     }
 
     void SpawnRats()
     {
-        int SpawnPosX = Random.Range(-2, 2);
-        int SpawnPosY = Random.Range(-2, 2);
+        float SpawnPosX = Random.Range(-1f, 1f);
+        float SpawnPosY = Random.Range(-1f, 1f);
 
-        Instantiate(RatPrefab, new Vector2(transform.position.x + SpawnPosX, transform.position.y + SpawnPosY), Quaternion.identity);
+        Instantiate(RatPrefab, new Vector3(transform.position.x + SpawnPosX, transform.position.y + SpawnPosY, 0), Quaternion.identity);
     }
 }
-
-

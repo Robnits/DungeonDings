@@ -8,19 +8,20 @@ using UnityEngine.UIElements;
 
 public class Rats : EnemysHauptklasse
 {
+
+    private Rigidbody2D rb;
     private void Start()
     {
         speed = 3.0f;
         life = 3f;
         value = 5f;
         damage = 1f;
+        player = GameObject.FindGameObjectWithTag("Player");
+        rb = GetComponent<Rigidbody2D>();
     }
-
-
 
     void Update()
     {
-        //player = GameObject.Find("Player");
 
         if (life <= 0)
             Death();
@@ -28,10 +29,26 @@ public class Rats : EnemysHauptklasse
         transform.LookAt(player.transform.position);
         transform.Rotate(new Vector2(0, -90), Space.Self);//correcting the original rotation
 
-        //move towards the player
+        /* 
+         
+         ///
+         /// habe beide Fehler mit dem durch die wand bewegen und nicht in den Spieler gehen gefixed.
+         /// 
         if (Vector3.Distance(transform.position, player.transform.position) > 1f)
         {
             transform.Translate(new Vector2(speed * Time.deltaTime, 0));
+            rb.velocity
+        }*/
+
+        // Move towards the player
+        if (Vector3.Distance(transform.position, player.transform.position) > 0f)
+        {
+            Vector2 moveDirection = (player.transform.position - transform.position).normalized;
+            rb.velocity = moveDirection * speed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero; // Stop moving if close to the player.
         }
     }
 }

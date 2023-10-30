@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemysHauptklasse : MonoBehaviour
 { 
-    public GameObject player;
+    protected GameObject player;
 
 
     [SerializeField]
@@ -15,6 +15,9 @@ public class EnemysHauptklasse : MonoBehaviour
     protected float life;
     protected float value;
     protected float damage;
+
+
+
 
     protected void Death()
     {
