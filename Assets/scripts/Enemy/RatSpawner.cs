@@ -62,9 +62,7 @@ public class RatSpawner : MonoBehaviour
 
     IEnumerator SpawnRatsTimer()
     {
-        print("ienum");
         yield return new WaitForSeconds(SpawnrateRats);
-        print("spawn");
         SpawnRats();
 
         StartCoroutine(SpawnRatsTimer());

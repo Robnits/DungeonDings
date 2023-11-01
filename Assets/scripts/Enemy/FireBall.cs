@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-    public Transform target;
+    private GameObject player;
     private float speed = 3f;
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, target.position) > 1f)
+        if (Vector3.Distance(transform.position, player.transform.position) > 1f)
         {
             transform.Translate(new Vector2(speed * Time.deltaTime, 0));
 
