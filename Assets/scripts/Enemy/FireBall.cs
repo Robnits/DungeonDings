@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-   
-    private float speed = 10f;
-    public Rigidbody2D FireBallRB;
-    
 
+    private GameObject player;
+    private float speed = 3f;
+
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private void Start()
     {
@@ -16,6 +20,13 @@ public class FireBall : MonoBehaviour
     }
     private void Update()
     {
+
+        if (Vector3.Distance(transform.position, player.transform.position) > 1f)
+        {
+            transform.Translate(new Vector2(speed * Time.deltaTime, 0));
+
+        }
+
         
         DestoyAfterTime();
     }

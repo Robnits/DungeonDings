@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2840355951319684218}
   - component: {fileID: 4894755632837252627}
   - component: {fileID: 2366262648491459896}
+  - component: {fileID: -6576832835972824287}
   m_Layer: 0
   m_Name: RatSpawner
   m_TagString: Untagged
@@ -76,15 +77,15 @@ SpriteRenderer:
   m_SortingLayerID: 1172353363
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 0e2e9347c4334ef4d9ecf5024e9317bc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae790d720b52fdf4a9d7b0c6214b05af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.875, y: 1.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &2840355951319684218
@@ -116,21 +117,21 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.875, y: 1.75}
+    newSize: {x: 0.875, y: 1.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 8, y: 8}
   m_EdgeRadius: 0
 --- !u!50 &4894755632837252627
 Rigidbody2D:
@@ -171,7 +172,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d8a8acf95ebfcd4f8eb71500bc3bacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   ScoreSO: {fileID: 11400000, guid: ae5c460e141021840a1fe50e6ab8b93c, type: 2}
   SpawnrateRats: 5
   RatPrefab: {fileID: 5052793950568914181, guid: 782fa4dc782bc024e80e3bc958639704, type: 3}
+--- !u!61 &-6576832835972824287
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7542046107334347594}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.6}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.875, y: 1.75}
+    newSize: {x: 0.875, y: 1.75}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.875, y: 0.4}
+  m_EdgeRadius: 0
