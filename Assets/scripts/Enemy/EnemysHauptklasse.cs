@@ -19,6 +19,7 @@ public class EnemysHauptklasse : MonoBehaviour
 
 
 
+
     protected void Death()
     {
         ScoreSO.NewMoney += value;

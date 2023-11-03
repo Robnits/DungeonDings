@@ -51,4 +51,21 @@ public class Rats : EnemysHauptklasse
             rb.velocity = Vector2.zero; // Stop moving if close to the player.
         }
     }
+
+    protected void Death()
+    {
+        ScoreSO.NewMoney += value;
+        Destroy(gameObject);
+    }
+
+    public float GetDamage()
+    {
+        return damage;
+    }
+
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+            life -= player.GetComponent<Player_behjaviour>().GetDamage();
+    }
 }

@@ -6,7 +6,7 @@ public class Enemy_Weapon : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform firepoint;
-    private float fireforce = 2f;
+    private float fireforce = 10f;
 
     private float baseDamage = 3f;
 

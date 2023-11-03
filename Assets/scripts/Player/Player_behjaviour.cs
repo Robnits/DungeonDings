@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Player_behjaviour : MonoBehaviour
 {
-    
+    public GameObject playerGO;
     public Rigidbody2D rb;
     public Weapon weapon;
     public GameObject scenenwechsel;
     public Animator anim;
+
+    public float playerPosX;
+    public float playerPosY;
     
     private float damage;
     private float movespeed = 5f;
@@ -40,6 +43,7 @@ public class Player_behjaviour : MonoBehaviour
     void Update()
     {
         
+
         float move_x = Input.GetAxisRaw("Horizontal");
         float move_y = Input.GetAxisRaw("Vertical");
 
@@ -60,9 +64,12 @@ public class Player_behjaviour : MonoBehaviour
         
         if (life <= 0)
             Death();
-        
-            
-        
+
+        Vector2 PositionPlayer = playerGO.transform.position;
+
+        playerPosX = PositionPlayer.x;
+        playerPosY = PositionPlayer.y;
+
     }
     //Todes animierung und ende des spieles
     private void Death()
