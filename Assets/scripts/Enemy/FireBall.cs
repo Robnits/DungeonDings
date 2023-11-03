@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
+
     private GameObject player;
     private float speed = 3f;
+
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    private void Start()
+    {
+        FireBallRB = GetComponent<Rigidbody2D>();
+    }
     private void Update()
     {
+
         if (Vector3.Distance(transform.position, player.transform.position) > 1f)
         {
             transform.Translate(new Vector2(speed * Time.deltaTime, 0));
 
         }
+
+        
+        DestoyAfterTime();
     }
 
     void DestoyAfterTime()
@@ -28,8 +38,11 @@ public class FireBall : MonoBehaviour
    
         private void OnCollisionEnter2D(Collision2D collision)
         {
+        if (collision.gameObject != CompareTag("Enemy"))
+        {
             Destroy(gameObject);
             GetComponent<DevilFireBall>().FireBallActive = false;
+        }
 
         }
         

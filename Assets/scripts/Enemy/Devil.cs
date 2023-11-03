@@ -6,25 +6,22 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.UIElements;
 
-public class Devil : MonoBehaviour
+public class Devil : EnemysHauptklasse
 {
-    public GameObject player;
+   
     public GameObject weapon;
 
-    [SerializeField]
-    private FloatSO ScoreSO;
-
-    private float life = 10f;
-    private float damage = 3f;
-    
-    private float value = 10f;
     private bool playerIsInRange;
-    private bool playerIsInMelee;
+    public bool playerIsInMelee;
     private Quaternion targetRotation;
+
+    private float Countdown = 3f;
     // Start is called before the first frame update
     void Start()
     {
-
+        life = 10f;
+        damage = 3f;
+        value = 10f;
     }
 
     // Update is called once per frame
@@ -66,12 +63,12 @@ public class Devil : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && playerIsInMelee == false)
         {
             playerIsInRange = true;
-            if(GetComponent<DevilFireBall>().FireBallActive == false)
-            weapon.GetComponent<DevilFireBall>().fireFireball();
-
+            StartCoroutine(FireballCountdown());
+                
+            
         }
     }
 
@@ -83,5 +80,16 @@ public class Devil : MonoBehaviour
         }
     }
 
-  
+  IEnumerator FireballCountdown()
+    {
+        while (playerIsInRange)
+        {
+            yield return new WaitForSeconds(Countdown);
+            weapon.GetComponent<DevilFireBall>().fireFireball();
+        }
+        yield return null;
+    }
+
+
+
 }
