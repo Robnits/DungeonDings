@@ -7,17 +7,16 @@ public class FireBall : MonoBehaviour
 
     private GameObject player;
     private float speed = 3f;
+    private Rigidbody2D FireBallRB;
 
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-    }
-
-    private void Start()
-    {
         FireBallRB = GetComponent<Rigidbody2D>();
     }
+
+  
     private void Update()
     {
 
