@@ -41,25 +41,9 @@ public class Devil : EnemysHauptklasse
         }
     }
 
-    private void Death()
-    {
-        ScoreSO.NewMoney += value;
-        Destroy(gameObject);
-    }
+   
 
-    public float GetDamage()
-    {
-        return damage;
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            life -= player.GetComponent<Player_behjaviour>().GetDamage();
-            Debug.Log(life);
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
