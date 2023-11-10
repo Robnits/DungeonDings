@@ -23,7 +23,7 @@ public class MeleeDevil : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             playerIsInRange = true;
-            GetComponent<Devil>().playerIsInMelee = true;
+            //GetComponent<Devil>().playerIsInMelee = true;
             StartCoroutine(MeleeDevilCountdown());
 
 
@@ -35,7 +35,6 @@ public class MeleeDevil : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             playerIsInRange = false;
-            GetComponent<Devil>().playerIsInMelee = false;
         }
     }
 

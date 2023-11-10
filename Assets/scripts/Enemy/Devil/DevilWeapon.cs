@@ -7,14 +7,15 @@ public class DevilFireBall : MonoBehaviour
     
     public GameObject fireBallPrefab;
     public Transform firepoint;
-    public bool FireBallActive = false;
     private float fireforce = 3f;
-    public Transform player;
-    public Transform target;
-    public Transform start;
+    private GameObject player;
 
     private float baseDamage = 3f;
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     public float GetDamage()
     {
@@ -27,7 +28,7 @@ public class DevilFireBall : MonoBehaviour
 
         GameObject bullet = Instantiate(fireBallPrefab, firepoint.position, firepoint.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * fireforce;
-        FireBallActive = true;
+        
 
         
     }
