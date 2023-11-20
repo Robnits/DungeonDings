@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player_behjaviour : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
     public Weapon weapon;
-    public GameObject scenenwechsel;
+    private GameObject scenenwechsel;
     public Animator anim;
     
     private float damage;
@@ -24,6 +24,8 @@ public class Player_behjaviour : MonoBehaviour
 
     private void Awake()
     {
+        scenenwechsel = GameObject.FindGameObjectWithTag("Respawn");
+        rb = GetComponent<Rigidbody2D>();
         gameObject.transform.position = new Vector3(4, 0, 0); 
         life = 10f + upgradeSO.Life;
         damage = upgradeSO.Damage + weapon.GetDamage();

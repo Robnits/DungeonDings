@@ -5,8 +5,11 @@ using UnityEngine;
 public class Cam_Follow : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject player;
-
+    private GameObject player;
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     private void FixedUpdate()
     {
         gameObject.transform.position = player.gameObject.transform.position;
