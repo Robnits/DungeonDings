@@ -10,7 +10,7 @@ public class Player_behjaviour : MonoBehaviour
     public Animator anim;
     
     private float damage;
-    private float movespeed = 5f;
+    private float movespeed = 2.5f;
     private float life;
     
 

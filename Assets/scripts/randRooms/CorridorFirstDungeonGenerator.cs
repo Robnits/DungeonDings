@@ -28,9 +28,6 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
 
         List<List<Vector2Int>> corridors = CreateCorridors(floorPositions, potentialRoomPositions);
 
-        // Korridore erstellen
-        //CreateCorridors(floorPositions, potentialRoomPositions);
-
         // Räume in potenziellen Raumpositionen erstellen
         HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
 
