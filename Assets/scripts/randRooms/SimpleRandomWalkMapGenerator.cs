@@ -5,12 +5,18 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
+
 // Ein einfacher Dungeon-Generator, der zufällige Wege durchläuft
 public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
 {
     // Parameter für den einfachen zufälligen Weg
     [SerializeField]
     protected SimpleRandomWalkSO randomWalkParameters;
+
+    public GameObject ratspwaner;
+
+    private int a;
 
     // Methode für die Ausführung der prozeduralen Generierung
     protected override void RunProceduralGeneration()
@@ -37,10 +43,33 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
             var path = ProceduralSpawn.SimpleRandomWalk(currentPosition, parameters.walklenght);
             floorPositions.UnionWith(path);
 
+            a++;
+            if (a == 30)
+            {
+                a = 0;
+                InstantiateRatspwaner(floorPositions);
+            }
+            
+            
             // Wenn in jeder Iteration zufällig gestartet werden soll
             if (parameters.startRandomlyEachIteration)
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }
         return floorPositions;
+    }
+
+    private void InstantiateRatspwaner(HashSet<Vector2Int> positions)
+    {
+        if (positions.Count > 0)
+        {
+            // Choose a random index
+            int randomIndex = Random.Range(0, positions.Count);
+
+            // Get the corresponding position
+            Vector2Int randomPosition = positions.ElementAt(randomIndex);
+
+            // Instantiate the ratspwaner at the chosen position
+            Instantiate(ratspwaner, new Vector3(randomPosition.x, randomPosition.y, 0f), Quaternion.identity);
+        }
     }
 }

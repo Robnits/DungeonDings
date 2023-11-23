@@ -12,7 +12,7 @@ public class Rats : EnemysHauptklasse
     private Rigidbody2D rb;
     private void Start()
     {
-        speed = 3.0f;
+        speed = 1.0f;
         life = 3f;
         value = 5f;
         damage = 1f;
