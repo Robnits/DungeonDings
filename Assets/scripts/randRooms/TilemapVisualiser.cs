@@ -19,9 +19,11 @@ public class TilemapVisualiser : MonoBehaviour
         paintTiles(floorPositions, floorTilemap, floorTile);
     }
 
+
     // Hilfsmethode zum Darstellen von Tiles an den angegebenen Positionen auf der Tilemap
     private void paintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
     {
+        
         foreach (var position in positions)
         {
             paintSingleTile(tilemap, tile, position);
@@ -38,6 +40,15 @@ public class TilemapVisualiser : MonoBehaviour
     // Methode zum Zurücksetzen der Tilemaps
     public void clear()
     {
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+
+        // Destroy each spawner
+        foreach (GameObject spawner in spawners)
+        {
+            DestroyImmediate(spawner);
+        }
+
+        // Clear tilemaps
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
     }

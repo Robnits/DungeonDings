@@ -68,6 +68,7 @@ public class Player_behjaviour : MonoBehaviour
     private void Death()
     {
         scenenwechsel.GetComponent<scenemanager>().mainmenu();
+        Destroy(gameObject);
     }
 
     private void FixedUpdate()
