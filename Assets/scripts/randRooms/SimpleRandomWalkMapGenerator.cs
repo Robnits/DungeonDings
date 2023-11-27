@@ -15,7 +15,8 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
     protected SimpleRandomWalkSO randomWalkParameters;
 
     public GameObject ratspwaner;
-
+    [SerializeField]
+    private int Spawnpercantage;
     private int a;
 
     // Methode für die Ausführung der prozeduralen Generierung
@@ -44,7 +45,7 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
             floorPositions.UnionWith(path);
 
             a++;
-            if (a == 30)
+            if (a == Spawnpercantage)
             {
                 a = 0;
                 InstantiateRatspwaner(floorPositions);
@@ -67,6 +68,7 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
 
             // Get the corresponding position
             Vector2Int randomPosition = positions.ElementAt(randomIndex);
+            
 
             // Instantiate the ratspwaner at the chosen position
             Instantiate(ratspwaner, new Vector3(randomPosition.x, randomPosition.y, 0f), Quaternion.identity);

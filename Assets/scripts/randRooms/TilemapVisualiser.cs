@@ -40,6 +40,15 @@ public class TilemapVisualiser : MonoBehaviour
     // Methode zum Zurücksetzen der Tilemaps
     public void clear()
     {
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+
+        // Destroy each spawner
+        foreach (GameObject spawner in spawners)
+        {
+            DestroyImmediate(spawner);
+        }
+
+        // Clear tilemaps
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
     }

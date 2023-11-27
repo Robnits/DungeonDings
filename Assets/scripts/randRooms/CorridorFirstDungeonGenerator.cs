@@ -12,7 +12,11 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
     [SerializeField]
     [Range(0.1f, 1)]
     private float roomPercent = 0.8f;
-
+    
+    private void Start()
+    {
+        GenerateDungeon();
+    }
     // Einstiegspunkt für die prozedurale Generierung
     protected override void RunProceduralGeneration()
     {
