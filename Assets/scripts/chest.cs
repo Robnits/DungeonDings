@@ -6,12 +6,13 @@ using TMPro;
 using System.Numerics;
 using Random = UnityEngine.Random;
 
-public class chest : MonoBehaviour
+public class Chest : MonoBehaviour
 {
-    
+    public GameObject canvas;
     private List<string> commonItems = new List<string>();
     void Start()
     {
+        canvas.SetActive(false);
         ResetList();
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -21,16 +22,25 @@ public class chest : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Player"))
             {
+                canvas.SetActive(true);
+                Time.timeScale = 0;
+
                 TextMeshProUGUI buttonText1 = GameObject.Find("Button1").GetComponentInChildren<TextMeshProUGUI>();
                 TextMeshProUGUI buttonText2 = GameObject.Find("Button2").GetComponentInChildren<TextMeshProUGUI>();
                 TextMeshProUGUI buttonText3 = GameObject.Find("Button3").GetComponentInChildren<TextMeshProUGUI>();
                 //buttonText.text = "hello World";
                 
                 
-                    hilf = Random.Range(0, commonItems.Count);
-                    buttonText1.text = commonItems[hilf];
-                    commonItems.Remove(commonItems[hilf]);
-                
+                hilf = Random.Range(0, commonItems.Count);
+                buttonText1.text = commonItems[hilf];
+                commonItems.Remove(commonItems[hilf]);
+                hilf = Random.Range(0, commonItems.Count);
+                buttonText2.text = commonItems[hilf];
+                commonItems.Remove(commonItems[hilf]);
+                hilf = Random.Range(0, commonItems.Count);
+                buttonText3.text = commonItems[hilf];
+                commonItems.Remove(commonItems[hilf]);
+
             }
         }
     }

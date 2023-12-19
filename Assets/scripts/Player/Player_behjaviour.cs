@@ -87,5 +87,27 @@ public class Player_behjaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Rats"))
             life -= collision.gameObject.GetComponent<Rats>().GetDamage();
     }
+        private bool instantiateList = false; 
+        private List<string> commonItems = new List<string>();
+    public void Upgrades(int NumberInList)
+    {
+        if (!instantiateList)
+        {
+            instantiateList = true;
+            commonItems.Add("Minigun");
+            commonItems.Add("Maschine Pistole");
+            commonItems.Add("50.Cal");
+            commonItems.Add("Marksmanrifle");
+            commonItems.Add("Piercing 1");
+            commonItems.Add("Piercing 2");
+            commonItems.Add("Glass Cannon");
+            commonItems.Add("Mamas Latschen");
+            commonItems.Add("Dornen");
+            commonItems.Add("Milch");
+            commonItems.Add("Gewichte");
+        }
+
+
+    }
 }
  

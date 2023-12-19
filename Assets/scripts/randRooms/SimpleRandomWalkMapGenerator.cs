@@ -16,8 +16,8 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
 
     public GameObject ratspwaner;
     [SerializeField]
-    [Range(0f, 100f)]
-    private float Spawnpercantage;
+    [Range(0, 100)]
+    private int Spawnpercantage;
 
     // Methode für die Ausführung der prozeduralen Generierung
     protected override void RunProceduralGeneration()
@@ -60,7 +60,7 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
             switch (whatGetGenerated)
             {
                 case 1:
-                    hilf = Random.Range(0, 100);
+                    hilf = Random.Range(1, 100);
                     if (hilf <= Spawnpercantage)
                     {
                         InstantiatePrefabsThatSpawnOnMap(position, whatGetGenerated);

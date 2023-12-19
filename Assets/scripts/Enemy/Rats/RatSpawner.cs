@@ -17,7 +17,7 @@ public class RatSpawner : MonoBehaviour
     private float value = 10f;
     private float damage = 3f;
     [SerializeField]  
-    private float SpawnrateRats = 10f;
+    private float SpawnrateRats = 8f;
     private bool test = true;
 
     public GameObject RatPrefab;
@@ -62,8 +62,9 @@ public class RatSpawner : MonoBehaviour
 
     IEnumerator SpawnRatsTimer()
     {
-        yield return new WaitForSeconds(SpawnrateRats);
         SpawnRats();
+        yield return new WaitForSeconds(SpawnrateRats);
+        
 
         StartCoroutine(SpawnRatsTimer());
     }
