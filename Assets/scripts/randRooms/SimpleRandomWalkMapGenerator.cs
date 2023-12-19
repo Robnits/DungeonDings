@@ -16,8 +16,8 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
 
     public GameObject ratspwaner;
     [SerializeField]
-    private int Spawnpercantage;
-    private int a;
+    [Range(0f, 100f)]
+    private float Spawnpercantage;
 
     // Methode für die Ausführung der prozeduralen Generierung
     protected override void RunProceduralGeneration()
@@ -42,36 +42,47 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
         {
             // Zufälligen Weg erstellen und Bodenpositionen hinzufügen
             var path = ProceduralSpawn.SimpleRandomWalk(currentPosition, parameters.walklenght);
-            floorPositions.UnionWith(path);
-
-            a++;
-            if (a == Spawnpercantage)
-            {
-                a = 0;
-                InstantiateRatspwaner(floorPositions);
-            }
-            
+            floorPositions.UnionWith(path);          
             
             // Wenn in jeder Iteration zufällig gestartet werden soll
             if (parameters.startRandomlyEachIteration)
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }
+        testspawn(floorPositions, 1);
         return floorPositions;
     }
 
-    private void InstantiateRatspwaner(HashSet<Vector2Int> positions)
+    private void testspawn(HashSet<Vector2Int> floorPositions, int whatGetGenerated)
     {
-        if (positions.Count > 0)
+        int hilf;
+        foreach (Vector2Int position in floorPositions)
         {
-            // Choose a random index
-            int randomIndex = Random.Range(0, positions.Count);
-
-            // Get the corresponding position
-            Vector2Int randomPosition = positions.ElementAt(randomIndex);
-            
-
-            // Instantiate the ratspwaner at the chosen position
-            Instantiate(ratspwaner, new Vector3(randomPosition.x, randomPosition.y, 0f), Quaternion.identity);
+            switch (whatGetGenerated)
+            {
+                case 1:
+                    hilf = Random.Range(0, 100);
+                    if (hilf <= Spawnpercantage)
+                    {
+                        InstantiatePrefabsThatSpawnOnMap(position, whatGetGenerated);
+                    }
+                    break;
+                case 2:
+                    break;
+            }
         }
+
+    }
+
+    private void InstantiatePrefabsThatSpawnOnMap(Vector2Int positions, int whatGetGenerated)
+    {
+        switch (whatGetGenerated)
+        {
+            case 1:
+                // Instantiate the ratspwaner at the chosen position
+                Instantiate(ratspwaner, new Vector3(positions.x + 0.5f, positions.y + 0.5f, 0f), Quaternion.identity);
+                break;
+        }
+        
+        
     }
 }

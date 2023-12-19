@@ -47,7 +47,7 @@ public class Player_behjaviour : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            weapon.fire();
+            weapon.FireCounter();
         }
         if (move_x != 0 || move_y != 0)
             anim.SetBool("isMoving", true);

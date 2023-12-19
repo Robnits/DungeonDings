@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 0c553d4d4064a3847b0c42f64ac81108
   - enabled: 1
-    path: Assets/Prefabs/Scenes/first_Scene.unity
+    path: Assets/pixelart/karsiori/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/procedural dungeon.unity
