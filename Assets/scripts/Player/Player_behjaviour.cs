@@ -20,6 +20,7 @@ public class Player_behjaviour : MonoBehaviour
     [SerializeField]
     private UpgradeSO upgradeSO;
 
+
     
 
     private void Awake()
@@ -89,25 +90,83 @@ public class Player_behjaviour : MonoBehaviour
     }
         private bool instantiateList = false; 
         private List<string> commonItems = new List<string>();
+        private List<string> rareItems = new List<string>();
+        private List<string> EpicItems = new List<string>();
+        private List<string> LegendaryItems = new List<string>();
     public void Upgrades(int NumberInList)
     {
         if (!instantiateList)
         {
             instantiateList = true;
-            commonItems.Add("Minigun");
-            commonItems.Add("Maschine Pistole");
-            commonItems.Add("50.Cal");
-            commonItems.Add("Marksmanrifle");
+            commonItems.Clear();
             commonItems.Add("Piercing 1");
-            commonItems.Add("Piercing 2");
-            commonItems.Add("Glass Cannon");
+            commonItems.Add("Pistol");
+            commonItems.Add("Helm");
             commonItems.Add("Mamas Latschen");
             commonItems.Add("Dornen");
+            commonItems.Add("Fußball");
             commonItems.Add("Milch");
-            commonItems.Add("Gewichte");
+            commonItems.Add("quick mag");
+            commonItems.Add("Kleines Waffenwissen");
+            commonItems.Add("wenig Munni");
+            commonItems.Add("Dieb");
+
+            rareItems.Clear();
+            rareItems.Add("Piercing 2");
+            rareItems.Add("Rüstungsschuhe");
+            rareItems.Add("Kaktus an die Rüstung geklebt");
+            rareItems.Add("Schulausbildung(Amerika)");
+            rareItems.Add("Gewichte");
+            rareItems.Add("Marcels faulheit");
+            rareItems.Add("Waffenwissen");
+            rareItems.Add("Dual wield maybe");
+
+            EpicItems.Clear();
+            EpicItems.Add("Piercing 3");
+            EpicItems.Add("Maschine Pistole");
+            EpicItems.Add("Marksmanrifle");
+            EpicItems.Add("Glass Cannon");
+            EpicItems.Add("Rüstung");
+            EpicItems.Add("Laufschuhe");
+            EpicItems.Add("Robins T-Shirt");
+            EpicItems.Add("Robins Melder");
+            EpicItems.Add("Robins iq");
+            EpicItems.Add("Cedrics Fettrüstung");
+
+            LegendaryItems.Clear();
+            LegendaryItems.Add("Alle Waffen im besitz");
+            LegendaryItems.Add("Minigun");
+            LegendaryItems.Add("50.Cal");
+            LegendaryItems.Add("Kartenbetrug");
         }
 
-
+        print(commonItems[NumberInList]);
+        switch (commonItems[NumberInList])
+        {
+            case "Minigun":
+                
+                break;
+            case "Maschine Pistole":
+                break;
+            case "50.Cal":
+                break;
+            case "Marksmanrifle":
+                break;
+            case "Piercing 1":
+                break;
+            case "Piercing 2":
+                break;
+            case "Glass Cannon":
+                break;
+            case "Mamas Latschen":
+                break;
+            case "Dornen":
+                break;
+            case "Milch":
+                break;
+            case "Gewichte":
+                break;
+        }
     }
 }
  
