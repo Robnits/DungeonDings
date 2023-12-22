@@ -6,16 +6,18 @@ public class Weapon : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform firepoint;
+
     private int ammunition;
-    private int maxAmmunition = 2;
-    private float fireforce = 30f;
 
+    Player_Stats stats;
 
-    private float baseDamage = 3f;
-
+    private void Awake()
+    {
+        stats = gameObject.GetComponentInParent<Player_Stats>();
+    }
     public float GetDamage()
     {
-        return baseDamage;
+        return stats.baseDamage * stats.damage;
     }
         
 
@@ -23,19 +25,18 @@ public class Weapon : MonoBehaviour
     {
         
 
-        if( ammunition < maxAmmunition)
+        if( ammunition < stats.maxAmmunition)
         {
             ammunition++;
             StartCoroutine(Shoot());
-        }
+        } 
         
     }
     IEnumerator Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(firepoint.up * fireforce, ForceMode2D.Force);
-        print(ammunition);
-        yield return new WaitForSeconds(1f);
+        bullet.GetComponent<Rigidbody2D>().AddForce(firepoint.up * stats.fireforce, ForceMode2D.Force);
+        yield return new WaitForSeconds(stats.attackSpeed);
         ammunition--;
     }
 }

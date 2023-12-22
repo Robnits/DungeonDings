@@ -16,10 +16,6 @@ public class EnemysHauptklasse : MonoBehaviour
     protected float value;
     protected float damage;
 
-
-
-
-
     protected void Death()
     {
         Destroy(gameObject);

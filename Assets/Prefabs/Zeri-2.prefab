@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 8040787363183541159}
   - component: {fileID: 5341271161676946424}
   - component: {fileID: 6587399514980610108}
+  - component: {fileID: 5923034341390060540}
   m_Layer: 0
   m_Name: Zeri-2
   m_TagString: Player
@@ -219,6 +220,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5923034341390060540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600018740165832157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797aab02038eeb3479a3c21687349d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeSO: {fileID: 11400000, guid: 519b717bee398e645957e370422e7abd, type: 2}
+  damage: 0
+  movespeed: 2.5
+  life: 10
+  maxAmmunition: 2
+  fireforce: 30
+  baseDamage: 3
 --- !u!1 &6456839155566004432
 GameObject:
   m_ObjectHideFlags: 0
