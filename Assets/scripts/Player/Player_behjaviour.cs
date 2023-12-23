@@ -62,7 +62,7 @@ public class Player_behjaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveDirection.x * stats.movespeed, moveDirection.y * stats.movespeed);
+        rb.velocity = new Vector2(moveDirection.x * stats.moveSpeed, moveDirection.y * stats.moveSpeed);
 
         Vector2 aimdirection = mousePosition - rb.position;
         float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg - 90f;

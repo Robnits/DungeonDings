@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
 
     private int ammunition;
 
-    Player_Stats stats;
+    private Player_Stats stats;
 
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class Weapon : MonoBehaviour
     IEnumerator Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(firepoint.up * stats.fireforce, ForceMode2D.Force);
+        bullet.GetComponent<Rigidbody2D>().AddForce(firepoint.up * stats.fireForce, ForceMode2D.Force);
         yield return new WaitForSeconds(stats.attackSpeed);
         ammunition--;
     }

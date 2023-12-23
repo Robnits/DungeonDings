@@ -8,15 +8,20 @@ using Random = UnityEngine.Random;
 
 public class Chest : MonoBehaviour
 {
-    public UpgradeManager upgrademanager;
+    private UpgradeManager upgrademanager;
 
     private bool isInRange = false;
 
+    private void Start()
+    {
+        upgrademanager = GameObject.Find("SpawnerAndUpgradeHandler").GetComponent<UpgradeManager>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && isInRange)
         {
             upgrademanager.ItemRoll();
+            Destroy(gameObject);
         }
     }
 
@@ -34,6 +39,4 @@ public class Chest : MonoBehaviour
             isInRange = false;
         }
     }
-
-    
 }

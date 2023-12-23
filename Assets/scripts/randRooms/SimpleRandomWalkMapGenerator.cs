@@ -15,9 +15,16 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
     protected SimpleRandomWalkSO randomWalkParameters;
 
     public GameObject ratspwaner;
+    public GameObject chestspawner;
+
     [SerializeField]
     [Range(0, 100)]
     private float Spawnpercantage;
+
+    [SerializeField]
+    [Range(0, 100)]
+    private float spawnChest;
+
 
     // Methode für die Ausführung der prozeduralen Generierung
     protected override void RunProceduralGeneration()
@@ -49,6 +56,8 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }
         testspawn(floorPositions, 1);
+        testspawn(floorPositions, 2);
+
         return floorPositions;
     }
 
@@ -62,15 +71,16 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
                 case 1:
                     hilf = Random.Range(0, 100);
                     if (hilf < Spawnpercantage)
-                    {
                         InstantiatePrefabsThatSpawnOnMap(position, whatGetGenerated);
-                    }
+                    
                     break;
                 case 2:
+                    hilf = Random.Range(0, 100);
+                    if (hilf < spawnChest)
+                        InstantiatePrefabsThatSpawnOnMap(position, whatGetGenerated);
                     break;
             }
         }
-
     }
 
     private void InstantiatePrefabsThatSpawnOnMap(Vector2Int positions, int whatGetGenerated)
@@ -80,6 +90,9 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
             case 1:
                 // Instantiate the ratspwaner at the chosen position
                 Instantiate(ratspwaner, new Vector3(positions.x + 0.5f, positions.y + 0.5f, 0f), Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(chestspawner, new Vector3(positions.x + 0.5f, positions.y + 0.5f, 0f), Quaternion.identity);
                 break;
         }
         

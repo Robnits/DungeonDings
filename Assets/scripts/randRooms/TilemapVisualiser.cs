@@ -41,9 +41,15 @@ public class TilemapVisualiser : MonoBehaviour
     public void clear()
     {
         GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        GameObject[] chests = GameObject.FindGameObjectsWithTag("Chests");
+
+        List<GameObject> gameObjects = new List<GameObject>();
+        gameObjects.Add(spawners[0]);
+        gameObjects.Add(chests[0]);
+
 
         // Destroy each spawner
-        foreach (GameObject spawner in spawners)
+        foreach (GameObject gameObject in gameObjects)
         {
             DestroyImmediate(spawner);
         }

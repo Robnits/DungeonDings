@@ -13,8 +13,8 @@ public class UpgradeManager : MonoBehaviour
 
     public List<string> commonItems;
     public List<string> rareItems;
-    public List<string> EpicItems;
-    public List<string> LegendaryItems;
+    public List<string> epicItems;
+    public List<string> legendaryItems;
     private List<List<string>> lists;
     
     GameObject button1;
@@ -23,6 +23,8 @@ public class UpgradeManager : MonoBehaviour
 
     private GameObject canvas;
     private GameObject Player;
+    private int hilf;
+
 
     private bool chose = true;
 
@@ -30,47 +32,55 @@ public class UpgradeManager : MonoBehaviour
 
     private void Awake()
     {
-        commonItems = new List<string>();
-        rareItems = new List<string>();
-        EpicItems = new List<string>();
-        LegendaryItems = new List<string>();
-        lists = new List<List<string>> { commonItems, rareItems, EpicItems, LegendaryItems };
+        commonItems = new List<string>
+    {
+        "Piercing 1",
+        "Pistol",
+        "Helm",
+        "Mamas Latschen",
+        "Dornen",
+        "Fußball",
+        "Milch",
+        "quick mag",
+        "Kleines Waffenwissen",
+        "wenig Munni",
+        "Dieb"
+    };
 
-        commonItems.Add("Piercing 1");
-        commonItems.Add("Pistol");
-        commonItems.Add("Helm");
-        commonItems.Add("Mamas Latschen");
-        commonItems.Add("Dornen");
-        commonItems.Add("Fußball");
-        commonItems.Add("Milch");
-        commonItems.Add("quick mag");
-        commonItems.Add("Kleines Waffenwissen");
-        commonItems.Add("wenig Munni");
-        commonItems.Add("Dieb");
+        rareItems = new List<string>
+    {
+        "Piercing 2",
+        "Rüstungsschuhe",
+        "Kaktus an die Rüstung geklebt",
+        "Schulausbildung(Amerika)",
+        "Gewichte",
+        "Marcels Faulheit",
+        "Waffenwissen"
+    };
 
-        rareItems.Add("Piercing 2");
-        rareItems.Add("Rüstungsschuhe");
-        rareItems.Add("Kaktus an die Rüstung geklebt");
-        rareItems.Add("Schulausbildung(Amerika)");
-        rareItems.Add("Gewichte");
-        rareItems.Add("Marcels Faulheit");
-        rareItems.Add("Waffenwissen");
+        epicItems = new List<string>
+    {
+        "Piercing 3",
+        "Maschine Pistole",
+        "Marksmanrifle",
+        "Glass Cannon",
+        "Rüstung",
+        "Laufschuhe",
+        "Robins T-Shirt",
+        "Robins Melder",
+        "Robins IQ",
+        "Cedrics Fettrüstung"
+    };
 
-        EpicItems.Add("Piercing 3");
-        EpicItems.Add("Maschine Pistole");
-        EpicItems.Add("Marksmanrifle");
-        EpicItems.Add("Glass Cannon");
-        EpicItems.Add("Rüstung");
-        EpicItems.Add("Laufschuhe");
-        EpicItems.Add("Robins T-Shirt");
-        EpicItems.Add("Robins Melder");
-        EpicItems.Add("Robins IQ");
-        EpicItems.Add("Cedrics Fettrüstung");
+        legendaryItems = new List<string>
+    {
+        "Alle Waffen im Besitz",
+        "Minigun",
+        "50.Cal",
+        "Kartenbetrug"
+    };
 
-        LegendaryItems.Add("Alle Waffen im Besitz");
-        LegendaryItems.Add("Minigun");
-        LegendaryItems.Add("50.Cal");
-        LegendaryItems.Add("Kartenbetrug");
+        lists = new List<List<string>> { commonItems, rareItems, epicItems, legendaryItems };
     }
     private void Start()
     {
@@ -103,11 +113,11 @@ public class UpgradeManager : MonoBehaviour
                 int rarity = Random.Range(0, 100);
                 if (rarity == 0)
                 {
-                    GenerateRandomItem(i, LegendaryItems, Color.yellow);
+                    GenerateRandomItem(i, legendaryItems, Color.yellow);
                 }
                 else if (rarity < 5 && rarity > 0)
                 {
-                    GenerateRandomItem(i, EpicItems, Color.magenta);
+                    GenerateRandomItem(i, epicItems, Color.magenta);
                 }
                 else if (rarity < 15 && rarity >= 5)
                 {
@@ -120,7 +130,6 @@ public class UpgradeManager : MonoBehaviour
             }
         }
     }
-    private int hilf;
 
     private void GenerateRandomItem(int i, List<string> itemList, Color buttonColor)
     {
@@ -133,10 +142,9 @@ public class UpgradeManager : MonoBehaviour
             } while (hilf == tempaugments[0] || hilf == tempaugments[1] || hilf == tempaugments[2]);
         }
         else
-        {
             ItemRoll();
-        }
-        // Use the correct button and color based on the value of i
+        
+
         if (i == 0)
         {
             buttonText1.text = itemList[hilf];
@@ -157,24 +165,15 @@ public class UpgradeManager : MonoBehaviour
     }
     public void ButtonPressed1()
     {
-        if (buttonText1 != null)
-            Buttonpressed(buttonText1);
-        else
-            Debug.Log("buttonText1 is null");
+        Buttonpressed(buttonText1);
     }
     public void ButtonPressed2()
     {
-        if (buttonText2 != null)
-            Buttonpressed(buttonText2);
-        else
-            Debug.Log("buttonText2 is null");
+        Buttonpressed(buttonText2);
     }
     public void ButtonPressed3()
     {
-        if (buttonText3 != null)
-            Buttonpressed(buttonText3);
-        else
-            Debug.Log("buttonText3 is null");
+        Buttonpressed(buttonText3);
     }
 
     public void Buttonpressed(TextMeshProUGUI button)
@@ -201,9 +200,9 @@ public class UpgradeManager : MonoBehaviour
         else if (rarity == 1)
             rareItems.Remove(rareItems[positionInList]);
         else if (rarity == 2)
-            EpicItems.Remove(EpicItems[positionInList]);
+            epicItems.Remove(epicItems[positionInList]);
         else if (rarity == 3)
-            LegendaryItems.Remove(LegendaryItems[positionInList]);
+            legendaryItems.Remove(legendaryItems[positionInList]);
 
         chose = true;
     }
