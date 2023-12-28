@@ -14,18 +14,15 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
     [SerializeField]
     protected SimpleRandomWalkSO randomWalkParameters;
 
-    public GameObject ratspwaner;
-    [SerializeField]
-    private int Spawnpercantage;
-    private int a;
+    public PrefabSpawner prefabSpawner;
 
     // Methode für die Ausführung der prozeduralen Generierung
     protected override void RunProceduralGeneration()
     {
         // Zufälliger Weg ausführen und Bodenpositionen darstellen
         HashSet<Vector2Int> floorPositions = RunRandomWalk(randomWalkParameters, startPosition);
-        tilemapVisualiser.clear();
-        tilemapVisualiser.paintFloorTiles(floorPositions);
+        tilemapVisualiser.Clear();
+        tilemapVisualiser.PaintFloorTiles(floorPositions);
         WallGenerator.CreateWalls(floorPositions, tilemapVisualiser);
     }
 
@@ -42,36 +39,15 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
         {
             // Zufälligen Weg erstellen und Bodenpositionen hinzufügen
             var path = ProceduralSpawn.SimpleRandomWalk(currentPosition, parameters.walklenght);
-            floorPositions.UnionWith(path);
-
-            a++;
-            if (a == Spawnpercantage)
-            {
-                a = 0;
-                InstantiateRatspwaner(floorPositions);
-            }
-            
+            floorPositions.UnionWith(path);          
             
             // Wenn in jeder Iteration zufällig gestartet werden soll
             if (parameters.startRandomlyEachIteration)
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }
+        prefabSpawner.SpawnObjects(floorPositions);
+        prefabSpawner.SpawnExit(floorPositions.First());
+
         return floorPositions;
-    }
-
-    private void InstantiateRatspwaner(HashSet<Vector2Int> positions)
-    {
-        if (positions.Count > 0)
-        {
-            // Choose a random index
-            int randomIndex = Random.Range(0, positions.Count);
-
-            // Get the corresponding position
-            Vector2Int randomPosition = positions.ElementAt(randomIndex);
-            
-
-            // Instantiate the ratspwaner at the chosen position
-            Instantiate(ratspwaner, new Vector3(randomPosition.x, randomPosition.y, 0f), Quaternion.identity);
-        }
     }
 }

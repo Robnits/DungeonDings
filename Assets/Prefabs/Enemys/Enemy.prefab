@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4874082125866955726}
   - component: {fileID: 4874082125866955761}
   - component: {fileID: 8090053682886326958}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 4874082126477150902}
   - component: {fileID: 4874082126477150903}
   - component: {fileID: 4874082126477150900}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4874082126736739338}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyFirepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

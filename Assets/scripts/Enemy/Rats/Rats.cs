@@ -14,7 +14,7 @@ public class Rats : EnemysHauptklasse
     {
         speed = 1.0f;
         life = 3f;
-        value = 5f;
+        value = 1f;
         damage = 1f;
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
@@ -29,17 +29,6 @@ public class Rats : EnemysHauptklasse
         transform.LookAt(player.transform.position);
         transform.Rotate(new Vector2(0, -90), Space.Self);//correcting the original rotation
 
-        /* 
-         
-         ///
-         /// habe beide Fehler mit dem durch die wand bewegen und nicht in den Spieler gehen gefixed.
-         /// 
-        if (Vector3.Distance(transform.position, player.transform.position) > 1f)
-        {
-            transform.Translate(new Vector2(speed * Time.deltaTime, 0));
-            rb.velocity
-        }*/
-
         // Move towards the player
         if (Vector3.Distance(transform.position, player.transform.position) > 0f)
         {
@@ -51,10 +40,4 @@ public class Rats : EnemysHauptklasse
             rb.velocity = Vector2.zero; // Stop moving if close to the player.
         }
     }
-
-  
-
- 
-
-
 }

@@ -6,19 +6,41 @@ public class Weapon : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform firepoint;
-    private float fireforce = 30f;
 
-    private float baseDamage = 3f;
+    private int ammunition = 2;
 
+    private Player_Stats stats;
+
+    [SerializeField]
+    private AudioSource shoot;
+
+    private void Awake()
+    {
+        stats = gameObject.GetComponentInParent<Player_Stats>();
+    }
     public float GetDamage()
     {
-        return baseDamage;
+        return stats.baseDamage * stats.damage;
     }
         
 
-    public void fire()
+    public void FireCounter()
+    {
+        if( ammunition > 0)
+        {
+            ammunition--;
+            stats.BulletChanges(ammunition);
+            shoot.Play();
+            StartCoroutine(Shoot());
+        } 
+        
+    }
+    IEnumerator Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(firepoint.up * fireforce, ForceMode2D.Force);
+        bullet.GetComponent<Rigidbody2D>().AddForce(firepoint.up * stats.fireForce, ForceMode2D.Force);
+        yield return new WaitForSeconds(stats.attackSpeed);
+        ammunition++;
+        stats.BulletChanges(ammunition);
     }
 }

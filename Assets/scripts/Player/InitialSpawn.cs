@@ -8,6 +8,6 @@ public class InitialSpawn : MonoBehaviour
 
     private void Awake()
     {
-        Instantiate(player_prefab, gameObject.transform);
+        Instantiate(player_prefab);
     }
 }

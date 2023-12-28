@@ -9,6 +9,11 @@ TagManager:
   - Bullet
   - Enemy
   - Rats
+  - Spawner
+  - Button
+  - Chest
+  - Exit
+  - Healthbar
   layers:
   - Default
   - TransparentFX
@@ -16,7 +21,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 

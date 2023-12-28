@@ -16,13 +16,10 @@ public class EnemysHauptklasse : MonoBehaviour
     protected float value;
     protected float damage;
 
-
-
-
-
     protected void Death()
     {
         Destroy(gameObject);
+        ScoreSO.NewMoney += value;
     }
 
     public float GetDamage()

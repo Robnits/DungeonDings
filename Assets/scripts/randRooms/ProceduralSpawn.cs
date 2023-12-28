@@ -51,7 +51,7 @@ public static class Direction2D
     public static List<Vector2Int> cardinalDirectionList = new List<Vector2Int>()
     {
         new Vector2Int(0, 1), // oben
-        new Vector2Int(1, 0), // rechts
+        new Vector2Int(1, 0), // rechtss
         new Vector2Int(0, -1), // unten
         new Vector2Int(-1, 0), // links
     };

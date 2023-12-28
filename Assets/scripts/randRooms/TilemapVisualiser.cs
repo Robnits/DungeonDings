@@ -14,41 +14,52 @@ public class TilemapVisualiser : MonoBehaviour
     private TileBase floorTile, wallTop;
 
     // Methode zum Darstellen von Boden-Tiles an den angegebenen Positionen
-    public void paintFloorTiles(IEnumerable<Vector2Int> floorPositions)
+    public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
-        paintTiles(floorPositions, floorTilemap, floorTile);
+        PaintTiles(floorPositions, floorTilemap, floorTile);
     }
 
 
     // Hilfsmethode zum Darstellen von Tiles an den angegebenen Positionen auf der Tilemap
-    private void paintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
+    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
     {
         
         foreach (var position in positions)
         {
-            paintSingleTile(tilemap, tile, position);
+            PaintSingleTile(tilemap, tile, position);
         }
     }
 
     // Hilfsmethode zum Darstellen eines einzelnen Tiles an einer Position auf der Tilemap
-    private void paintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position)
+    private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position)
     {
         var tilePosition = tilemap.WorldToCell((Vector3Int)position);
         tilemap.SetTile(tilePosition, tile);
     }
 
     // Methode zum Zurücksetzen der Tilemaps
-    public void clear()
+    public void Clear()
     {
         GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        GameObject[] chests = GameObject.FindGameObjectsWithTag("Chest");
+        GameObject[] exits = GameObject.FindGameObjectsWithTag("Exit");
+
 
         // Destroy each spawner
         foreach (GameObject spawner in spawners)
         {
             DestroyImmediate(spawner);
         }
+        foreach (GameObject chest in chests)
+        {
+            DestroyImmediate(chest);
+        }
+        foreach (var exit in exits)
+        {
+            DestroyImmediate(exit);
+        }
 
-        // Clear tilemaps
+
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
     }
@@ -56,6 +67,6 @@ public class TilemapVisualiser : MonoBehaviour
     // Methode zum Darstellen eines einzelnen Basis-Wall-Tiles an einer Position auf der Tilemap
     internal void PaintSingleBasicWall(Vector2Int position)
     {
-        paintSingleTile(wallTilemap, wallTop, position);
+        PaintSingleTile(wallTilemap, wallTop, position);
     }
 }
