@@ -9,15 +9,23 @@ public class PrefabSpawner : MonoBehaviour
     public GameObject chestspawner;
     public GameObject exit;
 
+    [SerializeField]
+    private BalancingSystemSO balancingSO;
+
 
     [SerializeField]
     [Range(0, 100)]
-    private float spawnpercantage;
+    private float SpawnerSpawnPercantage;
 
     [SerializeField]
     [Range(0, 100)]
-    private float spawnChest;
+    private float ChestSpawnPercantage;
 
+    private void Awake()
+    {
+        SpawnerSpawnPercantage = balancingSO.SpawnSpawner;
+        ChestSpawnPercantage = balancingSO.SpawnChest;
+    }
     public enum WhatGetSpawned
     {
         RatSpawner,
@@ -39,7 +47,7 @@ public class PrefabSpawner : MonoBehaviour
             // Check if the position is already occupied in SpawnedPositions
             if (!SpawnedPositions.Contains(position))
             {
-                if (hilf < spawnpercantage)
+                if (hilf < SpawnerSpawnPercantage)
                 {
                     InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.RatSpawner);
                     SpawnedPositions.Add(position);
@@ -47,7 +55,7 @@ public class PrefabSpawner : MonoBehaviour
 
                 hilf = Random.Range(0, 100);
                 // Check again after spawning the RatSpawner
-                if (hilf < spawnChest)
+                if (hilf < ChestSpawnPercantage)
                 {
                     InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Chest);
                     SpawnedPositions.Add(position);

@@ -5,9 +5,14 @@ using UnityEngine;
 public class Player_behjaviour : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public Weapon weapon;
+
+    [SerializeField]
+    Weapon weapon;
+
     private GameObject scenenwechsel;
-    public Animator anim;
+
+    [SerializeField]
+    private Animator anim;
     Player_Stats stats;
     
     Vector2 moveDirection;
@@ -34,26 +39,32 @@ public class Player_behjaviour : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        
-
-        float move_x = Input.GetAxisRaw("Horizontal");
-        float move_y = Input.GetAxisRaw("Vertical");
-
+        Movement();
         if (Input.GetMouseButtonDown(0))
             weapon.FireCounter();
-        
-        if (move_x != 0 || move_y != 0)
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            Dash();
+
+        if (stats.life <= 0)
+            Death();
+    }
+
+    private void Movement()
+    {
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (horizontalInput != 0 || verticalInput != 0)
             anim.SetBool("isMoving", true);
         else
             anim.SetBool("isMoving", false);
-       
-        moveDirection = new Vector2(move_x, move_y).normalized;
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
-        if (stats.life <= 0)
-            Death();
 
+        moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
+
+
     //Todes animierung und ende des spieles
     private void Death()
     {
@@ -76,7 +87,8 @@ public class Player_behjaviour : MonoBehaviour
         {
             if (collision.gameObject.GetComponentInChildren<Rats>() == true)
             {
-                StartCoroutine(InvincibleTime(collision));
+                if (!invincibleAfterDmg)
+                    StartCoroutine(InvincibleTime(collision));
             }
         }
     }
@@ -87,6 +99,11 @@ public class Player_behjaviour : MonoBehaviour
         stats.GetDamage(collision.gameObject.GetComponent<Rats>().GetDamage());
         yield return new WaitForSeconds(0.5f);
         invincibleAfterDmg = false;
+    }
+
+    private void Dash()
+    {
+        rb.velocity += moveDirection * stats.moveSpeed;
     }
 }
  
