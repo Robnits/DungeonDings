@@ -725,7 +725,7 @@ MonoBehaviour:
   Text_Life: {fileID: 1544087999}
   Text_Damage: {fileID: 1456906092}
   moneyText: {fileID: 1749519232}
-  upgradeSO: {fileID: 11400000, guid: 519b717bee398e645957e370422e7abd, type: 2}
+  upgradeSO: {fileID: 11400000, guid: 608c65eaf8edc1a4c951d4cac0281617, type: 2}
   scoreSO: {fileID: 11400000, guid: ae5c460e141021840a1fe50e6ab8b93c, type: 2}
 --- !u!1 &1029758175
 GameObject:
@@ -1029,7 +1029,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Damage
 --- !u!222 &1456906093
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1108,7 +1108,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Health
 --- !u!222 &1544088000
 CanvasRenderer:
   m_ObjectHideFlags: 0

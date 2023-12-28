@@ -18,7 +18,7 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
     public void GenerateDungeon()
     {
         // TilemapVisualiser zurücksetzen und die Generierung starten
-        tilemapVisualiser.clear();
+        tilemapVisualiser.Clear();
         RunProceduralGeneration();
     }
 

@@ -19,6 +19,7 @@ public class EnemysHauptklasse : MonoBehaviour
     protected void Death()
     {
         Destroy(gameObject);
+        ScoreSO.NewMoney += value;
     }
 
     public float GetDamage()

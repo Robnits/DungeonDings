@@ -28,7 +28,7 @@ public class UpgradeManager : MonoBehaviour
 
     private bool chose = true;
 
-    private int[] tempaugments = new int[3]; // Initialize the array with size 3
+    private readonly int[] tempaugments = new int[3]; // Initialize the array with size 3
 
     private void Awake()
     {
@@ -85,7 +85,7 @@ public class UpgradeManager : MonoBehaviour
     private void Start()
     {
         // Find the canvas and player in Start
-        canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("AugmentAuswahl");
         Player = GameObject.FindGameObjectWithTag("Player");
 
         canvas.SetActive(false);

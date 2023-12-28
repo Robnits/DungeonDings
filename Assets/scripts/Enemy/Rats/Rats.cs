@@ -14,7 +14,7 @@ public class Rats : EnemysHauptklasse
     {
         speed = 1.0f;
         life = 3f;
-        value = 5f;
+        value = 1f;
         damage = 1f;
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();

@@ -14,25 +14,15 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
     [SerializeField]
     protected SimpleRandomWalkSO randomWalkParameters;
 
-    public GameObject ratspwaner;
-    public GameObject chestspawner;
-
-    [SerializeField]
-    [Range(0, 100)]
-    private float Spawnpercantage;
-
-    [SerializeField]
-    [Range(0, 100)]
-    private float spawnChest;
-
+    public PrefabSpawner prefabSpawner;
 
     // Methode für die Ausführung der prozeduralen Generierung
     protected override void RunProceduralGeneration()
     {
         // Zufälliger Weg ausführen und Bodenpositionen darstellen
         HashSet<Vector2Int> floorPositions = RunRandomWalk(randomWalkParameters, startPosition);
-        tilemapVisualiser.clear();
-        tilemapVisualiser.paintFloorTiles(floorPositions);
+        tilemapVisualiser.Clear();
+        tilemapVisualiser.PaintFloorTiles(floorPositions);
         WallGenerator.CreateWalls(floorPositions, tilemapVisualiser);
     }
 
@@ -55,47 +45,9 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
             if (parameters.startRandomlyEachIteration)
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }
-        testspawn(floorPositions, 1);
-        testspawn(floorPositions, 2);
+        prefabSpawner.SpawnObjects(floorPositions);
+        prefabSpawner.SpawnExit(floorPositions.First());
 
         return floorPositions;
-    }
-
-    private void testspawn(HashSet<Vector2Int> floorPositions, int whatGetGenerated)
-    {
-        int hilf;
-        foreach (Vector2Int position in floorPositions)
-        {
-            switch (whatGetGenerated)
-            {
-                case 1:
-                    hilf = Random.Range(0, 100);
-                    if (hilf < Spawnpercantage)
-                        InstantiatePrefabsThatSpawnOnMap(position, whatGetGenerated);
-                    
-                    break;
-                case 2:
-                    hilf = Random.Range(0, 100);
-                    if (hilf < spawnChest)
-                        InstantiatePrefabsThatSpawnOnMap(position, whatGetGenerated);
-                    break;
-            }
-        }
-    }
-
-    private void InstantiatePrefabsThatSpawnOnMap(Vector2Int positions, int whatGetGenerated)
-    {
-        switch (whatGetGenerated)
-        {
-            case 1:
-                // Instantiate the ratspwaner at the chosen position
-                Instantiate(ratspwaner, new Vector3(positions.x + 0.5f, positions.y + 0.5f, 0f), Quaternion.identity);
-                break;
-            case 2:
-                Instantiate(chestspawner, new Vector3(positions.x + 0.5f, positions.y + 0.5f, 0f), Quaternion.identity);
-                break;
-        }
-        
-        
     }
 }

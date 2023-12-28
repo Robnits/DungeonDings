@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player_Stats : MonoBehaviour
 {
     public ScriptableObject upgradeSO;
+    public Weapon weapon;
+    private HealthbarUI healthbarUI;
+    private TextMeshProUGUI lifeText;
+    private TextMeshProUGUI bulletText;
 
     // Player stats
-    public float moveSpeed = 2.5f;
-    public float life = 10f;
-    public int maxAmmunition = 2;
-    public float fireForce = 30f;
-    public float attackSpeed = 1f;
-    public float dornen = 0f;
-    public float baseDamage = 3f;
-    public float damage = 1f;
+    public float moveSpeed;
+    public float maxlife;
+    public float life;
+    public int maxAmmunition;
+    public float fireForce;
+    public float attackSpeed;
+    public float dornen;
+    public float baseDamage;
+    public float damage;
 
     // Item lists
     private List<string> commonItems;
@@ -22,14 +28,34 @@ public class Player_Stats : MonoBehaviour
     private List<string> epicItems;
     private List<string> legendaryItems;
 
-    // Flag to ensure lists are instantiated only once
-    private bool instantiateList = false;
 
     private void Awake()
     {
+        instantiateStats();
+        InstantiateLists();
+        instantiateUi();
+    }
+
+    private void instantiateUi()
+    {
+        healthbarUI = GameObject.FindGameObjectWithTag("Healthbar").GetComponentInChildren<HealthbarUI>();
+
+        lifeText = GameObject.Find("LifeText").GetComponentInChildren<TextMeshProUGUI>();
+        bulletText = GameObject.Find("Bullets").GetComponentInChildren<TextMeshProUGUI>();
+
+        healthbarUI.SetMaxHealth(maxlife);
+        healthbarUI.SetHealth(life);
+        
+        GetDamage(0);
+        BulletChanges(maxAmmunition);
+    }
+
+    private void instantiateStats()
+    {
         // Initialize player stats
-        moveSpeed = 2.5f;   
-        life = 10f;
+        moveSpeed = 2.5f;
+        maxlife = 10f;
+        life = maxlife;
         maxAmmunition = 2;
         fireForce = 30f;
         attackSpeed = 1f;
@@ -38,41 +64,51 @@ public class Player_Stats : MonoBehaviour
         damage = 1f;
     }
 
+    public void BulletChanges(int ammunition)
+    {
+        bulletText.text = ammunition.ToString() + "/" + maxAmmunition.ToString();
+    }
+
+    public void GetDamage(float damage)
+    {
+        life -= damage;
+        healthbarUI.SetHealth(life);
+        lifeText.text = life.ToString() + "/" + maxlife.ToString();
+    }
+
+
     private void InstantiateLists()
     {
-        if (!instantiateList)
+
+        // Initialize item lists
+        commonItems = new List<string>
         {
-            instantiateList = true;
+            "Piercing 1", "Pistol", "Helm", "Mamas Latschen", "Dornen", "Fußball", "Milch", "quick mag",
+            "Kleines Waffenwissen", "wenig Munni", "Dieb"
+        };
 
-            // Initialize item lists
-            commonItems = new List<string>
-            {
-                "Piercing 1", "Pistol", "Helm", "Mamas Latschen", "Dornen", "Fußball", "Milch", "quick mag",
-                "Kleines Waffenwissen", "wenig Munni", "Dieb"
-            };
+        rareItems = new List<string>
+        {
+            "Piercing 2", "Rüstungsschuhe", "Kaktus an die Rüstung geklebt", "Schulausbildung(Amerika)",
+            "Gewichte", "Marcels Faulheit", "Waffenwissen"
+        };
 
-            rareItems = new List<string>
-            {
-                "Piercing 2", "Rüstungsschuhe", "Kaktus an die Rüstung geklebt", "Schulausbildung(Amerika)",
-                "Gewichte", "Marcels Faulheit", "Waffenwissen"
-            };
+        epicItems = new List<string>
+        {
+            "Piercing 3", "Maschine Pistole", "Marksmanrifle", "Glass Cannon", "Rüstung", "Laufschuhe",
+            "Robins T-Shirt", "Robins Melder", "Robins IQ", "Cedrics Fettrüstung"
+        };
 
-            epicItems = new List<string>
-            {
-                "Piercing 3", "Maschine Pistole", "Marksmanrifle", "Glass Cannon", "Rüstung", "Laufschuhe",
-                "Robins T-Shirt", "Robins Melder", "Robins IQ", "Cedrics Fettrüstung"
-            };
-
-            legendaryItems = new List<string>
-            {
-                "Alle Waffen im Besitz", "Minigun", "50.Cal", "Kartenbetrug"
-            };
-        }
+        legendaryItems = new List<string>
+        {
+            "Alle Waffen im Besitz", "Minigun", "50.Cal", "Kartenbetrug"
+        };
+        
     }
 
     public void Upgrades(int numberInList, int rarity)
     {
-        InstantiateLists();
+        
 
         // Map item names to actions using a dictionary
         Dictionary<string, Action> upgradeActions;

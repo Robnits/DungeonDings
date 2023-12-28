@@ -13,6 +13,8 @@ public class Player_behjaviour : MonoBehaviour
     Vector2 moveDirection;
     Vector2 mousePosition;
 
+    private bool invincibleAfterDmg = false;
+
     [SerializeField]
     private UpgradeSO upgradeSO;
 
@@ -38,9 +40,8 @@ public class Player_behjaviour : MonoBehaviour
         float move_y = Input.GetAxisRaw("Vertical");
 
         if (Input.GetMouseButtonDown(0))
-        {
             weapon.FireCounter();
-        }
+        
         if (move_x != 0 || move_y != 0)
             anim.SetBool("isMoving", true);
         else
@@ -71,10 +72,21 @@ public class Player_behjaviour : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-            stats.life -= collision.gameObject.GetComponent<Enemy_behaviour>().GetDamage();
-        if (collision.gameObject.CompareTag("Rats"))
-            stats.life -= collision.gameObject.GetComponent<Rats>().GetDamage();
+        if (collision.gameObject.layer == 6 && !invincibleAfterDmg)
+        {
+            if (collision.gameObject.GetComponentInChildren<Rats>() == true)
+            {
+                StartCoroutine(InvincibleTime(collision));
+            }
+        }
+    }
+
+    IEnumerator InvincibleTime(Collision2D collision)
+    {
+        invincibleAfterDmg = true;
+        stats.GetDamage(collision.gameObject.GetComponent<Rats>().GetDamage());
+        yield return new WaitForSeconds(0.5f);
+        invincibleAfterDmg = false;
     }
 }
  

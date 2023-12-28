@@ -7,9 +7,12 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firepoint;
 
-    private int ammunition;
+    private int ammunition = 2;
 
     private Player_Stats stats;
+
+    [SerializeField]
+    private AudioSource shoot;
 
     private void Awake()
     {
@@ -23,11 +26,11 @@ public class Weapon : MonoBehaviour
 
     public void FireCounter()
     {
-        
-
-        if( ammunition < stats.maxAmmunition)
+        if( ammunition > 0)
         {
-            ammunition++;
+            ammunition--;
+            stats.BulletChanges(ammunition);
+            shoot.Play();
             StartCoroutine(Shoot());
         } 
         
@@ -37,6 +40,7 @@ public class Weapon : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
         bullet.GetComponent<Rigidbody2D>().AddForce(firepoint.up * stats.fireForce, ForceMode2D.Force);
         yield return new WaitForSeconds(stats.attackSpeed);
-        ammunition--;
+        ammunition++;
+        stats.BulletChanges(ammunition);
     }
 }
