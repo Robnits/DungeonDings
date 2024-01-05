@@ -1,72 +1,80 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.Animations;
-using UnityEngine.UIElements;
 
-public class RatSpawner : MonoBehaviour
+
+public class RatSpawner : EnemysHauptklasse
 {
-    private GameObject player;
-
     [SerializeField]
-    private FloatSO ScoreSO;
+    private Sprite open1, open2, closed;
 
-    private float life = 10f;
-    private float value = 10f;
-    private float damage = 3f;
     [SerializeField]  
     private float SpawnrateRats = 8f;
-    private bool test = true;
+
+    private bool wasPlayerInRange = false;
+
+    private SpriteRenderer render;
 
     public GameObject RatPrefab;
 
+    private bool isActive = false;
+
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");        
+        render = GetComponent<SpriteRenderer>();
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        SetRandomOpenSprite();
+
+        life = 10f;
+        value = 10f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (test)
+            if (!wasPlayerInRange)
                 StartCoroutine(SpawnRatsTimer());
-            test = false;
+            wasPlayerInRange = true;            
         }
     }
 
-    void Update()
+    public bool ForChildIsOpen()
     {
-        if (life <= 0)
-            Death();
+        return isActive;
+    }
+    public void IsOpenOrClosed(bool IsOpen)
+    {
+        if (IsOpen)
+        {
+            StartCoroutine(SpawnRatsTimer());
+            SetRandomOpenSprite();
+        }
+        else
+        {
+            render.sprite = closed;
+            isActive = false;
+        }
+    }
+    private void SetRandomOpenSprite()
+    {
+        if (Random.Range(0, 2) == 1)
+            render.sprite = open1;
+        else
+            render.sprite = open2;
     }
 
-    private void Death()
-    {
-        ScoreSO.NewMoney += value;
-        Destroy(gameObject);
-    }
-
-    public float GetDamage()
-    {
-        return damage;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Bullet"))
-            life -= player.GetComponent<Player_behjaviour>().GetDamage();
-    }
 
     IEnumerator SpawnRatsTimer()
     {
         SpawnRats();
+        isActive = true;
         yield return new WaitForSeconds(SpawnrateRats);
-        
 
-        StartCoroutine(SpawnRatsTimer());
+        if (isActive)
+            StartCoroutine(SpawnRatsTimer());
+        
     }
 
     void SpawnRats()

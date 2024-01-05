@@ -19,10 +19,14 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
     // Methode für die Ausführung der prozeduralen Generierung
     protected override void RunProceduralGeneration()
     {
+        HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
         // Zufälliger Weg ausführen und Bodenpositionen darstellen
-        HashSet<Vector2Int> floorPositions = RunRandomWalk(randomWalkParameters, startPosition);
+        for (int i = 0; i < startPosition.Count(); i++)
+        {
+            floorPositions = RunRandomWalk(randomWalkParameters, startPosition[i]);
+        }
         tilemapVisualiser.Clear();
-        tilemapVisualiser.PaintFloorTiles(floorPositions);
+        tilemapVisualiser.PaintFloorTiles(floorPositions); 
         WallGenerator.CreateWalls(floorPositions, tilemapVisualiser);
     }
 
@@ -45,8 +49,8 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
             if (parameters.startRandomlyEachIteration)
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }
-        prefabSpawner.SpawnObjects(floorPositions);
-        prefabSpawner.SpawnExit(floorPositions.First());
+        
+        
 
         return floorPositions;
     }

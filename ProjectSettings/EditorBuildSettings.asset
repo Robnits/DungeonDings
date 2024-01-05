@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Shop.unity
-    guid: 595432ac5601ba34fbcbe24a32cb8a60
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 0c553d4d4064a3847b0c42f64ac81108
+  - enabled: 1
+    path: Assets/Scenes/Shop.unity
+    guid: 595432ac5601ba34fbcbe24a32cb8a60
   - enabled: 1
     path: Assets/Scenes/procedural dungeon.unity
     guid: b1652e18db607da4cbc704161a67f5f5

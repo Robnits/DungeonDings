@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Player_Stats : MonoBehaviour
 {
-    public ScriptableObject upgradeSO;
     public Weapon weapon;
     private HealthbarUI healthbarUI;
     private TextMeshProUGUI lifeText;
@@ -31,12 +30,12 @@ public class Player_Stats : MonoBehaviour
 
     private void Awake()
     {
-        instantiateStats();
+        InstantiateStats();
         InstantiateLists();
-        instantiateUi();
+        InstantiateUi();
     }
 
-    private void instantiateUi()
+    private void InstantiateUi()
     {
         healthbarUI = GameObject.FindGameObjectWithTag("Healthbar").GetComponentInChildren<HealthbarUI>();
 
@@ -50,17 +49,17 @@ public class Player_Stats : MonoBehaviour
         BulletChanges(maxAmmunition);
     }
 
-    private void instantiateStats()
+    private void InstantiateStats()
     {
         // Initialize player stats
         moveSpeed = 2.5f;
-        maxlife = 10f;
+        maxlife = 10f + GlobalVariables.healthUpgrade - 1;
         life = maxlife;
         maxAmmunition = 2;
         fireForce = 30f;
         attackSpeed = 1f;
         dornen = 0f;
-        baseDamage = 3f;
+        baseDamage = 3f + GlobalVariables.damageUpgrade - 1;
         damage = 1f;
     }
 
@@ -119,7 +118,7 @@ public class Player_Stats : MonoBehaviour
                 upgradeActions = new Dictionary<string, Action>
                 {
                     { "Pistol", () => damage += 1f },
-                    { "Helm", () => life += 5f },
+                    { "Helm", () => life += 5f},
                     { "Mamas Latschen", () => moveSpeed += 0.5f },
                     { "Dornen", () => dornen = 1f },
                     { "Milch", () => damage += 1f },

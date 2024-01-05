@@ -3,39 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class scenemanager : MonoBehaviour
+public class Scenemanager : MonoBehaviour
 {
-    public int sceneBuildIndex;
-    public void Start()
-    {
-        sceneBuildIndex = 0;
-    }
-    public void nextlevel()
-    {
-        sceneBuildIndex++;
-        SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
-    }
-    public void firstlevel()
-    {
-        sceneBuildIndex = 2;
-        SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
-    }
-    public void mainmenu()
-    {
-        sceneBuildIndex = 1;
-        SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
 
-    }
-    public void shop()
+    private Animator LevelLoaderAnim;
+
+    private void Awake()
     {
-        sceneBuildIndex = 0;
-        SceneManager.LoadScene(sceneBuildIndex, LoadSceneMode.Single);
+        LevelLoaderAnim =  GameObject.Find("Transition").GetComponentInChildren<Animator>();
     }
-    void OnTriggerEnter2D(Collider2D other)
+
+    public enum Scene
     {
-        if (other.gameObject.tag == "Player")
+        Shop,
+        MainMenu,
+        proceduralDungeon
+    }
+
+    public void StartSwitch(int scene)
+    {
+        StartCoroutine(Scenswitch(scene));
+    }
+
+    private IEnumerator Scenswitch(int scene)
+    {
+        LevelLoaderAnim.SetTrigger("Start");
+        yield return new WaitForSeconds(0.6f);
+        switch (scene)
         {
-            nextlevel();
+            case 0:
+                SceneManager.LoadScene("Shop", LoadSceneMode.Single);
+                break;
+            case 1:
+                SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+                break;
+            case 2:
+                SceneManager.LoadScene(2, LoadSceneMode.Single);
+                break;
         }
     }
 }

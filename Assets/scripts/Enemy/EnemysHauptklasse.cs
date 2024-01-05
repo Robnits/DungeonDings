@@ -7,10 +7,6 @@ public class EnemysHauptklasse : MonoBehaviour
 { 
     protected GameObject player;
 
-
-    [SerializeField]
-    protected FloatSO ScoreSO;
-
     protected float speed;
     protected float life;
     protected float value;
@@ -19,7 +15,7 @@ public class EnemysHauptklasse : MonoBehaviour
     protected void Death()
     {
         Destroy(gameObject);
-        ScoreSO.NewMoney += value;
+        GlobalVariables.money += value;
     }
 
     public float GetDamage()
@@ -30,6 +26,11 @@ public class EnemysHauptklasse : MonoBehaviour
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
+        {
             life -= player.GetComponent<Player_behjaviour>().GetDamage();
+            if (life <= 0)
+                Death();
+        }
+            
     }
 }

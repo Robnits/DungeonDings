@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Mathematics;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class Player_behjaviour : MonoBehaviour
 {
@@ -11,6 +16,9 @@ public class Player_behjaviour : MonoBehaviour
 
     private GameObject scenenwechsel;
 
+    private Cam_Follow cam;
+    private Animator levelLoader;
+
     [SerializeField]
     private Animator anim;
     Player_Stats stats;
@@ -20,15 +28,28 @@ public class Player_behjaviour : MonoBehaviour
 
     private bool invincibleAfterDmg = false;
 
-    [SerializeField]
-    private UpgradeSO upgradeSO;
+
+    private GameObject sprechblase;
+    private TextMeshPro sprechblaseText;
+    private Light2D light2d;
 
     private void Awake()
     {
+       
+        sprechblase = GameObject.Find("Sprechblase");
+        sprechblaseText = GameObject.Find("Sprechblase").GetComponentInChildren<TextMeshPro>();
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponentInChildren<Cam_Follow>();
+        levelLoader = GameObject.Find("LevelLoader").GetComponentInChildren<Canvas>().GetComponentInChildren<Image>().GetComponentInChildren<Animator>();
         stats = gameObject.GetComponent<Player_Stats>();
         scenenwechsel = GameObject.FindGameObjectWithTag("Respawn");
         rb = GetComponent<Rigidbody2D>();
-        gameObject.transform.position = new Vector3(0, 0, 0); 
+        light2d = sprechblase.GetComponent<Light2D>();
+        gameObject.transform.position = new Vector3(0, 0, 0);
+
+        light2d.intensity = 0f;
+
+        sprechblase.GetComponent<SpriteRenderer>().enabled = false;
+        sprechblaseText.text = null;
     }
 
     public float GetDamage()
@@ -36,25 +57,8 @@ public class Player_behjaviour : MonoBehaviour
         return (stats.damage * stats.baseDamage);
     }
 
-    // Start is called before the first frame update
-    void Update()
+    public void Movement(float horizontalInput, float verticalInput)
     {
-        Movement();
-        if (Input.GetMouseButtonDown(0))
-            weapon.FireCounter();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-            Dash();
-
-        if (stats.life <= 0)
-            Death();
-    }
-
-    private void Movement()
-    {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-
         if (horizontalInput != 0 || verticalInput != 0)
             anim.SetBool("isMoving", true);
         else
@@ -64,21 +68,20 @@ public class Player_behjaviour : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
-
-    //Todes animierung und ende des spieles
     private void Death()
     {
-        scenenwechsel.GetComponent<scenemanager>().mainmenu();
+        levelLoader.SetTrigger("Start");
+        scenenwechsel.GetComponent<Scenemanager>().StartSwitch(1);
         Destroy(gameObject);
     }
 
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveDirection.x * stats.moveSpeed, moveDirection.y * stats.moveSpeed);
-
         Vector2 aimdirection = mousePosition - rb.position;
         float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimangle;
+        
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -96,14 +99,40 @@ public class Player_behjaviour : MonoBehaviour
     IEnumerator InvincibleTime(Collision2D collision)
     {
         invincibleAfterDmg = true;
+        StartCoroutine(cam.CameraShake(0.2f, 1f));
         stats.GetDamage(collision.gameObject.GetComponent<Rats>().GetDamage());
+        if (stats.life <= 0)
+            Death();
         yield return new WaitForSeconds(0.5f);
         invincibleAfterDmg = false;
     }
 
-    private void Dash()
+    public void Shooting()
+    {
+        weapon.FireCounter();
+    }
+
+    public void Dash()
     {
         rb.velocity += moveDirection * stats.moveSpeed;
+    }
+
+    public void CloseGulli(bool showText)
+    {
+        if (showText)
+        {
+            sprechblase.GetComponent<SpriteRenderer>().enabled = true;
+            sprechblaseText.text = "Press E";
+            light2d.intensity = 0.8f;
+        }
+        else
+        {
+            sprechblase.GetComponent<SpriteRenderer>().enabled = false;
+            sprechblaseText.text = null;
+            light2d.intensity = 0f;
+        }
+            
+
     }
 }
  

@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.UIElements;
+
 
 public class Enemy_behaviour : MonoBehaviour
 {

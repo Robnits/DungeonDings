@@ -12,58 +12,47 @@ public class Ui_Manager : MonoBehaviour
     public Text Text_Damage;
     public Text moneyText;
 
-    private float multiplier = 1.7f;
+    private float healthCurrentprice = 1;
+    private float damageCurrentprice = 1;
 
-    [SerializeField]
-    private UpgradeSO upgradeSO;
-
-    [SerializeField]
-    private FloatSO scoreSO;
+    private const float multiplier = 1.7f;
 
     private void Awake()
     {
-        btnText_Life.text = (1 + multiplier * upgradeSO.Life).ToString() + "$";
-        btnText_Damage.text = (1 + multiplier * upgradeSO.Damage).ToString() + "$";
-        Text_Damage.text = upgradeSO.Damage.ToString() + "/25 Damage";
-        Text_Life.text = upgradeSO.Life.ToString() + "/10 Life";
-        scoreSO.OldMoney += scoreSO.NewMoney;
-        scoreSO.NewMoney = 0f;
-        moneyText.text = scoreSO.OldMoney.ToString() + "$";
+        SetUI();
     }
 
     public void Upgrade_Life()
     {
-        if (scoreSO.OldMoney >= multiplier * upgradeSO.Life +1f && upgradeSO.Life < 10)
+        healthCurrentprice = multiplier * GlobalVariables.healthUpgrade;
+        if (GlobalVariables.money >= healthCurrentprice && GlobalVariables.healthUpgrade <= 10)
         {
-           
-            scoreSO.OldMoney -= multiplier * upgradeSO.Life;
-            upgradeSO.Life++;
-            moneyText.text = scoreSO.OldMoney.ToString() + "$";
-            Text_Life.text = upgradeSO.Life.ToString() + "/10 Life";
-            btnText_Life.text = (1 + multiplier * upgradeSO.Life).ToString() + "$";
+            GlobalVariables.money -= healthCurrentprice;
+            GlobalVariables.healthUpgrade ++;
         }
-        else
-        {
-            Debug.Log("you cannot buy this right now");
-        }
+        SetUI();
     }
     public void Upgrade_Damage()
     {
-        if (scoreSO.OldMoney >= multiplier * upgradeSO.Damage + 1f && upgradeSO.Damage <25)
+        damageCurrentprice = multiplier * GlobalVariables.damageUpgrade;
+        if(GlobalVariables.money >= damageCurrentprice && GlobalVariables.damageUpgrade <= 10)
         {
-            
-            scoreSO.OldMoney -= multiplier * upgradeSO.Damage;
-            upgradeSO.Damage++;
-            moneyText.text = scoreSO.OldMoney.ToString() + "$";
-            Text_Damage.text = upgradeSO.Damage.ToString() + "/25 Damage";
-            btnText_Damage.text = (1 + multiplier * upgradeSO.Damage).ToString() + "$";
+            GlobalVariables.money -= damageCurrentprice;
+            GlobalVariables.damageUpgrade ++;
         }
-        else
-        {
-            Debug.Log("you cannot buy this right now");
-        }
+        SetUI();
     }
+    private void SetUI()
+    {
+        healthCurrentprice = multiplier * GlobalVariables.healthUpgrade;
+        damageCurrentprice = multiplier * GlobalVariables.damageUpgrade;
 
+        btnText_Life.text = (healthCurrentprice).ToString() + "$";
+        btnText_Damage.text = (damageCurrentprice).ToString() + "$";
 
-    
+        Text_Life.text = (GlobalVariables.healthUpgrade - 1).ToString() + "/10";
+        Text_Damage.text = (GlobalVariables.damageUpgrade - 1).ToString() + "/10";
+
+        moneyText.text = GlobalVariables.money.ToString() + "$";
+    }
 }

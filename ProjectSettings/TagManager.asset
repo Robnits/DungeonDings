@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Spawnpoint
-  - Rooms
   - Bullet
   - Enemy
   - Rats
@@ -14,6 +13,8 @@ TagManager:
   - Chest
   - Exit
   - Healthbar
+  - Rat
+  - Settings
   layers:
   - Default
   - TransparentFX

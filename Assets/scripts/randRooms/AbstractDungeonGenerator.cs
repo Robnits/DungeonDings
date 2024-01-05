@@ -12,7 +12,8 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
 
     // Startposition für die Dungeon-Generierung
     [SerializeField]
-    protected Vector2Int startPosition = Vector2Int.zero;
+    protected List<Vector2Int> startPosition;
+
 
     // Methode zum Generieren des Dungeons
     public void GenerateDungeon()
