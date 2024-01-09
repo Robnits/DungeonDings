@@ -13,6 +13,7 @@ public class Rats : EnemysHauptklasse
         life = 3f;
         value = 1f;
         damage = 1f;
+        droprate = 1;
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();

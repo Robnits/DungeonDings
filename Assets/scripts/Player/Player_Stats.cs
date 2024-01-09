@@ -74,6 +74,15 @@ public class Player_Stats : MonoBehaviour
         healthbarUI.SetHealth(life);
         lifeText.text = life.ToString() + "/" + maxlife.ToString();
     }
+    public void GetHealth(float health)
+    {
+        if (life < maxlife)
+        {
+            life += damage;
+            healthbarUI.SetHealth(life);
+            lifeText.text = life.ToString() + "/" + maxlife.ToString();
+        }
+    }
 
 
     private void InstantiateLists()

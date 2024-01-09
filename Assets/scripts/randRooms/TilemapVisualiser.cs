@@ -25,9 +25,11 @@ public class TilemapVisualiser : MonoBehaviour
             
             if (randint == 0)
                 PaintSingleTile(position, floorTilemap, floorTile11);
+            if (randint == 1)
+                PaintSingleTile(position, floorTilemap, floorTile10);
             else
             {
-                randint %= 10;
+                randint %= 9;
                 switch (randint)
                 {
                     case 0:
@@ -56,9 +58,6 @@ public class TilemapVisualiser : MonoBehaviour
                         break;
                     case 8:
                         PaintSingleTile(position, floorTilemap, floorTile9);
-                        break;
-                    case 9:
-                        PaintSingleTile(position, floorTilemap, floorTile10);
                         break;
                 }
             }
