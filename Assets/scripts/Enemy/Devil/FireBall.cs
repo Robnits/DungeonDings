@@ -9,6 +9,7 @@ public class FireBall : MonoBehaviour
     private float speed = 3f;
     private Rigidbody2D FireBallRB;
     private bool fireBallActive = true;
+    private float damage = 5f;
 
     private void Start()
     {
@@ -16,7 +17,10 @@ public class FireBall : MonoBehaviour
         FireBallRB = GetComponent<Rigidbody2D>();
         fireBallActive = true;
     }
-
+    public float GetDamage()
+    {
+        return damage;
+    }
 
     private void Update()
     {
@@ -31,23 +35,18 @@ public class FireBall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
-        //GetComponent<DevilFireBall>().FireBallActive = false;
-        
+        if(collision.gameObject.CompareTag("Player"))
+            Destroy(gameObject);        
     }
 
-
     IEnumerator DestroyAfterTime()
-    {
-
-        if (fireBallActive == true)
+    { 
+        if (fireBallActive)
         {
             yield return new WaitForSeconds(3f);
             Destroy(gameObject);
             fireBallActive = false;
         }
-        yield return null;
-
     }
 }
 

@@ -10,26 +10,15 @@ public class DevilFireBall : MonoBehaviour
     private float fireforce = 3f;
     private GameObject player;
 
-    private float baseDamage = 3f;
-
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public float GetDamage()
-    {
-        return baseDamage;
-    }
-
 
     public void fireFireball()
     {
-
         GameObject bullet = Instantiate(fireBallPrefab, firepoint.position, firepoint.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * fireforce;
-        
-
-        
     }
 }
