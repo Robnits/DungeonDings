@@ -8,9 +8,11 @@ public class RatSpawnerClose : MonoBehaviour
     private bool isInRange;
     private RatSpawner ratSpawner;
     private GameObject player;
+    private AudioSource gullisound;
     // Start is called before the first frame update
     void Start()
     {
+        gullisound = GetComponent<AudioSource>();
         ratSpawner = GetComponentInParent<RatSpawner>();
         inputHandler = GameObject.Find("LevelLoader").GetComponent<InputHandler>();
     }
@@ -37,9 +39,16 @@ public class RatSpawnerClose : MonoBehaviour
     private void Update()
     {
         if (isInRange && inputHandler.IsPLayerInteracting() && ratSpawner.ForChildIsOpen())
+        {
+            gullisound.Play();
             ratSpawner.IsOpenOrClosed(false);
+        }  
         else if (isInRange && inputHandler.IsPLayerInteracting() && !ratSpawner.ForChildIsOpen())
+        {
+            gullisound.Play();
             ratSpawner.IsOpenOrClosed(true);
+        }
+            
         
     }
 

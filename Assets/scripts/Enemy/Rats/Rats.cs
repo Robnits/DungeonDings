@@ -10,7 +10,7 @@ public class Rats : EnemysHauptklasse
     private void Start()
     {
         speed = 1.0f;
-        life = 3f;
+        life = 1f;
         value = 1f;
         damage = 1f;
         droprate = 1;

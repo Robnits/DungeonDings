@@ -35,9 +35,8 @@ public class Player_behjaviour : MonoBehaviour
 
     private void Awake()
     {
-       
         sprechblase = GameObject.Find("Sprechblase");
-        sprechblaseText = GameObject.Find("Sprechblase").GetComponentInChildren<TextMeshPro>();
+        sprechblaseText = sprechblase.GetComponentInChildren<TextMeshPro>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponentInChildren<Cam_Follow>();
         levelLoader = GameObject.Find("LevelLoader").GetComponentInChildren<Canvas>().GetComponentInChildren<Image>().GetComponentInChildren<Animator>();
         stats = gameObject.GetComponent<Player_Stats>();
@@ -52,9 +51,12 @@ public class Player_behjaviour : MonoBehaviour
         sprechblaseText.text = null;
     }
 
-    public float GetDamage()
+    public float GetDamage(bool isGranade)
     {
-        return (stats.damage * stats.baseDamage);
+        if (isGranade)
+            return (3f);
+        else
+            return (stats.damage * stats.baseDamage);
     }
 
     public void Movement(float horizontalInput, float verticalInput)
@@ -81,26 +83,64 @@ public class Player_behjaviour : MonoBehaviour
         Vector2 aimdirection = mousePosition - rb.position;
         float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimangle;
-        
+
+        /*sprechblase.transform.rotation = quaternion.identity;
+        Vector2 offset = new Vector2(0.6f, 0.45f); // Adjust the offset as needed
+        sprechblase.transform.position = rb.position + offset;*/
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 6 && !invincibleAfterDmg)
+            StartCoroutine(InvincibleTime(collision));
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 6 && !invincibleAfterDmg && collision.gameObject.CompareTag("Enemy"))
+            StartCoroutine(InvincibleTriggerTime(collision));
+    }
+
+    IEnumerator InvincibleTriggerTime(Collider2D collision)
+    {
+        invincibleAfterDmg = true;
+        StartCoroutine(cam.CameraShake(0.2f, 1f));
+
+
+        var collisionComponent = collision.gameObject.GetComponent<MonoBehaviour>();
+
+        switch (collisionComponent)
         {
-            if (collision.gameObject.GetComponentInChildren<Rats>() == true)
-            {
-                if (!invincibleAfterDmg)
-                    StartCoroutine(InvincibleTime(collision));
-            }
+            case RiesenFeuerballJunge fireBall:
+                stats.GetDamage(fireBall.GetDamage());
+                break;
         }
+
+        if (stats.life <= 0)
+            Death();
+        yield return new WaitForSeconds(1);
+        invincibleAfterDmg = false;
     }
 
     IEnumerator InvincibleTime(Collision2D collision)
     {
         invincibleAfterDmg = true;
         StartCoroutine(cam.CameraShake(0.2f, 1f));
-        stats.GetDamage(collision.gameObject.GetComponent<Rats>().GetDamage());
+
+
+        var collisionComponent = collision.gameObject.GetComponent<MonoBehaviour>();
+        
+        switch (collisionComponent)
+        {
+            case FireBall fireBall:
+                stats.GetDamage(fireBall.GetDamage());
+                break;
+
+            case Rats rats:
+                stats.GetDamage(rats.GetDamage());
+                break;
+        }
+        
         if (stats.life <= 0)
             Death();
         yield return new WaitForSeconds(0.5f);
@@ -114,7 +154,7 @@ public class Player_behjaviour : MonoBehaviour
 
     public void Dash()
     {
-        rb.velocity += moveDirection * stats.moveSpeed;
+        rb.velocity += stats.moveSpeed * 3 * moveDirection;
     }
 
     public void CloseGulli(bool showText)
@@ -131,8 +171,10 @@ public class Player_behjaviour : MonoBehaviour
             sprechblaseText.text = null;
             light2d.intensity = 0f;
         }
-            
-
+    }
+    public void ThrowGranade()
+    {
+        weapon.Granade();
     }
 }
  

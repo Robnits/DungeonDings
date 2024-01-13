@@ -6,8 +6,9 @@ public class DevilFireBall : MonoBehaviour
 {
     
     public GameObject fireBallPrefab;
+    public GameObject riesenfireBallPrefab;
     public Transform firepoint;
-    private float fireforce = 3f;
+    private readonly float fireforce = 3f;
     private GameObject player;
 
     private void Start()
@@ -16,9 +17,16 @@ public class DevilFireBall : MonoBehaviour
     }
 
 
-    public void fireFireball()
+    public void FireFireball()
     {
         GameObject bullet = Instantiate(fireBallPrefab, firepoint.position, firepoint.rotation);
         bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * fireforce;
     }
+
+    public void RiesenFeuerballJunge()
+    {
+        GameObject bullet = Instantiate(riesenfireBallPrefab, firepoint.position, firepoint.rotation);
+        bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * fireforce;
+    }
+
 }

@@ -7,76 +7,112 @@ using UnityEngine.UIElements;
 public class PrefabSpawner : MonoBehaviour
 {
 
-    public GameObject ratspwaner;
-    public GameObject chestspawner;
+    
+    
     public GameObject stairsDown;
     public GameObject stairsUp;
     public GameObject parentGameobject;
     private int stairnumber = 0;
+    private readonly List<Vector2Int> SpawnedPositions = new();
+    private bool dontSpawnFirstStair = true;
 
     [SerializeField]
-    private BalancingSystemSO balancingSO;
+    private BalancingSystemSO easy;
+    [SerializeField]
+    private BalancingSystemSO middle;
+    [SerializeField]
+    private BalancingSystemSO hard;
 
-
+    public GameObject ratspwaner;
     [SerializeField]
     [Range(0, 100)]
     private float SpawnerSpawnPercantage;
 
+    public GameObject chests;
     [SerializeField]
     [Range(0, 100)]
     private float ChestSpawnPercantage;
 
-    private void Awake()
+    public GameObject devils;
+    [SerializeField]
+    [Range(0, 100)]
+    private float devilSpawnPercantage;
+
+    private void Difficulty(BalancingSystemSO difficult)
     {
-        SpawnerSpawnPercantage = balancingSO.SpawnSpawner;
-        ChestSpawnPercantage = balancingSO.SpawnChest;
+        SpawnerSpawnPercantage = difficult.spawnSpawner;
+        ChestSpawnPercantage = difficult.spawnChest;
+        devilSpawnPercantage = difficult.devilSpawnrate;
     }
+
     public enum WhatGetSpawned
     {
         RatSpawner,
         Chest,
-        Exit
+        Exit,
+        Devil,
+        Down,
+        Up
     }
 
+    public IEnumerator WaitForSpawn(HashSet<Vector2Int> pos)
+    {
+        yield return new WaitForSeconds(0.2f);
+        SpawnExit(pos);
+    }
     public void SpawnExit(HashSet<Vector2Int> floorPositions)
     {
-        
-        Instantiate(stairsDown, new Vector3(floorPositions.Last<Vector2Int>().x + 0.5f, floorPositions.Last<Vector2Int>().y + 0.5f, 0f), Quaternion.identity);
+        Difficulty(easy);
+        if (dontSpawnFirstStair)
+        {
+            InstantiatePrefabsThatSpawnOnMap(new Vector2Int(40, -130), WhatGetSpawned.Up);
+            foreach (var item in GameObject.FindGameObjectsWithTag("UP"))
+                item.GetComponent<Stairs>().WhatIsMyNumber(stairnumber);
+            dontSpawnFirstStair = false;
+        }
+        else
+        {
+            InstantiatePrefabsThatSpawnOnMap(floorPositions.First(), WhatGetSpawned.Up);
+            foreach (var item in GameObject.FindGameObjectsWithTag("UP"))
+                item.GetComponent<Stairs>().WhatIsMyNumber(stairnumber);
+        }
+        stairnumber++;
+        InstantiatePrefabsThatSpawnOnMap(floorPositions.Last(), WhatGetSpawned.Down);
         foreach (var item in GameObject.FindGameObjectsWithTag("DOWN"))
             item.GetComponent<Stairs>().WhatIsMyNumber(stairnumber);
         
         stairnumber++;
-        Instantiate(stairsUp, new Vector3(floorPositions.First<Vector2Int>().x + 0.5f, floorPositions.First<Vector2Int>().y + 0.5f, 0f), Quaternion.identity);
-
-        foreach (var item in GameObject.FindGameObjectsWithTag("UP"))
-            item.GetComponent<Stairs>().WhatIsMyNumber(stairnumber);
-
-        stairnumber++;
+        SpawnedPositions.Add(floorPositions.First());
+        SpawnedPositions.Add(floorPositions.Last());
+        SpawnObjects(floorPositions);
     }
 
     public void SpawnObjects(HashSet<Vector2Int> floorPositions)
     {
-        HashSet<Vector2Int> SpawnedPositions = new HashSet<Vector2Int>();
+        
         foreach (Vector2Int position in floorPositions)
         {
-            int hilf = Random.Range(0, 100);
+            float hilf = Random.Range(0, 100);
 
             // Check if the position is already occupied in SpawnedPositions
-            if (!SpawnedPositions.Contains(position))
+            if (hilf < SpawnerSpawnPercantage && !SpawnedPositions.Contains(position))
             {
-                if (hilf < SpawnerSpawnPercantage)
-                {
-                    InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.RatSpawner);
-                    SpawnedPositions.Add(position);
-                }
+                InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.RatSpawner);
+                SpawnedPositions.Add(position);
+            }
 
-                hilf = Random.Range(0, 100);
-                // Check again after spawning the RatSpawner
-                if (hilf < ChestSpawnPercantage)
-                {
-                    InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Chest);
-                    SpawnedPositions.Add(position);
-                }
+            hilf = Random.Range(0, 100);
+            // Check again after spawning the RatSpawner
+            if (hilf < ChestSpawnPercantage && !SpawnedPositions.Contains(position))
+            {
+                InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Chest);
+                SpawnedPositions.Add(position);
+            }
+            hilf = Random.Range(0, 1000);
+            if (hilf < devilSpawnPercantage && !SpawnedPositions.Contains(position))
+            {
+                InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Devil);
+                SpawnedPositions.Add(position);
             }
         }
     }
@@ -90,7 +126,16 @@ public class PrefabSpawner : MonoBehaviour
                 Instantiate(ratspwaner, new Vector3(position.x + 0.5f, position.y + 0.5f, 0f), Quaternion.identity, parentGameobject.transform);
                 break;
             case WhatGetSpawned.Chest:
-                Instantiate(chestspawner, new Vector3(position.x + 0.5f, position.y + 0.5f, 0f), Quaternion.identity, parentGameobject.transform);
+                Instantiate(chests, new Vector3(position.x + 0.5f, position.y + 0.5f, 0f), Quaternion.identity, parentGameobject.transform);
+                break;
+            case WhatGetSpawned.Devil:
+                Instantiate(devils, new Vector3(position.x + 0.5f, position.y + 0.5f, 0f), Quaternion.identity, parentGameobject.transform);
+                break;
+            case WhatGetSpawned.Up:
+                Instantiate(stairsUp, new Vector3(position.x + 0.5f, position.y + 0.5f, 0f), Quaternion.identity, parentGameobject.transform);
+                break;
+            case WhatGetSpawned.Down:
+                Instantiate(stairsDown, new Vector3(position.x + 0.5f, position.y + 0.5f, 0f), Quaternion.identity, parentGameobject.transform);
                 break;
         }
     }

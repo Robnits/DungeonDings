@@ -19,7 +19,7 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
     // Methode für die Ausführung der prozeduralen Generierung
     protected override void RunProceduralGeneration()
     {
-        HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> floorPositions = new();
         // Zufälliger Weg ausführen und Bodenpositionen darstellen
         for (int i = 0; i < startPosition.Count(); i++)
         {
@@ -36,7 +36,7 @@ public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
         // Aktuelle Position für den zufälligen Weg
         var currentPosition = position;
         // Menge für die Bodenpositionen des zufälligen Wegs
-        HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> floorPositions = new();
 
         // Iterationen für den zufälligen Weg durchführen
         for (int i = 0; i < parameters.iterations; i++)

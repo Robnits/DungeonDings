@@ -30,7 +30,7 @@ public class RatSpawner : EnemysHauptklasse
         value = 10f;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private new void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -79,9 +79,6 @@ public class RatSpawner : EnemysHauptklasse
 
     void SpawnRats()
     {
-        float SpawnPosX = Random.Range(-1f, 1f);
-        float SpawnPosY = Random.Range(-1f, 1f);
-
-        Instantiate(RatPrefab, new Vector3(transform.position.x + SpawnPosX, transform.position.y + SpawnPosY, 0), Quaternion.identity);
+        Instantiate(RatPrefab, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
     }
 }

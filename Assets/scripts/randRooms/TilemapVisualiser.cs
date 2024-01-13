@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -14,7 +15,9 @@ public class TilemapVisualiser : MonoBehaviour
     [SerializeField]
     private Tilemap floorTilemap, wallTilemap;
     [SerializeField]
-    private TileBase floorTile1, floorTile2, floorTile3, floorTile4, floorTile5, floorTile6, floorTile7, floorTile8, floorTile9, floorTile10, floorTile11, wallTop;
+    private TileBase floorTile1, floorTile2, floorTile3, floorTile4, floorTile5, floorTile6, floorTile8, floorTile9, floorTile10, floorTile11, wallTop;
+    [SerializeField]
+    //private TileBase floorTile1, floorTile2, floorTile3, floorTile4, floorTile5, floorTile6, floorTile8, floorTile9, floorTile10, floorTile11, wallTop;
 
     // Methode zum Darstellen von Boden-Tiles an den angegebenen Positionen
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
@@ -26,10 +29,10 @@ public class TilemapVisualiser : MonoBehaviour
             if (randint == 0)
                 PaintSingleTile(position, floorTilemap, floorTile11);
             if (randint == 1)
-                PaintSingleTile(position, floorTilemap, floorTile10);
+                PaintSingleTile(position, floorTilemap, floorTile5);
             else
             {
-                randint %= 9;
+                randint %= 8;
                 switch (randint)
                 {
                     case 0:
@@ -45,20 +48,18 @@ public class TilemapVisualiser : MonoBehaviour
                         PaintSingleTile(position, floorTilemap, floorTile4);
                         break;
                     case 4:
-                        PaintSingleTile(position, floorTilemap, floorTile5);
+                        PaintSingleTile(position, floorTilemap, floorTile9);
                         break;
                     case 5:
                         PaintSingleTile(position, floorTilemap, floorTile6);
                         break;
                     case 6:
-                        PaintSingleTile(position, floorTilemap, floorTile7);
+                        PaintSingleTile(position, floorTilemap, floorTile10);
                         break;
                     case 7:
                         PaintSingleTile(position, floorTilemap, floorTile8);
                         break;
-                    case 8:
-                        PaintSingleTile(position, floorTilemap, floorTile9);
-                        break;
+                    
                 }
             }
         }
@@ -74,25 +75,18 @@ public class TilemapVisualiser : MonoBehaviour
     // Methode zum Zurücksetzen der Tilemaps
     public void Clear()
     {
+
         GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        GameObject[] downSpawners = GameObject.FindGameObjectsWithTag("DOWN");
+        GameObject[] upSpawners = GameObject.FindGameObjectsWithTag("UP");
         GameObject[] chests = GameObject.FindGameObjectsWithTag("Chest");
-        GameObject[] exits = GameObject.FindGameObjectsWithTag("Exit");
 
+        GameObject[] allSpawns = spawners.Concat(downSpawners).Concat(upSpawners).Concat(spawners).Concat(chests).ToArray();
 
-        // Destroy each spawner
-        foreach (GameObject spawner in spawners)
+        foreach (GameObject spawner in allSpawns)
         {
             DestroyImmediate(spawner);
         }
-        foreach (GameObject chest in chests)
-        {
-            DestroyImmediate(chest);
-        }
-        foreach (var exit in exits)
-        {
-            DestroyImmediate(exit);
-        }
-
 
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();

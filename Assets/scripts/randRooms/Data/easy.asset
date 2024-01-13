@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 446af09122c542a4c8b4e3b1bb133d23, type: 3}
-  m_Name: Balancing_
+  m_Name: easy
   m_EditorClassIdentifier: 
-  SpawnChest: 1
-  SpawnSpawner: 1
+  spawnChest: 1
+  spawnSpawner: 1
+  devilSpawnrate: 4

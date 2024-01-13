@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class Devil : EnemysHauptklasse
 {
-   
-    public GameObject weapon;
+    public DevilFireBall weapon;
 
     public bool playerIsInRange;
     public bool playerIsInMelee;
 
-    private float Countdown = 3f;
+    private readonly float Countdown = 3f;
     private Rigidbody2D rb;
     private bool isshooting;
+    private int fireballcounter;
     // Start is called before the first frame update
     void Start()
     {
-        life = 10f;
+        life = 20f;
         damage = 3f;
         value = 10f;
-        speed = 1f;
+        speed = 0.5f;
+        droprate = 90;
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
     }
@@ -28,36 +29,33 @@ public class Devil : EnemysHauptklasse
     // Update is called once per frame
     void FixedUpdate()
     {
-        float distance = Vector2.Distance(gameObject.transform.position, player.transform.position);
-
-        Vector3 directionToPlayer = player.transform.position - transform.position;
-
-        // Calculate the angle to rotate towards the player
-        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg + 90;
-
-        // Rotate the enemy to face the player
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        
-        if (distance <= 1)
+        if (player == null)
+            Destroy(gameObject);
+        if (playerIsInRange)
         {
-            StartCoroutine(MoveBackwards());
-            playerIsInMelee = true;
-            playerIsInRange = false;
-            StartCoroutine(MeleeAttack());
-        }
-        else
-        {
-            Vector2 moveDirection = (player.transform.position - transform.position).normalized;
-            rb.velocity = moveDirection * speed;
+            float distance = Vector2.Distance(gameObject.transform.position, player.transform.position);
 
-            playerIsInMelee = false;
-            playerIsInRange = true;
-            //StartCoroutine(FireballCountdown());
-        }
+            Vector3 directionToPlayer = player.transform.position - transform.position;
 
+            // Calculate the angle to rotate towards the player
+            float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg + 90;
+
+            // Rotate the enemy to face the player
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            if (distance <= 3)
+            {
+                StartCoroutine(MoveBackwards());
+            }
+            else
+            {
+                Vector2 moveDirection = (player.transform.position - transform.position).normalized;
+                rb.velocity = moveDirection * speed;
+            }
+        }
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private new void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && playerIsInMelee == false)
         {
@@ -76,10 +74,10 @@ public class Devil : EnemysHauptklasse
     IEnumerator MoveBackwards()
     {
         float timePassed = 0;
-        while (timePassed < 3)
+        while (timePassed < 2 && player != null)
         { 
             Vector2 moveDirection = (player.transform.position - transform.position).normalized;
-            rb.velocity = moveDirection * speed * -1;
+            rb.velocity =  speed * -1 * moveDirection;
             timePassed += Time.deltaTime;
 
             yield return null;
@@ -88,17 +86,26 @@ public class Devil : EnemysHauptklasse
     }
     IEnumerator FireballCountdown()
     {
-        if (playerIsInRange && !isshooting)
+        
+        if (playerIsInRange && !isshooting && fireballcounter < 3)
         {
+            fireballcounter++;
             isshooting = true;
-            weapon.GetComponent<DevilFireBall>().fireFireball();
+            weapon.GetComponent<DevilFireBall>().FireFireball();
             yield return new WaitForSeconds(Countdown);
             isshooting=false;
             StartCoroutine(FireballCountdown());
         }
-    }
-    IEnumerator MeleeAttack()
-    {
-        yield return null;
+        else if(playerIsInRange && !isshooting && fireballcounter >= 3)
+        {
+            isshooting = true;
+            yield  return new WaitForSeconds(0.3f);
+            weapon.GetComponent<DevilFireBall>().RiesenFeuerballJunge();
+            yield return new WaitForSeconds(0.3f);
+            fireballcounter = -1;
+            isshooting = false;
+            StartCoroutine(FireballCountdown());
+            
+        }
     }
 }

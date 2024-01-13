@@ -37,6 +37,10 @@ public class InputHandler : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
                 player.GetComponent<Player_behjaviour>().Dash();
+
+            if (Input.GetKeyDown(KeyCode.Q))
+                player.GetComponent<Player_behjaviour>().ThrowGranade();
+
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !isSettingOpen)

@@ -27,13 +27,9 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
     private void CorridorFirstGeneration()
     {
         // Sets zum Speichern von Bodenpositionen, potenziellen Raumpositionen und Raumpositionen
-        List<HashSet<Vector2Int>> floorPositions = new List<HashSet<Vector2Int>>();
-        List<HashSet <Vector2Int>> potentialRoomPositions = new List<HashSet<Vector2Int>>();
-        foreach (var item in startPosition)
-        {
-            floorPositions.Add(new HashSet<Vector2Int>());
-            potentialRoomPositions.Add(new HashSet<Vector2Int>());
-        }
+        List<HashSet<Vector2Int>> floorPositions = new();
+        List<HashSet<Vector2Int>> potentialRoomPositions = new();
+        NewMethod(floorPositions, potentialRoomPositions);
         for (int i = 0; i < startPosition.Count; i++)
         {
             List<List<Vector2Int>> corridors = CreateCorridors(floorPositions[i], potentialRoomPositions[i], i);
@@ -58,9 +54,18 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
 
             // Bodenfliesen visualisieren und Wände erstellen
             tilemapVisualiser.PaintFloorTiles(floorPositions[i]);
-            prefabSpawner.SpawnObjects(floorPositions[i]);
-            prefabSpawner.SpawnExit(floorPositions[i]);
+            StartCoroutine(prefabSpawner.WaitForSpawn(floorPositions[i]));
             WallGenerator.CreateWalls(floorPositions[i], tilemapVisualiser);
+        }
+    }
+
+    private void NewMethod(List<HashSet<Vector2Int>> floorPositions, List<HashSet<Vector2Int>> potentialRoomPositions)
+    {
+        for (int i = 0; i < startPosition.Count; i++)
+        {
+            _ = startPosition[i];
+            floorPositions.Add(new HashSet<Vector2Int>());
+            potentialRoomPositions.Add(new HashSet<Vector2Int>());
         }
     }
 
@@ -81,7 +86,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
     // Alle Sackgassen im Dungeon finden
     private List<Vector2Int> FindAllDeadEnds(HashSet<Vector2Int> floorPositions)
     {
-        List<Vector2Int> deadEnds = new List<Vector2Int>();
+        List<Vector2Int> deadEnds = new();
         foreach (Vector2Int position in floorPositions)
         {
             int neighboursCount = 0;
@@ -101,7 +106,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
     // Räume in einer Teilmenge potenzieller Raumpositionen erstellen
     private HashSet<Vector2Int> CreateRooms(HashSet<Vector2Int> potentialRoomPositions)
     {
-        HashSet<Vector2Int> roomPositions = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> roomPositions = new();
         int roomToCreateCount = Mathf.RoundToInt(potentialRoomPositions.Count * roomPercent);
 
         // Zufällig eine Teilmenge potenzieller Raumpositionen auswählen
@@ -119,7 +124,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
     // Initiale Korridore für den Dungeon erstellen
     private List<List<Vector2Int>> CreateCorridors(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions, int SpawnNumber)
     {
-        List<List<Vector2Int>> corridors = new List<List<Vector2Int>>();
+        List<List<Vector2Int>> corridors = new();
 
         var currentPosition = startPosition[SpawnNumber];
         potentialRoomPositions.Add(currentPosition);
@@ -129,7 +134,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
         {
             // Generate a random walk corridor and update the current position
             var corridor = ProceduralSpawn.RandomWalkCorridor(currentPosition, corridorLength);
-            currentPosition = corridor[corridor.Count - 1];
+            currentPosition = corridor[^1];
             potentialRoomPositions.Add(currentPosition);
             floorPositions.UnionWith(corridor);
         }
@@ -139,7 +144,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
 
     public List<Vector2Int> IncreaseCorridorSizeByOne(List<Vector2Int> corridor)
     {
-        List<Vector2Int> newCorridor = new List<Vector2Int>();
+        List<Vector2Int> newCorridor = new();
         Vector2Int previousDirection = Vector2Int.zero;
         for (int i = 1;i < corridorCount;i++)
         {
