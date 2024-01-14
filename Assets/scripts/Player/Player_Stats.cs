@@ -144,7 +144,7 @@ public class Player_Stats : MonoBehaviour
             1 => new Dictionary<string, Action>
                 {
                     { "Rüstungsschuhe", () => {maxlife += 5; GetHealth(5); moveSpeed -= 0.5f; } },
-                    { "Waffenwissen", () => {attackSpeed *= 0.8f; damage += 1.5f; maxlife -= 3; moveSpeed -= 3;} },
+                    { "Waffenwissen", () => {attackSpeed *= 0.8f; damage += 1.5f; maxlife -= 3; moveSpeed -= 3;} },// need fixing movespeed
                     { "Schulausbildung(Amerika)", () => {attackSpeed *= 0.8f; } },
                     { "Gewichte", () => {} },
                     { "Marcels Faulheit", () => {} }
