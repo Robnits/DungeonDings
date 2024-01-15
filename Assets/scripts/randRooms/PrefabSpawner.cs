@@ -38,6 +38,9 @@ public class PrefabSpawner : MonoBehaviour
     [Range(0, 100)]
     private float devilSpawnPercantage;
 
+    [SerializeField]
+    private GameObject Saeule;
+
     private void Difficulty(BalancingSystemSO difficult)
     {
         SpawnerSpawnPercantage = difficult.spawnSpawner;
@@ -52,7 +55,8 @@ public class PrefabSpawner : MonoBehaviour
         Exit,
         Devil,
         Down,
-        Up
+        Up,
+        Saeule
     }
 
     public IEnumerator WaitForSpawn(HashSet<Vector2Int> pos)
@@ -65,7 +69,7 @@ public class PrefabSpawner : MonoBehaviour
         Difficulty(easy);
         if (dontSpawnFirstStair)
         {
-            InstantiatePrefabsThatSpawnOnMap(new Vector2Int(40, -130), WhatGetSpawned.Up);
+            InstantiatePrefabsThatSpawnOnMap(new Vector2Int(40, -90), WhatGetSpawned.Up);
             foreach (var item in GameObject.FindGameObjectsWithTag("UP"))
                 item.GetComponent<Stairs>().WhatIsMyNumber(stairnumber);
             dontSpawnFirstStair = false;
@@ -80,7 +84,10 @@ public class PrefabSpawner : MonoBehaviour
         InstantiatePrefabsThatSpawnOnMap(floorPositions.Last(), WhatGetSpawned.Down);
         foreach (var item in GameObject.FindGameObjectsWithTag("DOWN"))
             item.GetComponent<Stairs>().WhatIsMyNumber(stairnumber);
-        
+
+        Vector2Int middlePos = floorPositions.ElementAt(floorPositions.Count / 2);
+        InstantiatePrefabsThatSpawnOnMap(middlePos, WhatGetSpawned.Saeule);
+
         stairnumber++;
         SpawnedPositions.Add(floorPositions.First());
         SpawnedPositions.Add(floorPositions.Last());
@@ -136,6 +143,9 @@ public class PrefabSpawner : MonoBehaviour
                 break;
             case WhatGetSpawned.Down:
                 Instantiate(stairsDown, new Vector3(position.x + 0.5f, position.y + 0.5f, 0f), Quaternion.identity, parentGameobject.transform);
+                break;
+            case WhatGetSpawned.Saeule:
+                Instantiate(Saeule, new Vector3(position.x + 0.5f, position.y + 1f, 0f), Quaternion.identity, parentGameobject.transform);
                 break;
         }
     }

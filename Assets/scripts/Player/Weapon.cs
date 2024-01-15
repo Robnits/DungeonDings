@@ -19,17 +19,18 @@ public class Weapon : MonoBehaviour
     {
         stats = gameObject.GetComponentInParent<Player_Stats>();
     }
-        
+
     public void Granade()
     {
         if (hasGranade)
-        { 
+        {
             hasGranade = false;
             GameObject granade = Instantiate(granadePrefab, firepoint.position, firepoint.rotation * Quaternion.Euler(0, 0, 90));
             granade.GetComponent<Rigidbody2D>().AddForce(4000 * stats.fireForce * firepoint.up, ForceMode2D.Force);
             StartCoroutine(GranadeCooldown());
         }
     }
+
     IEnumerator GranadeCooldown()
     {
         yield return new WaitForSeconds(10f);

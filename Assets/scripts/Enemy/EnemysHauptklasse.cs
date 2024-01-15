@@ -10,19 +10,34 @@ public class EnemysHauptklasse : MonoBehaviour
 { 
     protected GameObject player;
     public GameObject DropPotion;
+    public Healthbarscriptenemys healthscript;
 
     protected float speed;
-    protected float life;
+    public float life;
     protected float value;
     protected float damage;
     protected float droprate;
+    protected float maxlife;
 
     protected void Death()
     {
-        Destroy(gameObject);
+        if (transform.parent != null)
+            Destroy(transform.parent.gameObject);
+        else 
+            Destroy(gameObject);
         GlobalVariables.money += value;
         if (Random.Range(0,100) < droprate)
             Instantiate(DropPotion, transform.position, Quaternion.identity);
+    }
+    private void Start()
+    {
+        maxlife = 20f;
+    }
+
+    private void Update()
+    {
+        if (healthscript != null)
+            healthscript.FollowEnemy(gameObject.transform.position);
     }
 
     public float GetDamage()
@@ -37,6 +52,11 @@ public class EnemysHauptklasse : MonoBehaviour
             life -= player.GetComponent<Player_behjaviour>().GetDamage(false);
             if (life <= 0)
                 Death();
+
+            if (healthscript != null)
+                healthscript.GetDamaged(life); 
+
+                
         }
     }
     protected void OnTriggerEnter2D(Collider2D collision)
@@ -46,6 +66,8 @@ public class EnemysHauptklasse : MonoBehaviour
             life -= player.GetComponent<Player_behjaviour>().GetDamage(true);
             if (life <= 0)
                 Death();
+            if (healthscript != null)
+                healthscript.GetDamaged(life);
         }
     }
 }

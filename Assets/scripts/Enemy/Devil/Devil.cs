@@ -22,6 +22,7 @@ public class Devil : EnemysHauptklasse
         value = 10f;
         speed = 0.5f;
         droprate = 90;
+        healthscript.GetMaxhealth(life);
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
     }
@@ -29,31 +30,32 @@ public class Devil : EnemysHauptklasse
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (player == null)
-            Destroy(gameObject);
-        if (playerIsInRange)
+        if (player != null)
         {
-            float distance = Vector2.Distance(gameObject.transform.position, player.transform.position);
 
-            Vector3 directionToPlayer = player.transform.position - transform.position;
-
-            // Calculate the angle to rotate towards the player
-            float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg + 90;
-
-            // Rotate the enemy to face the player
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            if (distance <= 3)
+            if (playerIsInRange)
             {
-                StartCoroutine(MoveBackwards());
-            }
-            else
-            {
-                Vector2 moveDirection = (player.transform.position - transform.position).normalized;
-                rb.velocity = moveDirection * speed;
+                float distance = Vector2.Distance(gameObject.transform.position, player.transform.position);
+
+                Vector3 directionToPlayer = player.transform.position - transform.position;
+
+                // Calculate the angle to rotate towards the player
+                float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg + 90;
+
+                // Rotate the enemy to face the player
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                if (distance <= 3)
+                {
+                    StartCoroutine(MoveBackwards());
+                }
+                else
+                {
+                    Vector2 moveDirection = (player.transform.position - transform.position).normalized;
+                    rb.velocity = moveDirection * speed;
+                }
             }
         }
-
     }
     private new void OnTriggerEnter2D(Collider2D collision)
     {

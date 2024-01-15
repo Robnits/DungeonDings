@@ -45,12 +45,12 @@ public class InputHandler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape) && !isSettingOpen)
         {
-            einstellungen.OpenSetting();
+            einstellungen.OpenMenu();
             isSettingOpen = true;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isSettingOpen)
         {
-            einstellungen.CloseSetting();
+            einstellungen.OpenMenu();
             isSettingOpen = false;
         }
 

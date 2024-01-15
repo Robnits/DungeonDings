@@ -80,8 +80,11 @@ public class TilemapVisualiser : MonoBehaviour
         GameObject[] downSpawners = GameObject.FindGameObjectsWithTag("DOWN");
         GameObject[] upSpawners = GameObject.FindGameObjectsWithTag("UP");
         GameObject[] chests = GameObject.FindGameObjectsWithTag("Chest");
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] saeule = GameObject.FindGameObjectsWithTag("shouldGetDestroyedAfterRebuild");
 
-        GameObject[] allSpawns = spawners.Concat(downSpawners).Concat(upSpawners).Concat(spawners).Concat(chests).ToArray();
+
+        GameObject[] allSpawns = spawners.Concat(downSpawners).Concat(upSpawners).Concat(spawners).Concat(chests).Concat(enemys).Concat(saeule).ToArray();
 
         foreach (GameObject spawner in allSpawns)
         {

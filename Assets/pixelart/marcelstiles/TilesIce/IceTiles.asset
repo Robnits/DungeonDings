@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824c9e57faece61489bf2cd380a983d1, type: 3}
+  m_Name: IceTiles
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: 088b5c536b34f0640a639c8a3fcbede5, type: 2}
+  - {fileID: 11400000, guid: e3feac2bfa5739346a54a12df8a4007b, type: 2}
+  - {fileID: 11400000, guid: ec1641e886579ed4497c73d09830a508, type: 2}
+  - {fileID: 11400000, guid: b4fc2b9989f530b479bd4c5522d65529, type: 2}
+  - {fileID: 11400000, guid: feee6b335035f0047b042fec389fc01b, type: 2}
+  - {fileID: 11400000, guid: a665ebe66f460be49a12b9b7c9a33850, type: 2}
+  - {fileID: 11400000, guid: 782fa35cc1b56f7438651eb0a3eea03d, type: 2}
+  - {fileID: 11400000, guid: 5dc28a8dcad198d4ea823b1ca3d8f3d6, type: 2}
+  - {fileID: 11400000, guid: f4aa4bbffd9eecd4b9c9fcaf553dfd74, type: 2}
+  - {fileID: 11400000, guid: 75c0a59056781ef4f9e0475c3324dca3, type: 2}
+  wall: {fileID: 11400000, guid: fa51a22f8fce70246a0cbb5ebc87bd8b, type: 2}

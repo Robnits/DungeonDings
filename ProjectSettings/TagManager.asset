@@ -18,6 +18,8 @@ TagManager:
   - DOWN
   - UP
   - Granade
+  - BulletUI
+  - shouldGetDestroyedAfterRebuild
   layers:
   - Default
   - TransparentFX
@@ -58,12 +60,15 @@ TagManager:
   - name: Background
     uniqueID: 2389778479
     locked: 0
-  - name: bgWalls
+  - name: behindPlayer
     uniqueID: 3353436053
+    locked: 0
+  - name: UI
+    uniqueID: 23065893
     locked: 0
   - name: Player
     uniqueID: 1172353363
     locked: 0
-  - name: bgforWalls
+  - name: forPlayer
     uniqueID: 1591113029
     locked: 0

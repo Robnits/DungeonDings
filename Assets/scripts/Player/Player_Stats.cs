@@ -8,7 +8,8 @@ public class Player_Stats : MonoBehaviour
     public Weapon weapon;
     private HealthbarUI healthbarUI;
     private TextMeshProUGUI lifeText;
-    private TextMeshProUGUI bulletText;
+    public GameObject[] bulletUI;
+
 
     // Player stats
     public float moveSpeed;
@@ -40,11 +41,15 @@ public class Player_Stats : MonoBehaviour
         healthbarUI = GameObject.FindGameObjectWithTag("Healthbar").GetComponentInChildren<HealthbarUI>();
 
         lifeText = GameObject.Find("LifeText").GetComponentInChildren<TextMeshProUGUI>();
-        bulletText = GameObject.Find("Bullets").GetComponentInChildren<TextMeshProUGUI>();
+        healthbarUI.SetHealth(life, maxlife);
 
-        healthbarUI.SetMaxHealth(maxlife);
-        healthbarUI.SetHealth(life);
-        
+        bulletUI = GameObject.FindGameObjectsWithTag("BulletUI");
+
+        foreach (var item in bulletUI)
+        {
+            item.SetActive(false);
+        }
+
         GetDamage(0);
         BulletChanges(maxAmmunition);
     }
@@ -65,7 +70,15 @@ public class Player_Stats : MonoBehaviour
 
     public void BulletChanges(int ammunition)
     {
-        bulletText.text = ammunition.ToString() + "/" + maxAmmunition.ToString();
+        foreach (var item in bulletUI)
+        {
+            item.SetActive(false);
+        }
+
+        for (int i = 0; i < ammunition; i++)
+        {
+            bulletUI[i].SetActive(true);
+        }
     }
 
     public void GetDamage(float enemydamage)
@@ -75,7 +88,7 @@ public class Player_Stats : MonoBehaviour
         if (life < 0)
             life = 0;       
         
-        healthbarUI.SetHealth(life);
+        healthbarUI.SetHealth(life,maxlife);
         lifeText.text = life.ToString() + "/" + maxlife.ToString();
 
     }
@@ -86,7 +99,7 @@ public class Player_Stats : MonoBehaviour
         else
             if (life + health > maxlife)
                 life = maxlife;
-        healthbarUI.SetHealth(life);
+        healthbarUI.SetHealth(life, maxlife);
         lifeText.text = life.ToString() + "/" + maxlife.ToString();
     }
 
