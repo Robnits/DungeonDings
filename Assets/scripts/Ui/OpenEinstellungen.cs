@@ -113,28 +113,36 @@ public class OpenEinstellungen : MonoBehaviour
 
     public void SetMusicVolume()
     {
-        float volume = sliderMusic.value;
-        audioMixer.SetFloat("music", volume);
-        PlayerPrefs.SetFloat("music", volume);
+        if (sliderMusic != null)
+        {
+            float volume = sliderMusic.value;
+            audioMixer.SetFloat("music", volume);
+            PlayerPrefs.SetFloat("music", volume);
+        }
     }
     
     public void SetSFXVolume()
     {
-        float volume = sliderSFX.value;
-        audioMixer.SetFloat("sfx", volume);
-        PlayerPrefs.SetFloat("sfx", volume);
+        if (sliderSFX != null)
+        {
+            float volume = sliderSFX.value;
+            audioMixer.SetFloat("sfx", volume);
+            PlayerPrefs.SetFloat("sfx", volume);
+        }
     }
 
     private void LoadMusic()
     {
-        sliderMusic.value = PlayerPrefs.GetFloat("music");
+        if(sliderMusic != null)
+            sliderMusic.value = PlayerPrefs.GetFloat("music");
 
         SetMusicVolume();
     }
     
     private void LoadSFX()
     {
-        sliderSFX.value = PlayerPrefs.GetFloat("sfx");
+        if (sliderSFX != null)
+            sliderSFX.value = PlayerPrefs.GetFloat("sfx");
         
         SetSFXVolume();
     }

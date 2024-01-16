@@ -6,11 +6,18 @@ using UnityEngine.UI;
 public class HealthbarUI : MonoBehaviour
 {
 
-    public Slider slider;
+    public Slider sliderHealth;
+    public Slider sliderDash;
 
     public void SetHealth(float health, float maxHealth)
     {
-        slider.maxValue = maxHealth;
-        slider.value = health;
+        sliderHealth.maxValue = maxHealth;
+        sliderHealth.value = health;
+    }
+
+    public void SetDash(float dash, float dashmaxtime)
+    {
+        sliderDash.maxValue = dashmaxtime * 100;
+        sliderDash.value = dash;
     }
 }

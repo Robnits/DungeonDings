@@ -21,6 +21,8 @@ public class Player_Stats : MonoBehaviour
     public float dornen;
     public float baseDamage;
     public float damage;
+    public float dashmaxCooldown;
+    public float dashCooldown;
 
     // Item lists
     private List<string> commonItems;
@@ -66,6 +68,8 @@ public class Player_Stats : MonoBehaviour
         dornen = 0f;
         baseDamage = 1f + GlobalVariables.damageUpgrade - 1;
         damage = 1f;
+        dashmaxCooldown = 10f;
+        dashCooldown = 10f;
     }
 
     public void BulletChanges(int ammunition)
@@ -193,4 +197,9 @@ public class Player_Stats : MonoBehaviour
         }
     }
     private delegate void Action();
+
+    public void dashUI(float dashcd)
+    {
+        healthbarUI.SetDash(dashcd, dashmaxCooldown);
+    }
 }

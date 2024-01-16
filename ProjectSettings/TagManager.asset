@@ -20,6 +20,7 @@ TagManager:
   - Granade
   - BulletUI
   - shouldGetDestroyedAfterRebuild
+  - ui
   layers:
   - Default
   - TransparentFX

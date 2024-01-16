@@ -66,8 +66,11 @@ public class Player_behjaviour : MonoBehaviour
         else
             anim.SetBool("isMoving", false);
 
-        moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!dashing)
+        {
+            moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
     }
 
     private void Death()
@@ -84,9 +87,6 @@ public class Player_behjaviour : MonoBehaviour
         float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimangle;
 
-        /*sprechblase.transform.rotation = quaternion.identity;
-        Vector2 offset = new Vector2(0.6f, 0.45f); // Adjust the offset as needed
-        sprechblase.transform.position = rb.position + offset;*/
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -152,10 +152,37 @@ public class Player_behjaviour : MonoBehaviour
         weapon.FireCounter();
     }
 
+    private bool dashing;
+    private bool dashcooldown;
     public void Dash()
     {
-        rb.velocity += stats.moveSpeed * 3 * moveDirection;
+        if (!dashing && !dashcooldown) 
+            StartCoroutine(DashTime());
     }
+
+    IEnumerator DashTime()
+{
+    float timePassed = 0;
+    dashing = true;
+    dashcooldown = true;
+
+    while (timePassed < 0.8)
+    {
+        rb.AddForce(moveDirection * stats.moveSpeed * 25, ForceMode2D.Force);
+            timePassed += Time.fixedDeltaTime;
+        yield return null;
+    }
+    dashing = false;
+    timePassed = 0;
+    while (timePassed < stats.dashmaxCooldown * 100 + 1)
+    {
+        stats.dashUI(timePassed);
+        yield return new WaitForSeconds(0.01f);
+        timePassed++;
+    }
+    
+    dashcooldown = false;
+}
 
     public void CloseGulli(bool showText)
     {
@@ -177,4 +204,3 @@ public class Player_behjaviour : MonoBehaviour
         weapon.Granade();
     }
 }
- 

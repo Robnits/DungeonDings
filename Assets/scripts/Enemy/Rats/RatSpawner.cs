@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class RatSpawner : EnemysHauptklasse
 {
     [SerializeField]
@@ -24,6 +23,7 @@ public class RatSpawner : EnemysHauptklasse
         render = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
 
+        SpawnrateRats = Random.Range(5, 7);
         SetRandomOpenSprite();
 
         life = 10f;
@@ -72,6 +72,7 @@ public class RatSpawner : EnemysHauptklasse
         isActive = true;
         yield return new WaitForSeconds(SpawnrateRats);
 
+        SpawnrateRats = Random.Range(5, 7);
         if (isActive)
             StartCoroutine(SpawnRatsTimer());
         
