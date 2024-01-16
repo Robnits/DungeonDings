@@ -32,6 +32,7 @@ public class Player_behjaviour : MonoBehaviour
     private GameObject sprechblase;
     private TextMeshPro sprechblaseText;
     private Light2D light2d;
+    private Light2D zerilight2d;
 
     private void Awake()
     {
@@ -43,9 +44,14 @@ public class Player_behjaviour : MonoBehaviour
         scenenwechsel = GameObject.FindGameObjectWithTag("Respawn");
         rb = GetComponent<Rigidbody2D>();
         light2d = sprechblase.GetComponent<Light2D>();
-        gameObject.transform.position = new Vector3(0, 0, 0);
 
         light2d.intensity = 0f;
+        zerilight2d = GetComponentInChildren<Light2D>();
+        if (GlobalVariables.isInBossFight)
+        {
+            transform.position = new Vector3 (0, -30.9f, 0);
+            zerilight2d.intensity = 0f;
+        }
 
         sprechblase.GetComponent<SpriteRenderer>().enabled = false;
         sprechblaseText.text = null;
@@ -67,10 +73,15 @@ public class Player_behjaviour : MonoBehaviour
             anim.SetBool("isMoving", false);
 
         if (!dashing)
-        {
             moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
-            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
+
+        LookAtPlayer();
+    }
+
+
+    public void LookAtPlayer()
+    {
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void Death()
@@ -161,28 +172,28 @@ public class Player_behjaviour : MonoBehaviour
     }
 
     IEnumerator DashTime()
-{
-    float timePassed = 0;
-    dashing = true;
-    dashcooldown = true;
+    {
+        float timePassed = 0;
+        dashing = true;
+        dashcooldown = true;
 
-    while (timePassed < 0.8)
-    {
-        rb.AddForce(moveDirection * stats.moveSpeed * 25, ForceMode2D.Force);
+        while (timePassed < 0.8)
+        {
+            rb.AddForce(stats.moveSpeed * 25 * moveDirection, ForceMode2D.Force);
             timePassed += Time.fixedDeltaTime;
-        yield return null;
+            yield return null;
+        }
+        dashing = false;
+        timePassed = 0;
+        while (timePassed < stats.dashmaxCooldown * 50 + 1) // 50 muss zu hundert werden
+        {
+            stats.DashUI(timePassed);
+            yield return new WaitForSeconds(0.01f);
+            timePassed++;
+        }
+
+        dashcooldown = false;
     }
-    dashing = false;
-    timePassed = 0;
-    while (timePassed < stats.dashmaxCooldown * 100 + 1)
-    {
-        stats.dashUI(timePassed);
-        yield return new WaitForSeconds(0.01f);
-        timePassed++;
-    }
-    
-    dashcooldown = false;
-}
 
     public void CloseGulli(bool showText)
     {

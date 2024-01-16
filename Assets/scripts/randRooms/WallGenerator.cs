@@ -21,7 +21,7 @@ public static class WallGenerator
     private static HashSet<Vector2Int> FindWallsInDirections(HashSet<Vector2Int> floorPositions, List<Vector2Int> directionList)
     {
         // Menge für Wandpositionen
-        HashSet<Vector2Int> wallPositions = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> wallPositions = new();
 
         // Für jede Bodenposition prüfen, ob sie Nachbarn in bestimmten Richtungen hat
         foreach (var position in floorPositions)

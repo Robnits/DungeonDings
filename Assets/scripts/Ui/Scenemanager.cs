@@ -38,7 +38,10 @@ public class Scenemanager : MonoBehaviour
                 SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
                 break;
             case 2:
-                SceneManager.LoadScene(2, LoadSceneMode.Single);
+                SceneManager.LoadScene("procedural dungeon", LoadSceneMode.Single);
+                break;
+            case 3:
+                SceneManager.LoadScene("MarcelBossfight", LoadSceneMode.Single);
                 break;
         }
     }

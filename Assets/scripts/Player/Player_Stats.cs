@@ -22,7 +22,6 @@ public class Player_Stats : MonoBehaviour
     public float baseDamage;
     public float damage;
     public float dashmaxCooldown;
-    public float dashCooldown;
 
     // Item lists
     private List<string> commonItems;
@@ -60,7 +59,7 @@ public class Player_Stats : MonoBehaviour
     {
         // Initialize player stats
         moveSpeed = 2.5f;
-        maxlife = 10f + GlobalVariables.healthUpgrade - 1;
+        maxlife = 100f + GlobalVariables.healthUpgrade - 1;
         life = maxlife;
         maxAmmunition = 2;
         fireForce = 30f;
@@ -68,8 +67,7 @@ public class Player_Stats : MonoBehaviour
         dornen = 0f;
         baseDamage = 1f + GlobalVariables.damageUpgrade - 1;
         damage = 1f;
-        dashmaxCooldown = 10f;
-        dashCooldown = 10f;
+        dashmaxCooldown = 5f;
     }
 
     public void BulletChanges(int ammunition)
@@ -198,7 +196,7 @@ public class Player_Stats : MonoBehaviour
     }
     private delegate void Action();
 
-    public void dashUI(float dashcd)
+    public void DashUI(float dashcd)
     {
         healthbarUI.SetDash(dashcd, dashmaxCooldown);
     }

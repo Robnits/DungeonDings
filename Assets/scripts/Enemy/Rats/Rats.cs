@@ -12,7 +12,7 @@ public class Rats : EnemysHauptklasse
         speed = 1.0f;
         life = 1f;
         value = 1f;
-        damage = 1f;
+        damage = 5f;
         droprate = 1;
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();

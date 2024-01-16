@@ -10,7 +10,7 @@ public class RiesenFeuerballJunge : MonoBehaviour
     private readonly float speed = 0.5f;
     private Rigidbody2D FireBallRB;
     private bool fireBallActive = true;
-    private readonly float damage = 8f;
+    private readonly float damage = 75f;
 
     private void Start()
     {

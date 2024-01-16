@@ -6,6 +6,9 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu]
 public class SOTiles : ScriptableObject
 {
+
     public TileBase[] tiles;
-    public TileBase wall;
+    public TileBase[] raretiles;
+    public TileBase[] wall;
+
 }

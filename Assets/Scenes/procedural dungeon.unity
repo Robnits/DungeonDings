@@ -8141,17 +8141,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorTilemap: {fileID: 1501229854}
   wallTilemap: {fileID: 1369269551}
-  floorTile1: {fileID: 11400000, guid: 2fca5b3481f27a14594196a4af8dee8a, type: 2}
-  floorTile2: {fileID: 11400000, guid: 8edfa65067c678b4b97453e00cd406bf, type: 2}
-  floorTile3: {fileID: 11400000, guid: bfb42c7a60564894ab765c83c312339b, type: 2}
-  floorTile4: {fileID: 11400000, guid: 3ebdebfc2101d5b49b36b7a3cab5535d, type: 2}
-  floorTile5: {fileID: 11400000, guid: 0839342767f2b0a4cb3bd18e2be7bb3f, type: 2}
-  floorTile6: {fileID: 11400000, guid: 55f4c759dc4e7094abd3f844088e0336, type: 2}
-  floorTile8: {fileID: 11400000, guid: 89b6ad70745c9ef43a1af24a7b899a42, type: 2}
-  floorTile9: {fileID: 11400000, guid: f50d4cf7f9de44b4d96103d294f85858, type: 2}
-  floorTile10: {fileID: 11400000, guid: 6b01cb5a47a11bd42abdc3d76a00e075, type: 2}
-  floorTile11: {fileID: 11400000, guid: fbb65c598f8419f459bf14d549015893, type: 2}
-  wallTop: {fileID: 11400000, guid: cf40e87834c907e4993bab12fea0c08b, type: 2}
+  tilesSO:
+  - {fileID: 11400000, guid: 8716b15e73519fc4299abbcaf30e49c9, type: 2}
+  - {fileID: 11400000, guid: 3ea5b254c1972a54eaed708f8116a24c, type: 2}
+  - {fileID: 11400000, guid: 9d6a1e74936b1f242b0fd0236397f5f0, type: 2}
 --- !u!4 &418389275
 Transform:
   m_ObjectHideFlags: 0
@@ -93612,9 +93605,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.7
+  m_FalloffIntensity: 0.6
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.4
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 000000002f20718e955fe1c74575d65e25f55f01
@@ -93635,7 +93628,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 3
+  m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 6
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -98766,7 +98759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1976603344

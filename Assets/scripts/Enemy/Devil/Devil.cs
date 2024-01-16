@@ -18,7 +18,7 @@ public class Devil : EnemysHauptklasse
     void Start()
     {
         life = 20f;
-        damage = 3f;
+        damage = 30f;
         value = 10f;
         speed = 0.5f;
         droprate = 90;

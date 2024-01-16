@@ -8,6 +8,7 @@ public class InputHandler : MonoBehaviour
 
     private GameObject player;
     public OpenEinstellungen einstellungen;
+    public PhaseTrackScript phaseTrackScript;
 
     private bool isSettingOpen;
     private bool isInteracting;
@@ -18,7 +19,7 @@ public class InputHandler : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
 
-        if (currentScene.name == "procedural dungeon")
+        if (currentScene.name == "procedural dungeon"|| GlobalVariables.isInBossFight)
             player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -30,17 +31,27 @@ public class InputHandler : MonoBehaviour
 
         if (player != null && !isSettingOpen)
         {
-            player.GetComponent<Player_behjaviour>().Movement(horizontalInput, verticalInput);
+            if (phaseTrackScript != null && phaseTrackScript.playerIsAllowedToMove)
+            {
+                player.GetComponent<Player_behjaviour>().Movement(horizontalInput, verticalInput);
 
-            if (Input.GetMouseButtonDown(0))
-                player.GetComponent<Player_behjaviour>().Shooting();
+                if (Input.GetMouseButtonDown(0))
+                    player.GetComponent<Player_behjaviour>().Shooting();
 
-            if (Input.GetKeyDown(KeyCode.Space))
-                player.GetComponent<Player_behjaviour>().Dash();
+                if (Input.GetKeyDown(KeyCode.Space))
+                    player.GetComponent<Player_behjaviour>().Dash();
 
-            if (Input.GetKeyDown(KeyCode.Q))
-                player.GetComponent<Player_behjaviour>().ThrowGranade();
-
+                if (Input.GetKeyDown(KeyCode.Q))
+                    player.GetComponent<Player_behjaviour>().ThrowGranade();
+                if (Input.GetKeyDown(KeyCode.E))
+                    isInteracting = true;
+                else
+                    isInteracting = false;
+            }
+            else
+            {
+                player.GetComponent<Player_behjaviour>().LookAtPlayer(); ;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !isSettingOpen)
@@ -54,10 +65,7 @@ public class InputHandler : MonoBehaviour
             isSettingOpen = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-            isInteracting = true;
-        else
-            isInteracting = false;
+        
     }
     public bool IsPLayerInteracting()
     {

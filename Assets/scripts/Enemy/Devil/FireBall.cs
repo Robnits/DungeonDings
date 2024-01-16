@@ -10,7 +10,7 @@ public class FireBall : MonoBehaviour
     private readonly float speed = 2f;
     private Rigidbody2D FireBallRB;
     private bool fireBallActive = true;
-    private readonly float damage = 3f;
+    private readonly float damage = 30f;
 
     private void Start()
     {

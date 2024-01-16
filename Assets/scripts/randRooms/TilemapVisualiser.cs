@@ -15,56 +15,31 @@ public class TilemapVisualiser : MonoBehaviour
     [SerializeField]
     private Tilemap floorTilemap, wallTilemap;
     [SerializeField]
-    private TileBase floorTile1, floorTile2, floorTile3, floorTile4, floorTile5, floorTile6, floorTile8, floorTile9, floorTile10, floorTile11, wallTop;
-    [SerializeField]
-    //private TileBase floorTile1, floorTile2, floorTile3, floorTile4, floorTile5, floorTile6, floorTile8, floorTile9, floorTile10, floorTile11, wallTop;
+    private List<SOTiles> tilesSO;
+
+    private const int WallRandomRangeMax = 1001;
+
+    private int randomBiom;
+
+    private void Awake()
+    {
+        randomBiom = Random.Range(0, 3);
+    }
+
 
     // Methode zum Darstellen von Boden-Tiles an den angegebenen Positionen
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
         foreach (var position in floorPositions)
         {
-            int randint = Random.Range(0, 1000);
-            
-            if (randint == 0)
-                PaintSingleTile(position, floorTilemap, floorTile11);
-            if (randint == 1)
-                PaintSingleTile(position, floorTilemap, floorTile5);
-            else
-            {
-                randint %= 8;
-                switch (randint)
-                {
-                    case 0:
-                        PaintSingleTile(position, floorTilemap, floorTile1);
-                        break;
-                    case 1:
-                        PaintSingleTile(position, floorTilemap, floorTile2);
-                        break;
-                    case 2:
-                        PaintSingleTile(position, floorTilemap, floorTile3);
-                        break;
-                    case 3:
-                        PaintSingleTile(position, floorTilemap, floorTile4);
-                        break;
-                    case 4:
-                        PaintSingleTile(position, floorTilemap, floorTile9);
-                        break;
-                    case 5:
-                        PaintSingleTile(position, floorTilemap, floorTile6);
-                        break;
-                    case 6:
-                        PaintSingleTile(position, floorTilemap, floorTile10);
-                        break;
-                    case 7:
-                        PaintSingleTile(position, floorTilemap, floorTile8);
-                        break;
-                    
-                }
-            }
+            int randomValue = Random.Range(0, WallRandomRangeMax);
+
+            //if (randomValue > RarityThreshold)
+            PaintSingleTile(position, floorTilemap, tilesSO[randomBiom].tiles[randomValue % tilesSO[randomBiom].tiles.Count()]);
         }
     }
-
+/*if (randomValue == 1 && tilesSO.raretiles[1] != null)
+                PaintSingleTile(position, floorTilemap, tilesSO.raretiles[1]);    */
     // Hilfsmethode zum Darstellen eines einzelnen Tiles an einer Position auf der Tilemap
     private void PaintSingleTile(Vector2Int position, Tilemap tilemap, TileBase tile)
     {
@@ -98,6 +73,7 @@ public class TilemapVisualiser : MonoBehaviour
     // Methode zum Darstellen eines einzelnen Basis-Wall-Tiles an einer Position auf der Tilemap
     internal void PaintSingleBasicWall(Vector2Int position)
     {
-        PaintSingleTile(position, wallTilemap, wallTop);
+        int whichWall = Random.Range(1, tilesSO[randomBiom].wall.Count());
+        PaintSingleTile(position, wallTilemap, tilesSO[randomBiom].wall[whichWall - 1]);
     }
 }

@@ -32,4 +32,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5773906b39304914b9e94e69812e45bf, type: 2}
   - {fileID: 11400000, guid: cebdcacfa680ba6478e633993ee71636, type: 2}
   - {fileID: 11400000, guid: 5e50b37e1a36c654499d6a2bd5d746cf, type: 2}
-  wall: {fileID: 0}
+  raretiles: []
+  wall:
+  - {fileID: 11400000, guid: 7e255e3ca2ade974f931fb0fa7db692b, type: 2}
+  - {fileID: 11400000, guid: 1bc3f8a61dc7c054aa3751601f7fbc53, type: 2}
+  - {fileID: 11400000, guid: f38acbef68e4f1848a6b8517797b9e50, type: 2}
+  - {fileID: 11400000, guid: 71a36477117a9c44c9371e3f19483b85, type: 2}
+  - {fileID: 11400000, guid: 07743649f5df6a34ea376c5a2a0e431b, type: 2}
+  - {fileID: 11400000, guid: e0280e34644e2de46ac84fed261e6d27, type: 2}
