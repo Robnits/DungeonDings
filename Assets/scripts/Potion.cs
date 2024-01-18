@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
-    private readonly float health = 5;
+    private readonly float health = 25;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

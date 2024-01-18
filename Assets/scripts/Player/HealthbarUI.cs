@@ -17,7 +17,7 @@ public class HealthbarUI : MonoBehaviour
 
     public void SetDash(float dash, float dashmaxtime)
     {
-        sliderDash.maxValue = dashmaxtime * 100;
+        sliderDash.maxValue = dashmaxtime * 50;
         sliderDash.value = dash;
     }
 }

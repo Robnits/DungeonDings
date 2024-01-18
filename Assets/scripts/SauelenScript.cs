@@ -26,14 +26,21 @@ public class SauelenScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
+        {
             PlayerIsInRange = true;
+            collision.gameObject.GetComponent<Player_behjaviour>().SprechblasePressE(true);
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
+        {
             PlayerIsInRange = false;
+            collision.gameObject.GetComponent<Player_behjaviour>().SprechblasePressE(false);
+        }
     }
 
     private void Update()

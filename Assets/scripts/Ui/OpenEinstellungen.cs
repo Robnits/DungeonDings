@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+
 
 public class OpenEinstellungen : MonoBehaviour
 {
@@ -9,21 +12,62 @@ public class OpenEinstellungen : MonoBehaviour
     private CanvasGroup canvasGroup;
     public CanvasGroup CanvasGroupSettings;
     private bool settingsIsOpen;
+    public CanvasGroup canvasGroupSteuerungUI;
 
     [SerializeField] 
     private Slider sliderSFX;
     [SerializeField] 
     private Slider sliderMusic;
 
-    public AudioMixer audioMixer; 
+    public AudioMixer audioMixer;
+    
+    public TMP_Dropdown dropdown;
+    public Toggle toggle;
+
+
+    Resolution[] resolutions;
 
     // Start is called before the first frame update
     void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        InstantiateVolume();        
+
+        if (PlayerPrefs.HasKey("Tutorialhelp"))
+            LoadTutorial();
+
+        InstantiateVolume();
+        InstantiateResolution();
         CloseSettings();
         CloseMenu();
+    }
+    private void InstantiateResolution()
+    {
+
+        resolutions = Screen.resolutions;
+        if (dropdown != null)
+            dropdown.ClearOptions();
+
+        List<string> options = new();
+
+        int currentIndex = 0;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            options.Add(option);
+
+            if (resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height)
+            {
+                currentIndex = i;
+            }
+        }
+        if (dropdown != null)
+        {
+            dropdown.AddOptions(options);
+            dropdown.value = currentIndex;
+            dropdown.RefreshShownValue();
+        }
     }
 
     public void OpenMenu()
@@ -145,5 +189,29 @@ public class OpenEinstellungen : MonoBehaviour
             sliderSFX.value = PlayerPrefs.GetFloat("sfx");
         
         SetSFXVolume();
+    }
+
+    public void SetResolution(int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    
+    public void ShowSteuerung(bool alpha)
+    {
+        canvasGroupSteuerungUI.alpha = alpha ? 1 : 0;
+        
+        PlayerPrefs.SetInt("Tutorialhelp", alpha ? 1 : 0);
+    }
+
+    private void LoadTutorial()
+    {
+        if (toggle != null)
+        {
+            bool showTutorial = PlayerPrefs.GetInt("Tutorialhelp") == 1;
+            canvasGroupSteuerungUI.alpha = showTutorial ? 1 : 0;
+            toggle.isOn = showTutorial;
+        }
     }
 }

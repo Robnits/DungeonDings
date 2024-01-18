@@ -29,43 +29,43 @@ public class InputHandler : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (player != null && !isSettingOpen)
-        {
-            if (phaseTrackScript != null && phaseTrackScript.playerIsAllowedToMove)
-            {
-                player.GetComponent<Player_behjaviour>().Movement(horizontalInput, verticalInput);
-
-                if (Input.GetMouseButtonDown(0))
-                    player.GetComponent<Player_behjaviour>().Shooting();
-
-                if (Input.GetKeyDown(KeyCode.Space))
-                    player.GetComponent<Player_behjaviour>().Dash();
-
-                if (Input.GetKeyDown(KeyCode.Q))
-                    player.GetComponent<Player_behjaviour>().ThrowGranade();
-                if (Input.GetKeyDown(KeyCode.E))
-                    isInteracting = true;
-                else
-                    isInteracting = false;
-            }
-            else
-            {
-                player.GetComponent<Player_behjaviour>().LookAtPlayer(); ;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape) && !isSettingOpen)
-        {
-            einstellungen.OpenMenu();
-            isSettingOpen = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape) && isSettingOpen)
-        {
-            einstellungen.OpenMenu();
-            isSettingOpen = false;
-        }
-
+        if (player != null && !isSettingOpen && phaseTrackScript == null)
+            HandlePlayerInput();
         
+        else if(player != null && !isSettingOpen && phaseTrackScript != null)
+            if (phaseTrackScript.playerIsAllowedToMove)
+                HandlePlayerInput();
+
+        HandleMenuInput();
+    }
+    private void HandlePlayerInput()
+    {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+
+        Player_behjaviour playerBehaviour = player.GetComponent<Player_behjaviour>();
+
+        playerBehaviour.Movement(horizontalInput, verticalInput);
+
+        if (Input.GetMouseButtonDown(0))
+            playerBehaviour.Shooting();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            playerBehaviour.Dash();
+
+        if (Input.GetKeyDown(KeyCode.Q))
+            playerBehaviour.ThrowGranade();
+
+        isInteracting = Input.GetKeyDown(KeyCode.E);
+    }
+
+    private void HandleMenuInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            einstellungen.OpenMenu();
+            isSettingOpen = !isSettingOpen;
+        }
     }
     public bool IsPLayerInteracting()
     {

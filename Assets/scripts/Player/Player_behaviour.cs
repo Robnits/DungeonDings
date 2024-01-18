@@ -22,7 +22,7 @@ public class Player_behjaviour : MonoBehaviour
     [SerializeField]
     private Animator anim;
     Player_Stats stats;
-    
+
     Vector2 moveDirection;
     Vector2 mousePosition;
 
@@ -49,7 +49,9 @@ public class Player_behjaviour : MonoBehaviour
         zerilight2d = GetComponentInChildren<Light2D>();
         if (GlobalVariables.isInBossFight)
         {
-            transform.position = new Vector3 (0, -30.9f, 0);
+            //transform.position = new Vector3 (0, -30.9f, 0);
+            transform.position = new Vector3(0, -2f, 0);
+
             zerilight2d.intensity = 0f;
         }
 
@@ -140,7 +142,7 @@ public class Player_behjaviour : MonoBehaviour
 
 
         var collisionComponent = collision.gameObject.GetComponent<MonoBehaviour>();
-        
+
         switch (collisionComponent)
         {
             case FireBall fireBall:
@@ -151,7 +153,7 @@ public class Player_behjaviour : MonoBehaviour
                 stats.GetDamage(rats.GetDamage());
                 break;
         }
-        
+
         if (stats.life <= 0)
             Death();
         yield return new WaitForSeconds(0.5f);
@@ -167,7 +169,7 @@ public class Player_behjaviour : MonoBehaviour
     private bool dashcooldown;
     public void Dash()
     {
-        if (!dashing && !dashcooldown) 
+        if (!dashing && !dashcooldown)
             StartCoroutine(DashTime());
     }
 
@@ -177,9 +179,9 @@ public class Player_behjaviour : MonoBehaviour
         dashing = true;
         dashcooldown = true;
 
-        while (timePassed < 0.8)
+        while (timePassed < 0.4)
         {
-            rb.AddForce(stats.moveSpeed * 25 * moveDirection, ForceMode2D.Force);
+            rb.AddForce(stats.moveSpeed * 50 * moveDirection, ForceMode2D.Force);
             timePassed += Time.fixedDeltaTime;
             yield return null;
         }
@@ -195,9 +197,9 @@ public class Player_behjaviour : MonoBehaviour
         dashcooldown = false;
     }
 
-    public void CloseGulli(bool showText)
+    public void SprechblasePressE(bool hilf)
     {
-        if (showText)
+        if (hilf)
         {
             sprechblase.GetComponent<SpriteRenderer>().enabled = true;
             sprechblaseText.text = "Press E";
@@ -210,8 +212,28 @@ public class Player_behjaviour : MonoBehaviour
             light2d.intensity = 0f;
         }
     }
+
+
+
     public void ThrowGranade()
     {
         weapon.Granade();
+    }
+    private bool isSlowed;
+    private float slowed;
+    public void OnSlow(float slow)
+    {
+        
+        if (!isSlowed && slow > 0)
+        {
+            isSlowed = true;
+            slowed = slow;
+            stats.moveSpeed -= slow;
+        }
+        else if(!isSlowed && slow == 0)
+        {
+            stats.moveSpeed += slowed;
+            isSlowed = false;
+        }
     }
 }

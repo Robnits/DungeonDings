@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -7,6 +9,9 @@ public class PhaseTrackScript : MonoBehaviour
     private int phasen = 0;
     private GameObject player;
     private Animator LevelLoaderAnim;
+    public Neeko Neeko;
+    public CanvasGroup Healthleiste;
+    public GameObject neekoFakePrefab;
 
     public bool playerIsAllowedToMove = true;
     public Light2D globalLight;
@@ -14,8 +19,11 @@ public class PhaseTrackScript : MonoBehaviour
     public AudioSource normalMusic;
     public AudioSource Rennala;
 
+    public List<GameObject> RotationPoints;
+
     private void Start()
     {
+        Healthleiste.alpha = 0;
         player = GameObject.FindGameObjectWithTag("Player");
         playerIsAllowedToMove = true;
         LevelLoaderAnim = GameObject.Find("Transition").GetComponentInChildren<Animator>();
@@ -62,13 +70,27 @@ public class PhaseTrackScript : MonoBehaviour
         yield return new WaitForSeconds(1);
         playerIsAllowedToMove = true;
         LevelLoaderAnim.SetTrigger("End");
+        Healthleiste.alpha = 1;
         globalLight.intensity = 0.8f;
     }
     private void NeekoBattlePhase1()
     {
+        SpawnNeekos(15);
         //Neeko clone Spawnen rotieren im uhrzeigersinn
-
     }
 
+    private void SpawnNeekos(int anzahl)
+    {
+        for (int i = 0; i < anzahl; i++)
+        {
+            GameObject neekoClone = Instantiate(neekoFakePrefab, player.transform.position, quaternion.identity);
+            neekoClone.GetComponentInChildren<NeekoClones>().StartRotate(RotationPoints[i]);
+        }
+        Neeko.StartRotate(RotationPoints[15]);
+    }
 
+    private void Update()
+    {
+        transform.Rotate(Vector3.forward, 35 * Time.deltaTime);
+    }
 }

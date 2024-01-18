@@ -8,7 +8,7 @@ public class DevilFireBall : MonoBehaviour
     public GameObject fireBallPrefab;
     public GameObject riesenfireBallPrefab;
     public Transform firepoint;
-    private readonly float fireforce = 3f;
+    private readonly float fireforce = 2f;
     private GameObject player;
 
     private void Start()
