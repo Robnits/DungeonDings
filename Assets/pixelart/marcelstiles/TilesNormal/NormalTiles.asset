@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824c9e57faece61489bf2cd380a983d1, type: 3}
+  m_Name: NormalTiles
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: 2fca5b3481f27a14594196a4af8dee8a, type: 2}
+  - {fileID: 11400000, guid: 8edfa65067c678b4b97453e00cd406bf, type: 2}
+  - {fileID: 11400000, guid: bfb42c7a60564894ab765c83c312339b, type: 2}
+  - {fileID: 11400000, guid: 3ebdebfc2101d5b49b36b7a3cab5535d, type: 2}
+  - {fileID: 11400000, guid: 55f4c759dc4e7094abd3f844088e0336, type: 2}
+  - {fileID: 11400000, guid: 89b6ad70745c9ef43a1af24a7b899a42, type: 2}
+  - {fileID: 11400000, guid: f50d4cf7f9de44b4d96103d294f85858, type: 2}
+  - {fileID: 11400000, guid: 6b01cb5a47a11bd42abdc3d76a00e075, type: 2}
+  raretiles: []
+  wall:
+  - {fileID: 11400000, guid: cf40e87834c907e4993bab12fea0c08b, type: 2}

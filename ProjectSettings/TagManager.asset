@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Spawnpoint
-  - Rooms
   - Bullet
   - Enemy
   - Rats
@@ -14,6 +13,14 @@ TagManager:
   - Chest
   - Exit
   - Healthbar
+  - Rat
+  - Settings
+  - DOWN
+  - UP
+  - Granade
+  - BulletUI
+  - shouldGetDestroyedAfterRebuild
+  - ui
   layers:
   - Default
   - TransparentFX
@@ -22,7 +29,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - Walls
   - 
   - 
   - 
@@ -54,12 +61,15 @@ TagManager:
   - name: Background
     uniqueID: 2389778479
     locked: 0
-  - name: bgWalls
+  - name: behindPlayer
     uniqueID: 3353436053
     locked: 0
   - name: Player
     uniqueID: 1172353363
     locked: 0
-  - name: bgforWalls
+  - name: forPlayer
     uniqueID: 1591113029
+    locked: 0
+  - name: UI
+    uniqueID: 23065893
     locked: 0

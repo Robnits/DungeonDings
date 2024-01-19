@@ -84,11 +84,13 @@ public class UpgradeManager : MonoBehaviour
     }
     private void Start()
     {
-        // Find the canvas and player in Start
-        canvas = GameObject.Find("AugmentAuswahl");
+        if (!GlobalVariables.isInBossFight)
+        {
+            canvas = GameObject.Find("AugmentAuswahl");
+            canvas.SetActive(false);
+        }
+        
         Player = GameObject.FindGameObjectWithTag("Player");
-
-        canvas.SetActive(false);
     }
 
     public void ItemRoll()

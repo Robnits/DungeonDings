@@ -6,15 +6,20 @@ using UnityEngine.UI;
 public class HealthbarUI : MonoBehaviour
 {
 
-    public Slider slider;
+    [SerializeField] 
+    private Slider sliderHealth;
+    [SerializeField] 
+    private Slider sliderDash;
 
-    public void SetMaxHealth(float maxHealth)
+    public void SetHealth(float health, float maxHealth)
     {
-        slider.maxValue = maxHealth;
+        sliderHealth.maxValue = maxHealth;
+        sliderHealth.value = health;
     }
 
-    public void SetHealth(float health)
+    public void SetDash(float dash, float dashmaxtime)
     {
-        slider.value = health;
+        sliderDash.maxValue = dashmaxtime * 50;
+        sliderDash.value = dash;
     }
 }

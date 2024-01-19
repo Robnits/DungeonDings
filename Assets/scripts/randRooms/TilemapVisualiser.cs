@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
+
 
 // Klasse zur Visualisierung von Tiles auf Tilemaps
 public class TilemapVisualiser : MonoBehaviour
@@ -11,27 +15,33 @@ public class TilemapVisualiser : MonoBehaviour
     [SerializeField]
     private Tilemap floorTilemap, wallTilemap;
     [SerializeField]
-    private TileBase floorTile, wallTop;
+    private List<SOTiles> tilesSO;
+
+    private const int WallRandomRangeMax = 1001;
+
+    private int randomBiom;
+
+    private void Awake()
+    {
+        randomBiom = Random.Range(0, 3);
+    }
+
 
     // Methode zum Darstellen von Boden-Tiles an den angegebenen Positionen
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
-        PaintTiles(floorPositions, floorTilemap, floorTile);
-    }
-
-
-    // Hilfsmethode zum Darstellen von Tiles an den angegebenen Positionen auf der Tilemap
-    private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
-    {
-        
-        foreach (var position in positions)
+        foreach (var position in floorPositions)
         {
-            PaintSingleTile(tilemap, tile, position);
+            int randomValue = Random.Range(0, WallRandomRangeMax);
+
+            //if (randomValue > RarityThreshold)
+            PaintSingleTile(position, floorTilemap, tilesSO[randomBiom].tiles[randomValue % tilesSO[randomBiom].tiles.Count()]);
         }
     }
-
+/*if (randomValue == 1 && tilesSO.raretiles[1] != null)
+                PaintSingleTile(position, floorTilemap, tilesSO.raretiles[1]);    */
     // Hilfsmethode zum Darstellen eines einzelnen Tiles an einer Position auf der Tilemap
-    private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position)
+    private void PaintSingleTile(Vector2Int position, Tilemap tilemap, TileBase tile)
     {
         var tilePosition = tilemap.WorldToCell((Vector3Int)position);
         tilemap.SetTile(tilePosition, tile);
@@ -40,25 +50,21 @@ public class TilemapVisualiser : MonoBehaviour
     // Methode zum Zurücksetzen der Tilemaps
     public void Clear()
     {
+
         GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        GameObject[] downSpawners = GameObject.FindGameObjectsWithTag("DOWN");
+        GameObject[] upSpawners = GameObject.FindGameObjectsWithTag("UP");
         GameObject[] chests = GameObject.FindGameObjectsWithTag("Chest");
-        GameObject[] exits = GameObject.FindGameObjectsWithTag("Exit");
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] saeule = GameObject.FindGameObjectsWithTag("shouldGetDestroyedAfterRebuild");
 
 
-        // Destroy each spawner
-        foreach (GameObject spawner in spawners)
+        GameObject[] allSpawns = spawners.Concat(downSpawners).Concat(upSpawners).Concat(spawners).Concat(chests).Concat(enemys).Concat(saeule).ToArray();
+
+        foreach (GameObject spawner in allSpawns)
         {
             DestroyImmediate(spawner);
         }
-        foreach (GameObject chest in chests)
-        {
-            DestroyImmediate(chest);
-        }
-        foreach (var exit in exits)
-        {
-            DestroyImmediate(exit);
-        }
-
 
         floorTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
@@ -67,6 +73,7 @@ public class TilemapVisualiser : MonoBehaviour
     // Methode zum Darstellen eines einzelnen Basis-Wall-Tiles an einer Position auf der Tilemap
     internal void PaintSingleBasicWall(Vector2Int position)
     {
-        PaintSingleTile(wallTilemap, wallTop, position);
+        int whichWall = Random.Range(1, tilesSO[randomBiom].wall.Count());
+        PaintSingleTile(position, wallTilemap, tilesSO[randomBiom].wall[whichWall - 1]);
     }
 }

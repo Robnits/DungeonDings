@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class InitialSpawn : MonoBehaviour
 {
-    public GameObject player_prefab;
+    [SerializeField]
+    private GameObject player_prefab;
 
     private void Awake()
     {
