@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class Player_Stats : MonoBehaviour
 {
-    public Weapon weapon;
+    [SerializeField]
+    private Weapon weapon;
     private HealthbarUI healthbarUI;
     private TextMeshProUGUI lifeText;
-    public GameObject[] bulletUI;
+    [SerializeField]
+    private GameObject[] bulletUI;
 
 
     // Player stats
+    public float maxMoveSpeed;
     public float moveSpeed;
+
     public float maxlife;
     public float life;
     public int maxAmmunition;
@@ -58,7 +62,8 @@ public class Player_Stats : MonoBehaviour
     private void InstantiateStats()
     {
         // Initialize player stats
-        moveSpeed = 2.5f;
+        maxMoveSpeed = 2.5f;
+        moveSpeed = maxMoveSpeed;
         maxlife = 100f + GlobalVariables.healthUpgrade - 1;
         life = maxlife;
         maxAmmunition = 2;

@@ -10,19 +10,23 @@ public class OpenEinstellungen : MonoBehaviour
 {
 
     private CanvasGroup canvasGroup;
-    public CanvasGroup CanvasGroupSettings;
+    [SerializeField] 
+    private CanvasGroup CanvasGroupSettings;
     private bool settingsIsOpen;
-    public CanvasGroup canvasGroupSteuerungUI;
+    [SerializeField] 
+    private CanvasGroup canvasGroupSteuerungUI;
 
     [SerializeField] 
     private Slider sliderSFX;
     [SerializeField] 
     private Slider sliderMusic;
 
-    public AudioMixer audioMixer;
-    
-    public TMP_Dropdown dropdown;
-    public Toggle toggle;
+    [SerializeField]
+    private AudioMixer audioMixer;
+    [SerializeField]
+    private TMP_Dropdown dropdown;
+    [SerializeField]
+    private Toggle toggle;
 
 
     Resolution[] resolutions;

@@ -12,7 +12,7 @@ public class Player_behjaviour : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField]
-    Weapon weapon;
+    private Weapon weapon;
 
     private GameObject scenenwechsel;
 

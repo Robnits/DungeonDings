@@ -7,8 +7,10 @@ public class InputHandler : MonoBehaviour
 {
 
     private GameObject player;
-    public OpenEinstellungen einstellungen;
-    public PhaseTrackScript phaseTrackScript;
+    [SerializeField]
+    private OpenEinstellungen einstellungen;
+    [SerializeField]
+    private PhaseTrackScript phaseTrackScript;
 
     private bool isSettingOpen;
     private bool isInteracting;

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-    public Transform firepoint;
+    [SerializeField] 
+    private GameObject bulletPrefab;
+    [SerializeField] 
+    private Transform firepoint;
     private Player_Stats stats;
-    public GameObject granadePrefab;
+    [SerializeField] 
+    private GameObject granadePrefab;
 
     [SerializeField]
     private AudioSource shoot;

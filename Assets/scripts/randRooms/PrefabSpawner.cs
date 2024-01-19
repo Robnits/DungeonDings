@@ -6,9 +6,6 @@ using UnityEngine.UIElements;
 
 public class PrefabSpawner : MonoBehaviour
 {
-
-    
-    
     public GameObject stairsDown;
     public GameObject stairsUp;
     public GameObject parentGameobject;
@@ -28,12 +25,14 @@ public class PrefabSpawner : MonoBehaviour
     [Range(0, 100)]
     private float SpawnerSpawnPercantage;
 
-    public GameObject chests;
+    [SerializeField] 
+    private GameObject chests;
     [SerializeField]
     [Range(0, 100)]
     private float ChestSpawnPercantage;
 
-    public GameObject devils;
+    [SerializeField] 
+    private GameObject devils;
     [SerializeField]
     [Range(0, 100)]
     private float devilSpawnPercantage;
