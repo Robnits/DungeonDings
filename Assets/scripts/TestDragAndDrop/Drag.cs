@@ -25,17 +25,7 @@ public class NewBehaviourScript : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(transform.position.x > 370 && transform.position.y < 420 &&
-            transform.position.y > 200 && transform.position.y < 250) 
-        {
-            
-        }
-        else
-        {
-            print("test");
-            transform.position = startposition;
-        }
+        
     }
 
-    private void GoToMiddle() { }
 }

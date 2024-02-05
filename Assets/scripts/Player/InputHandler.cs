@@ -55,7 +55,7 @@ public class InputHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             playerBehaviour.Dash();
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetMouseButtonDown(1))
             playerBehaviour.ThrowGranade();
 
         isInteracting = Input.GetKeyDown(KeyCode.E);
