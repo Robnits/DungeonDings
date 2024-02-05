@@ -73,6 +73,7 @@ public class Devil : EnemysHauptklasse
             playerIsInRange = false;
         }
     }
+
     IEnumerator MoveBackwards()
     {
         float timePassed = 0;

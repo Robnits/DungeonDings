@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class Healthbarscriptenemys : MonoBehaviour
 {
     public GameObject healthbar;
+    public GameObject enemy;
 
     private float maxhealth;
 
@@ -18,11 +19,12 @@ public class Healthbarscriptenemys : MonoBehaviour
         maxhealth = maxlife;
     }
     
-    public void FollowEnemy(Vector3 position)
+    private void Update()
     {
-        healthbar.transform.position = position + new Vector3(0f, 1f, 0f);
+        if (healthbar != null)
+            healthbar.transform.position = enemy.transform.position + new Vector3(0f, 0.8f, 0f);
     }
-    
+
     public void GetDamaged(float life)
     {
         healthbar.SetActive (true);

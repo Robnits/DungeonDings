@@ -152,6 +152,9 @@ public class Player_behjaviour : MonoBehaviour
             case Rats rats:
                 stats.GetDamage(rats.GetDamage());
                 break;
+            case Wuestengegner wuestengegner:
+                stats.GetDamage(wuestengegner.GetDamage());
+                break;
         }
 
         if (stats.life <= 0)

@@ -18,6 +18,7 @@ public class Chest : MonoBehaviour
         anim = GetComponent<Animator>();
         upgrademanager = GameObject.Find("SpawnerAndUpgradeHandler").GetComponent<UpgradeManager>();
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && isInRange)
