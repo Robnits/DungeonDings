@@ -12,67 +12,107 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
     [SerializeField]
     [Range(0.1f, 1)]
     private float roomPercent = 0.8f;
-
+    
+    private void Awake()
+    {
+        GenerateDungeon();
+    }
+    // Einstiegspunkt für die prozedurale Generierung
     protected override void RunProceduralGeneration()
     {
         CorridorFirstGeneration();
     }
 
+    // Hauptmethode für die Korridor-erste Dungeon-Generierung
     private void CorridorFirstGeneration()
     {
-        HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
-        HashSet<Vector2Int> potentialRoomPositions = new HashSet<Vector2Int>();
+        // Sets zum Speichern von Bodenpositionen, potenziellen Raumpositionen und Raumpositionen
+        List<HashSet<Vector2Int>> floorPositions = new();
+        List<HashSet<Vector2Int>> potentialRoomPositions = new();
+        NewMethod(floorPositions, potentialRoomPositions);
+        for (int i = 0; i < startPosition.Count; i++)
+        {
+            List<List<Vector2Int>> corridors = CreateCorridors(floorPositions[i], potentialRoomPositions[i], i);
 
-        CreateCorridors(floorPositions, potentialRoomPositions);
+            // Räume in potenziellen Raumpositionen erstellen
+            HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions[i]);
 
-        HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
+            // Sackgassen in Korridoren finden
+            List<Vector2Int> deadEnds = FindAllDeadEnds(floorPositions[i]);
 
-        List<Vector2Int> deadEnds = FindAllDeadEnds(floorPositions);
+            // Zusätzliche Räume an Sackgassen erstellen
+            CreateRoomsAtDeadEnds(deadEnds, roomPositions);
 
-        CreateRoomsAtDeadEnds(deadEnds, roomPositions);
+            // Bodenpositionen aus Korridoren und Räumen kombinieren
+            floorPositions[i].UnionWith(roomPositions);
 
-        floorPositions.UnionWith(roomPositions);
+            for (int j = 0; j < corridors.Count; j++)
+            {
+                corridors[j] = IncreaseCorridorSizeByOne(corridors[j]);
+                floorPositions[i].UnionWith(corridors[j]);
+            }
 
-        tilemapVisualiser.paintFloorTiles(floorPositions);
-        WallGenerator.CreateWalls(floorPositions, tilemapVisualiser);
+            // Bodenfliesen visualisieren und Wände erstellen
+            tilemapVisualiser.PaintFloorTiles(floorPositions[i]);
+            StartCoroutine(prefabSpawner.WaitForSpawn(floorPositions[i]));
+            WallGenerator.CreateWalls(floorPositions[i], tilemapVisualiser);
+        }
     }
 
+    private void NewMethod(List<HashSet<Vector2Int>> floorPositions, List<HashSet<Vector2Int>> potentialRoomPositions)
+    {
+        for (int i = 0; i < startPosition.Count; i++)
+        {
+            _ = startPosition[i];
+            floorPositions.Add(new HashSet<Vector2Int>());
+            potentialRoomPositions.Add(new HashSet<Vector2Int>());
+        }
+    }
+
+    // Zusätzliche Räume an Sackgassen erstellen
     private void CreateRoomsAtDeadEnds(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors)
     {
-        foreach (var positions in deadEnds)
+        foreach (var position in deadEnds)
         {
-            if(roomFloors.Contains(positions) == false)
+            if (roomFloors.Contains(position) == false)
             {
-                var room = RunRandomWalk(randomWalkParameters, positions);
+                // Einen Raum mit Zufallsweg ab der Sackgasse erstellen
+                var room = RunRandomWalk(randomWalkParameters, position);
                 roomFloors.UnionWith(room);
             }
         }
     }
 
+    // Alle Sackgassen im Dungeon finden
     private List<Vector2Int> FindAllDeadEnds(HashSet<Vector2Int> floorPositions)
     {
-        List<Vector2Int> deadEnds = new List<Vector2Int>();
-        foreach (Vector2Int position in floorPositions) 
+        List<Vector2Int> deadEnds = new();
+        foreach (Vector2Int position in floorPositions)
         {
             int neighboursCount = 0;
             foreach (var direction in Direction2D.cardinalDirectionList)
             {
+                // Anzahl der Bodenpositionen in der Nachbarschaft einer gegebenen Position zählen
                 if (floorPositions.Contains(position + direction))
-                    neighboursCount ++;
+                    neighboursCount++;
             }
-            if(neighboursCount == 1)
+            // Wenn es nur einen Nachbarn gibt, handelt es sich um eine Sackgasse
+            if (neighboursCount == 1)
                 deadEnds.Add(position);
         }
         return deadEnds;
     }
 
+    // Räume in einer Teilmenge potenzieller Raumpositionen erstellen
     private HashSet<Vector2Int> CreateRooms(HashSet<Vector2Int> potentialRoomPositions)
     {
-        HashSet<Vector2Int> roomPositions = new HashSet<Vector2Int>();
+        HashSet<Vector2Int> roomPositions = new();
         int roomToCreateCount = Mathf.RoundToInt(potentialRoomPositions.Count * roomPercent);
 
+        // Zufällig eine Teilmenge potenzieller Raumpositionen auswählen
         List<Vector2Int> roomsToCreate = potentialRoomPositions.OrderBy(x => Guid.NewGuid()).Take(roomToCreateCount).ToList();
 
+        // Räume mit Zufallsweg ab den ausgewählten Positionen erstellen
         foreach (var roomPosition in roomsToCreate)
         {
             var roomFloor = RunRandomWalk(randomWalkParameters, roomPosition);
@@ -81,17 +121,68 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
         return roomPositions;
     }
 
-    private void CreateCorridors(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions)
+    // Initiale Korridore für den Dungeon erstellen
+    private List<List<Vector2Int>> CreateCorridors(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions, int SpawnNumber)
     {
-        var currentPosition = startPosition;
+        List<List<Vector2Int>> corridors = new();
+
+        var currentPosition = startPosition[SpawnNumber];
         potentialRoomPositions.Add(currentPosition);
 
-        for (int i = 0; i < corridorCount; i++) 
+        // Generate a series of connected corridors
+        for (int j = 0; j < corridorCount; j++)
         {
+            // Generate a random walk corridor and update the current position
             var corridor = ProceduralSpawn.RandomWalkCorridor(currentPosition, corridorLength);
-            currentPosition = corridor[corridor.Count - 1];
+            currentPosition = corridor[^1];
             potentialRoomPositions.Add(currentPosition);
             floorPositions.UnionWith(corridor);
         }
+
+        return corridors;
+    }
+
+    public List<Vector2Int> IncreaseCorridorSizeByOne(List<Vector2Int> corridor)
+    {
+        List<Vector2Int> newCorridor = new();
+        Vector2Int previousDirection = Vector2Int.zero;
+        for (int i = 1;i < corridorCount;i++)
+        {
+            Vector2Int directionFromCell = corridor[i] - corridor[i - 1];
+            if (previousDirection != Vector2Int.zero &&
+                directionFromCell != previousDirection)
+            {
+
+                for (int x = -1; x < 2; x++)
+                {
+                    for (int y = -1; y < 2; y++)
+                    {
+                        newCorridor.Add(corridor[i - 1] + new Vector2Int(x, y));
+                    }
+                }
+                previousDirection = directionFromCell;
+            }
+            else
+            {
+                Vector2Int newCorridorTileOffset
+                    = GetDirection90From(directionFromCell);
+                newCorridor.Add(corridor[i - 1]);
+                newCorridor.Add(corridor[i - 1] + newCorridorTileOffset);
+            }
+        }
+        return newCorridor;
+    }
+
+    private Vector2Int GetDirection90From(Vector2Int direction)
+    {
+        if(direction == Vector2Int.up)
+            return Vector2Int.right;
+        if(direction == Vector2Int.right)
+            return Vector2Int.down;
+        if(direction == Vector2Int.down)
+            return Vector2Int.left;
+        if(direction == Vector2Int.left)
+            return Vector2Int.up;
+        return Vector2Int.zero;
     }
 }

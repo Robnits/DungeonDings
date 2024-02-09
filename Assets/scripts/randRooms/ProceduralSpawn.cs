@@ -2,33 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Eine statische Klasse für prozedurale Erzeugung von Wegen und Korridoren
 public static class ProceduralSpawn
 {
-    // Start is called before the first frame update
-    public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startposition, int walklenght)
+    // Einfacher zufälliger Weg von einer Startposition aus
+    public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPosition, int walkLength)
     {
-        HashSet<Vector2Int> path = new HashSet<Vector2Int>();
-
-        path.Add(startposition);
-        var previousposition = startposition;
-
-        for (int i = 0;i < walklenght; i++)
+        // Menge für den zufälligen Weg
+        HashSet<Vector2Int> path = new()
         {
-            var newPosition = previousposition + Direction2D.GetRandomCardinalDirection();
+            // Startposition hinzufügen
+            startPosition
+        };
+        var previousPosition = startPosition;
+
+        // Zufälligen Weg erstellen
+        for (int i = 0; i < walkLength; i++)
+        {
+            var newPosition = previousPosition + Direction2D.GetRandomCardinalDirection();
             path.Add(newPosition);
-            previousposition = newPosition;
+            previousPosition = newPosition;
         }
         return path;
     }
 
-    public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPosition, int corridorLenght) 
+    // Zufälliger Weg für einen Korridor von einer Startposition aus
+    public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPosition, int corridorLength)
     {
-        List<Vector2Int> corridor = new List<Vector2Int>();
+        // Liste für den Korridor
+        List<Vector2Int> corridor = new();
         var direction = Direction2D.GetRandomCardinalDirection();
         var currentPosition = startPosition;
         corridor.Add(currentPosition);
 
-        for (int i = 0; i < corridorLenght; i++)
+        // Zufälligen Korridor erstellen
+        for (int i = 0; i < corridorLength; i++)
         {
             currentPosition += direction;
             corridor.Add(currentPosition);
@@ -36,17 +44,28 @@ public static class ProceduralSpawn
         return corridor;
     }
 }
+
+// Eine statische Klasse für 2D-Richtungen
 public static class Direction2D
 {
-    public static List<Vector2Int> cardinalDirectionList = new List<Vector2Int>()
+    // Liste der kardinalen Richtungen (oben, rechts, unten, links)
+    public static List<Vector2Int> cardinalDirectionList = new()
     {
-        new Vector2Int(0, 1), //up
-        new Vector2Int(1, 0), //right
-        new Vector2Int(0, -1), //down
-        new Vector2Int(-1, 0), //left
-
+        new Vector2Int(0, 1), // oben
+        new Vector2Int(1, 0), // rechtss
+        new Vector2Int(0, -1), // unten
+        new Vector2Int(-1, 0), // links
     };
-    public static Vector2Int GetRandomCardinalDirection() 
+    public static List<Vector2Int> diagonalDirectionList = new()
+    {
+        new Vector2Int(1, 1), // oben rechts
+        new Vector2Int(1, -1), // unten rechts
+        new Vector2Int(-1, -1), // unten links
+        new Vector2Int(-1, 1), // oben links
+    };
+
+    // Methode zur Auswahl einer zufälligen kardinalen Richtung
+    public static Vector2Int GetRandomCardinalDirection()
     {
         return cardinalDirectionList[Random.Range(0, cardinalDirectionList.Count)];
     }

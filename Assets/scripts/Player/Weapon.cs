@@ -4,21 +4,59 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-    public Transform firepoint;
-    private float fireforce = 50f;
+    [SerializeField] 
+    private GameObject bulletPrefab;
+    [SerializeField] 
+    private Transform firepoint;
+    private Player_Stats stats;
+    [SerializeField] 
+    private GameObject granadePrefab;
 
-    private float baseDamage = 3f;
+    [SerializeField]
+    private AudioSource shoot;
 
-    public float GetDamage()
+    private int ammunition = 2;
+    private bool hasGranade = true;
+
+    private void Awake()
     {
-        return baseDamage;
+        stats = gameObject.GetComponentInParent<Player_Stats>();
     }
-        
 
-    public void fire()
+    public void Granade()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(firepoint.up * fireforce, ForceMode2D.Force);
+        if (hasGranade)
+        {
+            hasGranade = false;
+            GameObject granade = Instantiate(granadePrefab, firepoint.position, firepoint.rotation * Quaternion.Euler(0, 0, 90));
+            granade.GetComponent<Rigidbody2D>().AddForce(1200 * stats.fireForce * firepoint.up, ForceMode2D.Force);
+            StartCoroutine(GranadeCooldown());
+        }
+    }
+
+    IEnumerator GranadeCooldown()
+    {
+        yield return new WaitForSeconds(10f);
+        hasGranade = true;
+    }
+
+    public void FireCounter()
+    {
+        if( ammunition > 0)
+        {
+            ammunition--;
+            stats.BulletChanges(ammunition);
+            shoot.Play();
+            StartCoroutine(Shoot());
+        }
+    }
+    IEnumerator Shoot()
+    {
+
+        GameObject bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation * Quaternion.Euler(0, 0, 90));
+        bullet.GetComponent<Rigidbody2D>().AddForce(firepoint.up * stats.fireForce, ForceMode2D.Force);
+        yield return new WaitForSeconds(stats.attackSpeed);
+        ammunition++;
+        stats.BulletChanges(ammunition);
     }
 }
