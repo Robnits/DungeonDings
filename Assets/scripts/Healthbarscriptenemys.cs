@@ -22,7 +22,7 @@ public class Healthbarscriptenemys : MonoBehaviour
     private void Update()
     {
         if (healthbar != null)
-            healthbar.transform.position = enemy.transform.position + new Vector3(0f, 0.8f, 0f);
+            healthbar.transform.position = enemy.transform.position + new Vector3(0f, 1f, 0f);
     }
 
     public void GetDamaged(float life)

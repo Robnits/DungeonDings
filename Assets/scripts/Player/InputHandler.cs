@@ -11,11 +11,14 @@ public class InputHandler : MonoBehaviour
     private OpenEinstellungen einstellungen;
     [SerializeField]
     private PhaseTrackScript phaseTrackScript;
+    [SerializeField]
+    private OpenEinstellungen einstellungenHandler;
 
     private bool isSettingOpen;
     private bool isInteracting;
     private float horizontalInput;
     private float verticalInput;
+    
     // Start is called before the first frame update
     public void Start()
     {
@@ -31,10 +34,10 @@ public class InputHandler : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (player != null && !isSettingOpen && phaseTrackScript == null)
+        if (player != null && !einstellungenHandler.settingsIsOpen && phaseTrackScript == null)
             HandlePlayerInput();
         
-        else if(player != null && !isSettingOpen && phaseTrackScript != null)
+        else if(player != null && !einstellungenHandler.settingsIsOpen && phaseTrackScript != null)
             if (phaseTrackScript.playerIsAllowedToMove)
                 HandlePlayerInput();
 
@@ -55,18 +58,20 @@ public class InputHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             playerBehaviour.Dash();
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(GlobalVariables.shootKey))
             playerBehaviour.ThrowGranade();
 
-        isInteracting = Input.GetKeyDown(KeyCode.E);
+        isInteracting = Input.GetKeyDown(GlobalVariables.interactionKey);
     }
 
     private void HandleMenuInput()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            einstellungen.OpenMenu();
-            isSettingOpen = !isSettingOpen;
+            if(einstellungenHandler.settingsIsOpen)
+                einstellungenHandler.OpenSettings(0);
+            else
+                einstellungen.OpenSettings(1);
         }
     }
     public bool IsPLayerInteracting()

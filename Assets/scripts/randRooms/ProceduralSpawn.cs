@@ -9,10 +9,11 @@ public static class ProceduralSpawn
     public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPosition, int walkLength)
     {
         // Menge für den zufälligen Weg
-        HashSet<Vector2Int> path = new HashSet<Vector2Int>();
-
-        // Startposition hinzufügen
-        path.Add(startPosition);
+        HashSet<Vector2Int> path = new()
+        {
+            // Startposition hinzufügen
+            startPosition
+        };
         var previousPosition = startPosition;
 
         // Zufälligen Weg erstellen
@@ -29,7 +30,7 @@ public static class ProceduralSpawn
     public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPosition, int corridorLength)
     {
         // Liste für den Korridor
-        List<Vector2Int> corridor = new List<Vector2Int>();
+        List<Vector2Int> corridor = new();
         var direction = Direction2D.GetRandomCardinalDirection();
         var currentPosition = startPosition;
         corridor.Add(currentPosition);
@@ -48,12 +49,19 @@ public static class ProceduralSpawn
 public static class Direction2D
 {
     // Liste der kardinalen Richtungen (oben, rechts, unten, links)
-    public static List<Vector2Int> cardinalDirectionList = new List<Vector2Int>()
+    public static List<Vector2Int> cardinalDirectionList = new()
     {
         new Vector2Int(0, 1), // oben
         new Vector2Int(1, 0), // rechtss
         new Vector2Int(0, -1), // unten
         new Vector2Int(-1, 0), // links
+    };
+    public static List<Vector2Int> diagonalDirectionList = new()
+    {
+        new Vector2Int(1, 1), // oben rechts
+        new Vector2Int(1, -1), // unten rechts
+        new Vector2Int(-1, -1), // unten links
+        new Vector2Int(-1, 1), // oben links
     };
 
     // Methode zur Auswahl einer zufälligen kardinalen Richtung

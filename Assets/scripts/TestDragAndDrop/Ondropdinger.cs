@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Ondropdinger : MonoBehaviour, IDropHandler
 {
-    public List<GameObject> list = new List<GameObject>();
+    public List<GameObject> list = new();
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -18,7 +18,7 @@ public class Ondropdinger : MonoBehaviour, IDropHandler
         {
             for(int i = 0; i < list.Count; i++)
             {
-                list[i].GetComponent<Drag>().GoToMiddle();
+                //list[i].GetComponent<Drag>().GoToMiddle();
             }
         }
     }
