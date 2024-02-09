@@ -21,6 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89b6ad70745c9ef43a1af24a7b899a42, type: 2}
   - {fileID: 11400000, guid: f50d4cf7f9de44b4d96103d294f85858, type: 2}
   - {fileID: 11400000, guid: 6b01cb5a47a11bd42abdc3d76a00e075, type: 2}
-  raretiles: []
+  raretiles:
+  - {fileID: 11400000, guid: fbb65c598f8419f459bf14d549015893, type: 2}
   wall:
   - {fileID: 11400000, guid: cf40e87834c907e4993bab12fea0c08b, type: 2}

@@ -10,140 +10,48 @@ public class OpenEinstellungen : MonoBehaviour
 {
 
     private CanvasGroup canvasGroup;
+
     [SerializeField] 
     private CanvasGroup CanvasGroupSettings;
-    private bool settingsIsOpen;
+
     [SerializeField] 
     private CanvasGroup canvasGroupSteuerungUI;
 
     [SerializeField] 
+    private CanvasGroup canvasGroupButtonChange;
+
+    [SerializeField] 
     private Slider sliderSFX;
+
     [SerializeField] 
     private Slider sliderMusic;
 
     [SerializeField]
     private AudioMixer audioMixer;
+
     [SerializeField]
     private TMP_Dropdown dropdown;
+
     [SerializeField]
     private Toggle toggle;
+
+    public bool settingsIsOpen = false;
 
 
     Resolution[] resolutions;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+        
 
         if (PlayerPrefs.HasKey("Tutorialhelp"))
             LoadTutorial();
 
         InstantiateVolume();
         InstantiateResolution();
-        CloseSettings();
-        CloseMenu();
-    }
-    private void InstantiateResolution()
-    {
 
-        resolutions = Screen.resolutions;
-        if (dropdown != null)
-            dropdown.ClearOptions();
-
-        List<string> options = new();
-
-        int currentIndex = 0;
-
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
-
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentIndex = i;
-            }
-        }
-        if (dropdown != null)
-        {
-            dropdown.AddOptions(options);
-            dropdown.value = currentIndex;
-            dropdown.RefreshShownValue();
-        }
-    }
-
-    public void OpenMenu()
-    {
-        if (!settingsIsOpen)
-            OpenOrCloseMenu(true);
-    }
-    
-    public void CloseMenu()
-    {
-        OpenOrCloseMenu(false);
-    }
-
-    public void OpenSettings()
-    {
-        settingsIsOpen = true;
-        OpenOrCloseSettings(true);
-    }
-    
-    public void CloseSettings()
-    {
-        settingsIsOpen = false;
-        OpenOrCloseSettings(false);
-    }
-
-    private void OpenOrCloseMenu(bool x)
-    {
-        if (canvasGroup != null && !settingsIsOpen)
-        {
-            if (x)
-            {
-                Time.timeScale = 0;
-                canvasGroup.alpha = 1f;
-            }
-            else
-            {
-                Time.timeScale = 1;
-                canvasGroup.alpha = 0f;
-            }
-            canvasGroup.interactable = x;
-            canvasGroup.enabled = true;
-            canvasGroup.blocksRaycasts = x;
-        }
-    }
-    
-    private void OpenOrCloseSettings(bool x)
-    {
-        if (CanvasGroupSettings != null)
-        {
-            if (x)
-            {
-                Time.timeScale = 0;
-                CanvasGroupSettings.alpha = 1f;
-            }
-            else
-            {
-                CanvasGroupSettings.alpha = 0f;
-            }
-            CanvasGroupSettings.interactable = x;
-            CanvasGroupSettings.enabled = true;
-            CanvasGroupSettings.blocksRaycasts = x;
-        }
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
-
-    public void FullScreen(bool isFullscreen)
-    {
-        Screen.fullScreen = isFullscreen;
+        OpenSettings(0);
     }
 
     private void InstantiateVolume()
@@ -152,11 +60,11 @@ public class OpenEinstellungen : MonoBehaviour
             LoadMusic();
         else
             SetMusicVolume();
-        
+
         if (PlayerPrefs.HasKey("sfx"))
             LoadSFX();
         else
-            SetSFXVolume();       
+            SetSFXVolume();
     }
 
     public void SetMusicVolume()
@@ -168,7 +76,7 @@ public class OpenEinstellungen : MonoBehaviour
             PlayerPrefs.SetFloat("music", volume);
         }
     }
-    
+
     public void SetSFXVolume()
     {
         if (sliderSFX != null)
@@ -181,18 +89,116 @@ public class OpenEinstellungen : MonoBehaviour
 
     private void LoadMusic()
     {
-        if(sliderMusic != null)
+        if (sliderMusic != null)
             sliderMusic.value = PlayerPrefs.GetFloat("music");
 
         SetMusicVolume();
     }
-    
+
     private void LoadSFX()
     {
         if (sliderSFX != null)
             sliderSFX.value = PlayerPrefs.GetFloat("sfx");
-        
+
         SetSFXVolume();
+    }
+
+    private void InstantiateResolution()
+    {
+        resolutions = Screen.resolutions;
+
+        if (dropdown != null)
+            dropdown.ClearOptions();
+
+        List<string> options = new(); 
+
+        int currentIndex = 0;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+
+            if (!options.Contains(option))
+            {
+                options.Add(option);
+
+                if (resolutions[i].width == Screen.currentResolution.width &&
+                    resolutions[i].height == Screen.currentResolution.height)
+                {
+                    currentIndex = options.Count - 1;
+                }
+            }
+        }
+
+        if (dropdown != null)
+        {
+            dropdown.AddOptions(options);
+            dropdown.value = currentIndex;
+            dropdown.RefreshShownValue();
+        }
+    }
+
+    public void OpenSettings(int x)
+    {
+        if (x != 0)
+        {
+            settingsIsOpen = true;
+            Time.timeScale = 0;
+        }
+        else
+            settingsIsOpen = false;
+        
+        switch (x) 
+        {
+            case 0:
+                Time.timeScale = 1;
+                OpenOrCloseMenu(false);
+                OpenOrCloseSettings(false);
+                break;
+            case 1:
+                OpenOrCloseSettings(false);
+                OpenOrCloseMenu(true);
+                break;
+            case 2:
+                OpenOrCloseMenu(false);
+                OpenOrCloseSettings(true);
+                break;
+        }
+    }
+
+    private void OpenOrCloseMenu(bool x)
+    {
+
+        if (x)
+            canvasGroup.alpha = 1f;
+        else
+            canvasGroup.alpha = 0f;
+        
+        canvasGroup.interactable = x;
+        canvasGroup.enabled = true;
+        canvasGroup.blocksRaycasts = x;
+    }
+    
+    private void OpenOrCloseSettings(bool x)
+    {
+        if (x)
+            CanvasGroupSettings.alpha = 1f;
+        else
+            CanvasGroupSettings.alpha = 0f;
+
+        CanvasGroupSettings.interactable = x;
+        CanvasGroupSettings.enabled = true;
+        CanvasGroupSettings.blocksRaycasts = x;
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void FullScreen(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
     }
 
     public void SetResolution(int resolutionIndex)

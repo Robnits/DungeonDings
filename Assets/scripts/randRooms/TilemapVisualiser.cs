@@ -34,13 +34,16 @@ public class TilemapVisualiser : MonoBehaviour
         {
             int randomValue = Random.Range(0, WallRandomRangeMax);
 
-            //if (randomValue > RarityThreshold)
-            PaintSingleTile(position, floorTilemap, tilesSO[randomBiom].tiles[randomValue % tilesSO[randomBiom].tiles.Count()]);
+            if (randomValue >= 100 && tilesSO[randomBiom].raretiles.Count() > 1)
+            {
+                PaintSingleTile(position, floorTilemap, tilesSO[randomBiom].raretiles[randomValue % tilesSO[randomBiom].raretiles.Count()]);
+                Debug.Log("RareTileSpawnded" + position);
+            }
+            else
+                PaintSingleTile(position, floorTilemap, tilesSO[randomBiom].tiles[randomValue % tilesSO[randomBiom].tiles.Count()]);
         }
+        
     }
-/*if (randomValue == 1 && tilesSO.raretiles[1] != null)
-                PaintSingleTile(position, floorTilemap, tilesSO.raretiles[1]);    */
-    // Hilfsmethode zum Darstellen eines einzelnen Tiles an einer Position auf der Tilemap
     private void PaintSingleTile(Vector2Int position, Tilemap tilemap, TileBase tile)
     {
         var tilePosition = tilemap.WorldToCell((Vector3Int)position);

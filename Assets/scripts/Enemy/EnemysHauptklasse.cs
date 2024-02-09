@@ -29,16 +29,7 @@ public class EnemysHauptklasse : MonoBehaviour
         if (Random.Range(0,100) < droprate)
             Instantiate(DropPotion, transform.position, Quaternion.identity);
     }
-    private void Start()
-    {
-        maxlife = 20f;
-    }
 
-    private void Update()
-    {
-        if (healthscript != null)
-            healthscript.FollowEnemy(gameObject.transform.position);
-    }
 
     public float GetDamage()
     {

@@ -21,16 +21,13 @@ public class Rats : EnemysHauptklasse
     
     void Update()
     {
-        if (player == null)
-        {
-            Death();
-        }
-        else
+        if (player != null)
         {
             if (rb.velocity.x != 0 || rb.velocity.y != 0)
                 anim.SetBool("IsMoving", true);
             else
                 anim.SetBool("IsMoving", false);
+
             transform.LookAt(player.transform.position);
             transform.Rotate(new Vector3(0, -90, 90), Space.Self);//correcting the original rotation
 
@@ -39,10 +36,6 @@ public class Rats : EnemysHauptklasse
             {
                 Vector2 moveDirection = (player.transform.position - transform.position).normalized;
                 rb.velocity = moveDirection * speed;
-            }
-            else
-            {
-                rb.velocity = Vector2.zero; // Stop moving if close to the player.
             }
         }
     }

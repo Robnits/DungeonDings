@@ -152,6 +152,9 @@ public class Player_behjaviour : MonoBehaviour
             case Rats rats:
                 stats.GetDamage(rats.GetDamage());
                 break;
+            case Wuestengegner wuestengegner:
+                stats.GetDamage(wuestengegner.GetDamage());
+                break;
         }
 
         if (stats.life <= 0)
@@ -220,20 +223,18 @@ public class Player_behjaviour : MonoBehaviour
         weapon.Granade();
     }
     private bool isSlowed;
-    private float slowed;
-    public void OnSlow(float slow)
+
+    public void NotOnSlow()
     {
-        
-        if (!isSlowed && slow > 0)
+        isSlowed = false;
+        stats.moveSpeed = stats.maxMoveSpeed;
+    }
+    public void OnSlow(float slow)
+    { 
+        if (!isSlowed)
         {
             isSlowed = true;
-            slowed = slow;
             stats.moveSpeed -= slow;
-        }
-        else if(!isSlowed && slow == 0)
-        {
-            stats.moveSpeed += slowed;
-            isSlowed = false;
         }
     }
 }
