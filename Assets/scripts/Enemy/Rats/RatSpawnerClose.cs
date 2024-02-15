@@ -38,12 +38,12 @@ public class RatSpawnerClose : MonoBehaviour
 
     private void Update()
     {
-        if (isInRange && inputHandler.IsPLayerInteracting() && ratSpawner.ForChildIsOpen())
+        if (isInRange && inputHandler.IsPlayerInteracting() && ratSpawner.ForChildIsOpen())
         {
             gullisound.Play();
             ratSpawner.IsOpenOrClosed(false);
         }  
-        else if (isInRange && inputHandler.IsPLayerInteracting() && !ratSpawner.ForChildIsOpen())
+        else if (isInRange && inputHandler.IsPlayerInteracting() && !ratSpawner.ForChildIsOpen())
         {
             gullisound.Play();
             ratSpawner.IsOpenOrClosed(true);

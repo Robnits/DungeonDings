@@ -168,15 +168,18 @@ public class OpenEinstellungen : MonoBehaviour
 
     private void OpenOrCloseMenu(bool x)
     {
+        if (canvasGroup != null)
+        {
+            if (x)
 
-        if (x)
-            canvasGroup.alpha = 1f;
-        else
-            canvasGroup.alpha = 0f;
-        
-        canvasGroup.interactable = x;
-        canvasGroup.enabled = true;
-        canvasGroup.blocksRaycasts = x;
+                canvasGroup.alpha = 1f;
+            else
+                canvasGroup.alpha = 0f;
+
+            canvasGroup.interactable = x;
+            canvasGroup.enabled = true;
+            canvasGroup.blocksRaycasts = x;
+        }
     }
     
     private void OpenOrCloseSettings(bool x)

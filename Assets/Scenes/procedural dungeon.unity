@@ -26949,6 +26949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1195264378}
   - component: {fileID: 1195264379}
+  - component: {fileID: 1195264380}
   m_Layer: 0
   m_Name: LevelLoader
   m_TagString: Untagged
@@ -26984,9 +26985,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56dcd88257c968c4295ed8deeb32b4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  einstellungen: {fileID: 1933180674}
-  phaseTrackScript: {fileID: 0}
   einstellungenHandler: {fileID: 1933180674}
+  einstellungen: {fileID: 1933180674}
+  shootInput: {fileID: 30533099908982442, guid: af321cd741950794591c07e94bd375cb, type: 3}
+  dashInput: {fileID: -2271648849087381910, guid: af321cd741950794591c07e94bd375cb, type: 3}
+  grenadeInput: {fileID: 6615987891438436719, guid: af321cd741950794591c07e94bd375cb, type: 3}
+  settingInput: {fileID: 2484261690368588220, guid: af321cd741950794591c07e94bd375cb, type: 3}
+  movementInput: {fileID: 6826815938091650722, guid: af321cd741950794591c07e94bd375cb, type: 3}
+  interactInput: {fileID: 5569386914999204898, guid: af321cd741950794591c07e94bd375cb, type: 3}
+  mousePosition: {fileID: -936937716681432962, guid: af321cd741950794591c07e94bd375cb, type: 3}
+--- !u!114 &1195264380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195264377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecb6529758965954a9735f3fa387ab77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputActionAsset: {fileID: -944628639613478452, guid: af321cd741950794591c07e94bd375cb, type: 3}
 --- !u!1 &1202018862
 GameObject:
   m_ObjectHideFlags: 0

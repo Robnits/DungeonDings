@@ -8,7 +8,7 @@ public class Wuestengegner : EnemysHauptklasse
 
     void Start()
     {
-        speed = 2.55f;
+        speed = 2.4f;
         maxlife = 3;
         life = maxlife;
         value = 3;

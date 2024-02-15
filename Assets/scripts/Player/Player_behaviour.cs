@@ -67,23 +67,21 @@ public class Player_behjaviour : MonoBehaviour
             return (stats.damage * stats.baseDamage);
     }
 
-    public void Movement(float horizontalInput, float verticalInput)
+    public void Movement(Vector2 movement)
     {
-        if (horizontalInput != 0 || verticalInput != 0)
+        if (movement.x != 0 || movement.y != 0)
             anim.SetBool("isMoving", true);
         else
             anim.SetBool("isMoving", false);
 
         if (!dashing)
-            moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
-
-        LookAtPlayer();
+            moveDirection = new Vector2(movement.x, movement.y).normalized;
     }
 
 
-    public void LookAtPlayer()
+    public void LookAtPlayer(Vector2 mousePos)
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePos);
     }
 
     private void Death()

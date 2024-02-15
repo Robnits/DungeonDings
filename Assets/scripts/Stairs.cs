@@ -57,7 +57,7 @@ public class Stairs : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerInRange && inputHandler.IsPLayerInteracting())
+        if (isPlayerInRange && inputHandler.IsPlayerInteracting())
             player.transform.position = connector.transform.position; 
     }
     

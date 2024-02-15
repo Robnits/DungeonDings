@@ -45,7 +45,7 @@ public class SauelenScript : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerIsInRange && inputHandler.IsPLayerInteracting() && !AlreadyActive)
+        if (PlayerIsInRange && inputHandler.IsPlayerInteracting() && !AlreadyActive)
         {
             StartCoroutine(ShowText());
             bossRoomScript.OpenGate();
