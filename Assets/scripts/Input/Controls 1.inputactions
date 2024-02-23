@@ -1,0 +1,34 @@
+{
+    "name": "Controls 1",
+    "maps": [
+        {
+            "name": "gameplay",
+            "id": "289b8188-468d-4cd1-9a6a-bde7d1aaf8c5",
+            "actions": [
+                {
+                    "name": "buttonShoot",
+                    "type": "Button",
+                    "id": "5719fa1d-d888-40b1-bd92-15ccc9db8bda",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "11695e25-fb97-44ab-9706-f71f7a466268",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "buttonShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

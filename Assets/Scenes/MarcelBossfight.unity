@@ -10781,8 +10781,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 640233856}
-  - component: {fileID: 640233855}
   - component: {fileID: 640233857}
+  - component: {fileID: 640233858}
   m_Layer: 0
   m_Name: LevelLoader
   m_TagString: Untagged
@@ -10790,28 +10790,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &640233855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640233854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56dcd88257c968c4295ed8deeb32b4a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  einstellungenHandler: {fileID: 1866549298}
-  einstellungen: {fileID: 1866549298}
-  shootInput: {fileID: 30533099908982442, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  dashInput: {fileID: -2271648849087381910, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  grenadeInput: {fileID: 6615987891438436719, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  settingInput: {fileID: 2484261690368588220, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  movementInput: {fileID: 6826815938091650722, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  interactInput: {fileID: 5569386914999204898, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  mousePosition: {fileID: 2639706924581085308, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  coursorPosition: {fileID: -936937716681432962, guid: af321cd741950794591c07e94bd375cb, type: 3}
 --- !u!4 &640233856
 Transform:
   m_ObjectHideFlags: 0
@@ -10840,7 +10818,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb6529758965954a9735f3fa387ab77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputActionAsset: {fileID: -944628639613478452, guid: af321cd741950794591c07e94bd375cb, type: 3}
+  inputActionAsset: {fileID: -944628639613478452, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
+--- !u!114 &640233858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640233854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe728eb99cc9f640aa38c0892230e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  einstellungenHandler: {fileID: 1866549298}
+  einstellungen: {fileID: 1866549298}
+  shootInput: {fileID: 0}
+  dashInput: {fileID: 0}
+  grenadeInput: {fileID: 0}
+  settingInput: {fileID: 0}
+  movementInput: {fileID: 0}
+  interactInput: {fileID: 0}
+  mousePosition: {fileID: 0}
+  coursorPosition: {fileID: 0}
 --- !u!1 &641798196
 GameObject:
   m_ObjectHideFlags: 0
@@ -31708,7 +31708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92b71d648d557d4980d9a4cace5a35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piercing: 0
 --- !u!50 &2102306324
 Rigidbody2D:
   serializedVersion: 4

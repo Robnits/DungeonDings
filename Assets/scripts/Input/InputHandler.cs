@@ -115,7 +115,7 @@ public class InputHandler : MonoBehaviour
     private void HandlePlayerInput()
     {
         if(player != null)
-            player.GetComponent<Player_behjaviour>().Movement(movement);
+            player.GetComponent<Player_behjaviour>().Movement(movement.x, movement.y);
         if(interactInput != null)
         isInteracting = interactInput.action.triggered;
     }

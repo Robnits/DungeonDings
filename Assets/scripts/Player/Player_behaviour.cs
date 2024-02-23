@@ -76,15 +76,9 @@ public class Player_behjaviour : MonoBehaviour
         if (!dashing)
             moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
 
-        LookAtPlayer();
+        //LookAtPlayer();
     }
 
-<<<<<<< Updated upstream
-
-    public void LookAtPlayer()
-    {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-=======
     public void LookAtPlayerCoursor(Vector2 courserPos)
     {
         lastcursorInput = true;
@@ -98,7 +92,6 @@ public class Player_behjaviour : MonoBehaviour
     {
         lastcursorInput = false;
         mousePosition = courserPos;
->>>>>>> Stashed changes
     }
 
     private void Death()
