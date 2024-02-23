@@ -10,29 +10,26 @@ using UnityEngine.UI;
 public class Player_behjaviour : MonoBehaviour
 {
     private Rigidbody2D rb;
-
-    [SerializeField]
-    private Weapon weapon;
-
+    [SerializeField] private Weapon weapon;
     private GameObject scenenwechsel;
-
     private Cam_Follow cam;
     private Animator levelLoader;
 
-    [SerializeField]
-    private Animator anim;
+    
+    [SerializeField] private Animator anim;
     Player_Stats stats;
 
     Vector2 moveDirection;
     Vector2 mousePosition;
+    private Vector2 lastCorserPos;
 
     private bool invincibleAfterDmg = false;
-
-
     private GameObject sprechblase;
     private TextMeshPro sprechblaseText;
     private Light2D light2d;
     private Light2D zerilight2d;
+    private bool lastcursorInput;
+    private Vector2 CurrentMouseInput;
 
     private void Awake()
     {
@@ -44,6 +41,8 @@ public class Player_behjaviour : MonoBehaviour
         scenenwechsel = GameObject.FindGameObjectWithTag("Respawn");
         rb = GetComponent<Rigidbody2D>();
         light2d = sprechblase.GetComponent<Light2D>();
+
+        mousePosition = new Vector2(0,0);
 
         light2d.intensity = 0f;
         zerilight2d = GetComponentInChildren<Light2D>();
@@ -80,10 +79,26 @@ public class Player_behjaviour : MonoBehaviour
         LookAtPlayer();
     }
 
+<<<<<<< Updated upstream
 
     public void LookAtPlayer()
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+=======
+    public void LookAtPlayerCoursor(Vector2 courserPos)
+    {
+        lastcursorInput = true;
+    if (courserPos != null && courserPos != Vector2.zero)
+    {
+        mousePosition = courserPos + new Vector2(transform.position.x, transform.position.y);
+        lastCorserPos = courserPos;
+    }
+    }
+    public void LookAtPlayerMouse(Vector2 courserPos)
+    {
+        lastcursorInput = false;
+        mousePosition = courserPos;
+>>>>>>> Stashed changes
     }
 
     private void Death()
@@ -92,14 +107,22 @@ public class Player_behjaviour : MonoBehaviour
         scenenwechsel.GetComponent<Scenemanager>().StartSwitch(1);
         Destroy(gameObject);
     }
-
+    
+    public void MousePosition(Vector2 mousePos)
+    {
+        CurrentMouseInput = mousePos;
+    }
     private void FixedUpdate()
     {
+        if(lastcursorInput)
+            mousePosition = lastCorserPos + new Vector2(transform.position.x, transform.position.y);
+        else
+            mousePosition = CurrentMouseInput;
         rb.velocity = new Vector2(moveDirection.x * stats.moveSpeed, moveDirection.y * stats.moveSpeed);
         Vector2 aimdirection = mousePosition - rb.position;
         float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimangle;
-
+        
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -215,9 +238,6 @@ public class Player_behjaviour : MonoBehaviour
             light2d.intensity = 0f;
         }
     }
-
-
-
     public void ThrowGranade()
     {
         weapon.Granade();

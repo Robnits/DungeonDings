@@ -107,33 +107,36 @@ public class PrefabSpawner : MonoBehaviour
         
         foreach (Vector2Int position in floorPositions)
         {
-            float hilf = Random.Range(0, 100);
+            if(position.x >= 5 || position.x <= -5 && position.y >= 5 || position.y <= -5)
+            {
+                float hilf = Random.Range(0, 100);
 
-            // Check if the position is already occupied in SpawnedPositions
-            if (hilf < SpawnerSpawnPercantage && !SpawnedPositions.Contains(position))
-            {
-                InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.RatSpawner);
-                SpawnedPositions.Add(position);
-            }
+                // Check if the position is already occupied in SpawnedPositions
+                if (hilf < SpawnerSpawnPercantage && !SpawnedPositions.Contains(position))
+                {
+                    InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.RatSpawner);
+                    SpawnedPositions.Add(position);
+                }
 
-            hilf = Random.Range(0, 100);
-            // Check again after spawning the RatSpawner
-            if (hilf < ChestSpawnPercantage && !SpawnedPositions.Contains(position))
-            {
-                InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Chest);
-                SpawnedPositions.Add(position);
-            }
-            hilf = Random.Range(0, 1000);
-            if (hilf < devilSpawnPercantage && !SpawnedPositions.Contains(position))
-            {
-                InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Devil);
-                SpawnedPositions.Add(position);
-            }
-            hilf = Random.Range(0, 1000);
-            if (hilf < wuestengegnerSpawnPercantage && !SpawnedPositions.Contains(position))
-            {
-                InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.wuestengegner);
-                SpawnedPositions.Add(position);
+                hilf = Random.Range(0, 100);
+                // Check again after spawning the RatSpawner
+                if (hilf < ChestSpawnPercantage && !SpawnedPositions.Contains(position))
+                {
+                    InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Chest);
+                    SpawnedPositions.Add(position);
+                }
+                hilf = Random.Range(0, 1000);
+                if (hilf < devilSpawnPercantage && !SpawnedPositions.Contains(position))
+                {
+                    InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Devil);
+                    SpawnedPositions.Add(position);
+                }
+                hilf = Random.Range(0, 1000);
+                if (hilf < wuestengegnerSpawnPercantage && !SpawnedPositions.Contains(position))
+                {
+                    InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.wuestengegner);
+                    SpawnedPositions.Add(position);
+                }
             }
         }
     }

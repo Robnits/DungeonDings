@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4976056243708204071}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wuestengegner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8760632925217471235}
   - component: {fileID: 2824755105573625004}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2436012690710140555}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 6106958675080489426}
   - component: {fileID: 6754767791242610396}
   - component: {fileID: 5181072811902015570}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: health_bar_background0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

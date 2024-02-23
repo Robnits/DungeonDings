@@ -50,4 +50,11 @@ public class Neeko : BossHauptklasse
         rotationPoint = phaseRotationPoint;
         BattlePhase++;
     }
+
+
+    public void shoot()
+    {
+        
+
+    }
 }

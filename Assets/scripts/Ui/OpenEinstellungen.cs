@@ -181,14 +181,17 @@ public class OpenEinstellungen : MonoBehaviour
     
     private void OpenOrCloseSettings(bool x)
     {
-        if (x)
-            CanvasGroupSettings.alpha = 1f;
-        else
-            CanvasGroupSettings.alpha = 0f;
-
-        CanvasGroupSettings.interactable = x;
-        CanvasGroupSettings.enabled = true;
-        CanvasGroupSettings.blocksRaycasts = x;
+        if(canvasGroup != null)
+        {
+            if (x)
+                CanvasGroupSettings.alpha = 1f;
+            else
+                CanvasGroupSettings.alpha = 0f;
+    
+            CanvasGroupSettings.interactable = x;
+            CanvasGroupSettings.enabled = true;
+            CanvasGroupSettings.blocksRaycasts = x;
+        }
     }
 
     public void Quit()

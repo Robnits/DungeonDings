@@ -40,8 +40,6 @@ public class BossHauptklasse : MonoBehaviour
                 Death();
             if(neeko != null)
                 neeko.SetHealthbar();
-            if (neekoClones != null)
-                neekoClones.SetHealthbar();
         }
     }
     protected void OnTriggerEnter2D(Collider2D collision)
@@ -53,9 +51,6 @@ public class BossHauptklasse : MonoBehaviour
                 Death();
             if (neeko != null)
                 neeko.SetHealthbar();
-            if(neekoClones != null)
-                neekoClones.SetHealthbar();
-
         }
     }
 }

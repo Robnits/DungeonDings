@@ -17,13 +17,13 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
     {
         GenerateDungeon();
     }
-    // Einstiegspunkt für die prozedurale Generierung
+    // Einstiegspunkt fï¿½r die prozedurale Generierung
     protected override void RunProceduralGeneration()
     {
         CorridorFirstGeneration();
     }
 
-    // Hauptmethode für die Korridor-erste Dungeon-Generierung
+    // Hauptmethode fï¿½r die Korridor-erste Dungeon-Generierung
     private void CorridorFirstGeneration()
     {
         // Sets zum Speichern von Bodenpositionen, potenziellen Raumpositionen und Raumpositionen
@@ -34,16 +34,17 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
         {
             List<List<Vector2Int>> corridors = CreateCorridors(floorPositions[i], potentialRoomPositions[i], i);
 
-            // Räume in potenziellen Raumpositionen erstellen
+            // Rï¿½ume in potenziellen Raumpositionen erstellen
+            
             HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions[i]);
 
             // Sackgassen in Korridoren finden
             List<Vector2Int> deadEnds = FindAllDeadEnds(floorPositions[i]);
 
-            // Zusätzliche Räume an Sackgassen erstellen
+            // Zusï¿½tzliche Rï¿½ume an Sackgassen erstellen
             CreateRoomsAtDeadEnds(deadEnds, roomPositions);
 
-            // Bodenpositionen aus Korridoren und Räumen kombinieren
+            // Bodenpositionen aus Korridoren und Rï¿½umen kombinieren
             floorPositions[i].UnionWith(roomPositions);
 
             for (int j = 0; j < corridors.Count; j++)
@@ -52,7 +53,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
                 floorPositions[i].UnionWith(corridors[j]);
             }
 
-            // Bodenfliesen visualisieren und Wände erstellen
+            // Bodenfliesen visualisieren und Wï¿½nde erstellen
             tilemapVisualiser.PaintFloorTiles(floorPositions[i]);
             StartCoroutine(prefabSpawner.WaitForSpawn(floorPositions[i]));
             WallGenerator.CreateWalls(floorPositions[i], tilemapVisualiser);
@@ -69,7 +70,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
         }
     }
 
-    // Zusätzliche Räume an Sackgassen erstellen
+    // Zusï¿½tzliche Rï¿½ume an Sackgassen erstellen
     private void CreateRoomsAtDeadEnds(List<Vector2Int> deadEnds, HashSet<Vector2Int> roomFloors)
     {
         foreach (var position in deadEnds)
@@ -92,7 +93,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
             int neighboursCount = 0;
             foreach (var direction in Direction2D.cardinalDirectionList)
             {
-                // Anzahl der Bodenpositionen in der Nachbarschaft einer gegebenen Position zählen
+                // Anzahl der Bodenpositionen in der Nachbarschaft einer gegebenen Position zï¿½hlen
                 if (floorPositions.Contains(position + direction))
                     neighboursCount++;
             }
@@ -103,16 +104,16 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
         return deadEnds;
     }
 
-    // Räume in einer Teilmenge potenzieller Raumpositionen erstellen
+    // Rï¿½ume in einer Teilmenge potenzieller Raumpositionen erstellen
     private HashSet<Vector2Int> CreateRooms(HashSet<Vector2Int> potentialRoomPositions)
     {
         HashSet<Vector2Int> roomPositions = new();
         int roomToCreateCount = Mathf.RoundToInt(potentialRoomPositions.Count * roomPercent);
 
-        // Zufällig eine Teilmenge potenzieller Raumpositionen auswählen
+        // Zufï¿½llig eine Teilmenge potenzieller Raumpositionen auswï¿½hlen
         List<Vector2Int> roomsToCreate = potentialRoomPositions.OrderBy(x => Guid.NewGuid()).Take(roomToCreateCount).ToList();
 
-        // Räume mit Zufallsweg ab den ausgewählten Positionen erstellen
+        // Rï¿½ume mit Zufallsweg ab den ausgewï¿½hlten Positionen erstellen
         foreach (var roomPosition in roomsToCreate)
         {
             var roomFloor = RunRandomWalk(randomWalkParameters, roomPosition);
@@ -121,7 +122,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
         return roomPositions;
     }
 
-    // Initiale Korridore für den Dungeon erstellen
+    // Initiale Korridore fï¿½r den Dungeon erstellen
     private List<List<Vector2Int>> CreateCorridors(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions, int SpawnNumber)
     {
         List<List<Vector2Int>> corridors = new();

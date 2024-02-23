@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2928134978776718193}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8217678260580075321}
   - component: {fileID: 1729470861257015860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2052616785362743136}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Devil
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7394053357952904669}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 9079429138413267191}
   - component: {fileID: 7804550781097867210}
   - component: {fileID: 7007629417573377463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: health_bar_background0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 2782294348821409549}
   - component: {fileID: 820679082386615128}
   - component: {fileID: 4570896706241801585}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Devil Standart
   m_TagString: Untagged
   m_Icon: {fileID: 0}

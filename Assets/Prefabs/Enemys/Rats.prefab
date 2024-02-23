@@ -102,6 +102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DropPotion: {fileID: 1239244259627632074, guid: 5cbfc62e9cde7ed419667d888c09a786, type: 3}
+  healthscript: {fileID: 0}
+  life: 0
 --- !u!50 &8478938256952187945
 Rigidbody2D:
   serializedVersion: 4

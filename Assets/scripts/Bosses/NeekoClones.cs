@@ -22,15 +22,10 @@ public class NeekoClones : BossHauptklasse
         life = 10f;
         damage = 0;
         Sprechblase.transform.localScale = new Vector3(0.15f, 0.15f, 1);
-        SetHealthbar();
     }
 
-    public void SetHealthbar()
-    {
-        if(healthbar != null)
-            healthbar.transform.localScale = new Vector3(life / 100, 1, 1);
-    }
-    private bool canshootagain;
+
+    private bool canshootagain = true;
     private void Update()
     { 
         Sprechblase.transform.localScale = new Vector3(0.15f, 0.15f, 1);
@@ -44,26 +39,23 @@ public class NeekoClones : BossHauptklasse
                 Vector2 aimdirection = new Vector2(player.transform.position.x,player.transform.position.y) - rb.position;
                 float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg + 90;
                 rb.rotation = aimangle;
-                if(!canshootagain)
-                    StartCoroutine(ShootslightlyRandom());
+                if(canshootagain)
+                    StartCoroutine(Shoot());
                 break;
         }
     }
-    IEnumerator ShootslightlyRandom()
-    {
-        canshootagain = true;
-        GameObject bullet = Instantiate(NeekoProjectile, firePoint.transform.position, firePoint.transform.rotation * Quaternion.Euler(0, 0, 90));
-        bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.up, ForceMode2D.Force);
-        yield return new WaitForSeconds(Random.Range(3, 10));
-        canshootagain = false;
-        StartCoroutine(ShootslightlyRandom());
-    }
-
-
     public void StartRotate(GameObject phaseRotationPoint)
     {
-        
         rotationPoint = phaseRotationPoint;
         BattlePhase++;
+    }
+
+    IEnumerator Shoot()
+    {
+        canshootagain = false;
+        yield return new WaitForSeconds(Random.Range(5,10));
+        GameObject bullet = Instantiate(NeekoProjectile, firePoint.transform.position, firePoint.transform.rotation * Quaternion.Euler(0, 0, 90));
+        bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.up * 2, ForceMode2D.Force);
+        StartCoroutine(Shoot());
     }
 }
