@@ -12,6 +12,7 @@ public class NeekoClones : BossHauptklasse
     private Rigidbody2D rb;
     public GameObject firePoint;
     public GameObject NeekoProjectile;
+    private bool canshootagain = true;
 
     private void Start()
     {
@@ -25,7 +26,7 @@ public class NeekoClones : BossHauptklasse
     }
 
 
-    private bool canshootagain = true;
+    
     private void Update()
     { 
         Sprechblase.transform.localScale = new Vector3(0.15f, 0.15f, 1);
@@ -53,7 +54,7 @@ public class NeekoClones : BossHauptklasse
     IEnumerator Shoot()
     {
         canshootagain = false;
-        yield return new WaitForSeconds(Random.Range(5,10));
+        yield return new WaitForSeconds(Random.Range(2,5));
         GameObject bullet = Instantiate(NeekoProjectile, firePoint.transform.position, firePoint.transform.rotation * Quaternion.Euler(0, 0, 90));
         bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.up * 2, ForceMode2D.Force);
         StartCoroutine(Shoot());

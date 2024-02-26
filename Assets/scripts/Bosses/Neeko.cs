@@ -10,6 +10,9 @@ public class Neeko : BossHauptklasse
     private GameObject rotationPoint;
     public PhaseTrackScript phaseTrackScript;
     private Rigidbody2D rb;
+    public GameObject firePoint;
+    public GameObject NeekoProjectile;
+    private bool canshootagain = true;
 
     private void Start()
     {
@@ -40,6 +43,8 @@ public class Neeko : BossHauptklasse
                 Vector2 aimdirection = new Vector2(player.transform.position.x,player.transform.position.y) - rb.position;
                 float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg + 90;
                 rb.rotation = aimangle;
+                if(canshootagain)
+                    StartCoroutine(Shoot());
                 break;
         }
     }
@@ -52,9 +57,12 @@ public class Neeko : BossHauptklasse
     }
 
 
-    public void shoot()
+    IEnumerator Shoot()
     {
-        
-
+        canshootagain = false;
+        yield return new WaitForSeconds(Random.Range(2,5));
+        GameObject bullet = Instantiate(NeekoProjectile, firePoint.transform.position, firePoint.transform.rotation * Quaternion.Euler(0, 0, 90));
+        bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.up * 2, ForceMode2D.Force);
+        StartCoroutine(Shoot());
     }
 }
