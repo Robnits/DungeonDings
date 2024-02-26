@@ -30,6 +30,8 @@ public class Player_behjaviour : MonoBehaviour
     private Light2D zerilight2d;
     private bool lastcursorInput;
     private Vector2 CurrentMouseInput;
+    private bool dashing;
+    private bool isDashAvailable;
 
     private void Awake()
     {
@@ -75,8 +77,6 @@ public class Player_behjaviour : MonoBehaviour
 
         if (!dashing)
             moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
-
-        //LookAtPlayer();
     }
 
     public void LookAtPlayerCoursor(Vector2 courserPos)
@@ -164,7 +164,6 @@ public class Player_behjaviour : MonoBehaviour
             case FireBall fireBall:
                 stats.GetDamage(fireBall.GetDamage());
                 break;
-
             case Rats rats:
                 stats.GetDamage(rats.GetDamage());
                 break;
@@ -184,11 +183,9 @@ public class Player_behjaviour : MonoBehaviour
         weapon.FireCounter();
     }
 
-    private bool dashing;
-    private bool dashcooldown;
     public void Dash()
     {
-        if (!dashing && !dashcooldown)
+        if (!dashing && !isDashAvailable)
             StartCoroutine(DashTime());
     }
 
@@ -196,7 +193,7 @@ public class Player_behjaviour : MonoBehaviour
     {
         float timePassed = 0;
         dashing = true;
-        dashcooldown = true;
+        isDashAvailable = true;
 
         while (timePassed < 0.4)
         {
@@ -213,7 +210,7 @@ public class Player_behjaviour : MonoBehaviour
             timePassed++;
         }
 
-        dashcooldown = false;
+        isDashAvailable = false;
     }
 
     public void SprechblasePressE(bool hilf)
