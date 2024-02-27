@@ -21665,6 +21665,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1195264378}
+  - component: {fileID: 1195264380}
   - component: {fileID: 1195264379}
   m_Layer: 0
   m_Name: LevelLoader
@@ -21698,18 +21699,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1195264377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56dcd88257c968c4295ed8deeb32b4a2, type: 3}
+  m_Script: {fileID: 11500000, guid: dfe728eb99cc9f640aa38c0892230e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  einstellungenHandler: {fileID: 1933180674}
   einstellungen: {fileID: 1933180674}
-  shootInput: {fileID: 30533099908982442, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  dashInput: {fileID: -2271648849087381910, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  grenadeInput: {fileID: 6615987891438436719, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  settingInput: {fileID: 2484261690368588220, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  movementInput: {fileID: 6826815938091650722, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  interactInput: {fileID: 5569386914999204898, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  mousePosition: {fileID: 2639706924581085308, guid: af321cd741950794591c07e94bd375cb, type: 3}
-  coursorPosition: {fileID: -936937716681432962, guid: af321cd741950794591c07e94bd375cb, type: 3}
+  shootInput: {fileID: 223521110745166674, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
+  dashInput: {fileID: -6668389131059955495, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
+  grenadeInput: {fileID: -2066385763570699288, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
+  settingInput: {fileID: -5563610672087967912, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
+  movementInput: {fileID: -4637767202581802979, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
+  interactInput: {fileID: 6875471913709306678, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
+  mousePosition: {fileID: 1890689786577543857, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
+  coursorPosition: {fileID: 3170661357165263830, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
 --- !u!114 &1195264380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21722,7 +21724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb6529758965954a9735f3fa387ab77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputActionAsset: {fileID: -944628639613478452, guid: af321cd741950794591c07e94bd375cb, type: 3}
+  inputActionAsset: {fileID: -944628639613478452, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
 --- !u!1 &1202018862
 GameObject:
   m_ObjectHideFlags: 0

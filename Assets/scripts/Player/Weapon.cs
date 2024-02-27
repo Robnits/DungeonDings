@@ -18,6 +18,11 @@ public class Weapon : MonoBehaviour
     private int ammunition = 2;
     private bool hasGranade = true;
 
+    public void ChangeBullets(int changedBullets)
+    {
+        ammunition += changedBullets;
+    }
+
     private void Awake()
     {
         stats = gameObject.GetComponentInParent<Player_Stats>();

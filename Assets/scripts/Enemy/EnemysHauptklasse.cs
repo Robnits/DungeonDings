@@ -12,10 +12,11 @@ public class EnemysHauptklasse : MonoBehaviour
     public GameObject DropPotion;
     public Healthbarscriptenemys healthscript;
 
+    protected DealDamageToPlayer dealDamageToPlayer;
+
     protected float speed;
     public float life;
     protected float value;
-    protected float damage;
     protected float droprate;
     protected float maxlife;
 
@@ -28,12 +29,6 @@ public class EnemysHauptklasse : MonoBehaviour
         GlobalVariables.money += value;
         if (Random.Range(0,100) < droprate)
             Instantiate(DropPotion, transform.position, Quaternion.identity);
-    }
-
-
-    public float GetDamage()
-    {
-        return damage;
     }
 
     protected void OnCollisionEnter2D(Collision2D collision)

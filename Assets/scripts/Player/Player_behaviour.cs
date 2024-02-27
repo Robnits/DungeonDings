@@ -136,14 +136,8 @@ public class Player_behjaviour : MonoBehaviour
         StartCoroutine(cam.CameraShake(0.2f, 1f));
 
 
-        var collisionComponent = collision.gameObject.GetComponent<MonoBehaviour>();
-
-        switch (collisionComponent)
-        {
-            case RiesenFeuerballJunge fireBall:
-                stats.GetDamage(fireBall.GetDamage());
-                break;
-        }
+        var dmgscript = collision.gameObject.GetComponent<DealDamageToPlayer>();
+        stats.GetDamage(dmgscript.GetDamage(), dmgscript.GetTime(), dmgscript.DamageOverTime());
 
         if (stats.life <= 0)
             Death();
@@ -156,21 +150,8 @@ public class Player_behjaviour : MonoBehaviour
         invincibleAfterDmg = true;
         StartCoroutine(cam.CameraShake(0.2f, 1f));
 
-
-        var collisionComponent = collision.gameObject.GetComponent<MonoBehaviour>();
-
-        switch (collisionComponent)
-        {
-            case FireBall fireBall:
-                stats.GetDamage(fireBall.GetDamage());
-                break;
-            case Rats rats:
-                stats.GetDamage(rats.GetDamage());
-                break;
-            case Wuestengegner wuestengegner:
-                stats.GetDamage(wuestengegner.GetDamage());
-                break;
-        }
+        var dmgscript = collision.gameObject.GetComponent<DealDamageToPlayer>();
+        stats.GetDamage(dmgscript.GetDamage(), dmgscript.GetTime(), dmgscript.DamageOverTime());
 
         if (stats.life <= 0)
             Death();

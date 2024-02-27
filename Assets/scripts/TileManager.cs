@@ -24,7 +24,7 @@ public class TileManager : MonoBehaviour
             if (tilemap.GetTile(gridPosition) == poisonTiles.tiles[i])
             {
                 player.GetComponent<Player_behjaviour>().NotOnSlow();
-                player.GetComponent<Player_Stats>().GetDamage(poisonTiles.damage);
+                //player.GetComponent<Player_Stats>().GetDamage(poisonTiles.damage);
             }
             else
             {

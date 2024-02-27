@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7880109636491814309}
   - component: {fileID: 7367144643038956996}
   - component: {fileID: 4050146474329972983}
+  - component: {fileID: 4809654981360488973}
   m_Layer: 6
   m_Name: Rats
   m_TagString: Rats
@@ -247,3 +248,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4809654981360488973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5052793950568914181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c1208faaa70bc4594b1fb5af65b42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poisondmg: 0
+  firedmg: 0
+  dmg: 0
+  dot: 0
+  damageTime: 0

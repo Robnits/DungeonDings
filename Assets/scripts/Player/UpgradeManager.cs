@@ -39,7 +39,7 @@ public class UpgradeManager : MonoBehaviour
         "Helm",
         "Mamas Latschen",
         "Dornen",
-        "Fußball",
+        "Fussball",
         "Milch",
         "quick mag",
         "Kleines Waffenwissen",
@@ -50,8 +50,8 @@ public class UpgradeManager : MonoBehaviour
         rareItems = new List<string>
     {
         "Piercing 2",
-        "Rüstungsschuhe",
-        "Kaktus an die Rüstung geklebt",
+        "Ruestungsschuhe",
+        "Kaktus an die Ruestung geklebt",
         "Schulausbildung(Amerika)",
         "Gewichte",
         "Marcels Faulheit",
@@ -64,12 +64,12 @@ public class UpgradeManager : MonoBehaviour
         "Maschine Pistole",
         "Marksmanrifle",
         "Glass Cannon",
-        "Rüstung",
+        "Ruestung",
         "Laufschuhe",
         "Robins T-Shirt",
         "Robins Melder",
         "Robins IQ",
-        "Cedrics Fettrüstung"
+        "Cedrics Fettruestung"
     };
 
         legendaryItems = new List<string>

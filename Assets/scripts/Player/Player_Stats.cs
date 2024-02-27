@@ -20,6 +20,7 @@ public class Player_Stats : MonoBehaviour
     public float maxlife;
     public float life;
     public int maxAmmunition;
+    public int ammunition;
     public float fireForce;
     public float attackSpeed;
     public float dornen;
@@ -54,8 +55,7 @@ public class Player_Stats : MonoBehaviour
         {
             item.SetActive(false);
         }
-
-        GetDamage(0);
+        //GetDamage(0,0,0);
         BulletChanges(maxAmmunition);
     }
 
@@ -67,6 +67,7 @@ public class Player_Stats : MonoBehaviour
         maxlife = 100f + GlobalVariables.healthUpgrade - 1;
         life = maxlife;
         maxAmmunition = 2;
+        ammunition = maxAmmunition;
         fireForce = 30f;
         attackSpeed = 1f;
         dornen = 0f;
@@ -75,20 +76,20 @@ public class Player_Stats : MonoBehaviour
         dashmaxCooldown = 5f;
     }
 
-    public void BulletChanges(int ammunition)
+    public void BulletChanges(int ammo)
     {
         foreach (var item in bulletUI)
         {
             item.SetActive(false);
         }
 
-        for (int i = 0; i < ammunition; i++)
+        for (int i = 0; i < ammo; i++)
         {
             bulletUI[i].SetActive(true);
         }
     }
 
-    public void GetDamage(float enemydamage)
+    public void GetDamage(float enemydamage,float length,float dot)
     {
 
         life -= enemydamage;
@@ -114,30 +115,54 @@ public class Player_Stats : MonoBehaviour
     private void InstantiateLists()
     {
 
-        // Initialize item lists
         commonItems = new List<string>
         {
-            "Piercing 1", "Pistol", "Helm", "Mamas Latschen", "Dornen", "Fußball", "Milch", "quick mag",
-            "Kleines Waffenwissen", "wenig Munni", "Dieb"
+            "Piercing 1",
+            "Pistol",
+            "Helm",
+            "Mamas Latschen",
+            "Dornen",
+            "Fussball",
+            "Milch",
+            "quick mag",
+            "Kleines Waffenwissen",
+            "wenig Munni",
+            "Dieb"
         };
 
         rareItems = new List<string>
         {
-            "Piercing 2", "Rüstungsschuhe", "Kaktus an die Rüstung geklebt", "Schulausbildung(Amerika)",
-            "Gewichte", "Marcels Faulheit", "Waffenwissen"
+            "Piercing 2",
+            "Ruestungsschuhe",
+            "Kaktus an die Ruestung geklebt",
+            "Schulausbildung(Amerika)",
+            "Gewichte",
+            "Marcels Faulheit",
+            "Waffenwissen"
         };
 
         epicItems = new List<string>
         {
-            "Piercing 3", "Maschine Pistole", "Marksmanrifle", "Glass Cannon", "Rüstung", "Laufschuhe",
-            "Robins T-Shirt", "Robins Melder", "Robins IQ", "Cedrics Fettrüstung"
+            "Piercing 3",
+            "Maschine Pistole",
+            "Marksmanrifle",
+            "Glass Cannon",
+            "Ruestung",
+            "Laufschuhe",
+            "Robins T-Shirt",
+            "Robins Melder",
+            "Robins IQ",
+            "Cedrics Fettruestung"
         };
 
         legendaryItems = new List<string>
         {
-            "Alle Waffen im Besitz", "Minigun", "50.Cal", "Kartenbetrug"
+            "Alle Waffen im Besitz",
+            "Minigun",
+            "50.Cal",
+            "Kartenbetrug"
         };
-        
+
     }
 
     public void Upgrades(int numberInList, int rarity)
@@ -149,21 +174,21 @@ public class Player_Stats : MonoBehaviour
         {
             0 => new Dictionary<string, Action>
                 {
-                    { "Pistol", () => damage += 1f },
+                    { "Pistol", () => {maxAmmunition += 1; weapon.ChangeBullets(1);}},
                     { "Helm", () => {maxlife += 5f; GetHealth(5); } },
                     { "Mamas Latschen", () => moveSpeed += 0.5f },
-                    { "Dornen", () => dornen = 1f },// noch nicht implementiert
+                    { "Dornen", () => dornen = 1f },
                     { "Milch", () => damage += 1f },
                     { "quick mag", () => attackSpeed *= 0.9f },
                     { "Kleines Waffenwissen", () => { attackSpeed *= 0.95f; damage += 0.5f; } },
                     { "Dieb", () => damage += 1f },
-                    { "Fußball", () => moveSpeed += 0.5f},
-                    { "wenig Munni", () => moveSpeed += 0.5f}
+                    { "Fussball", () => moveSpeed += 0.5f},
+                    { "wenig Munni", () => { maxAmmunition += 1; ammunition += 1; weapon.ChangeBullets(ammunition);}}
 
                 },
             1 => new Dictionary<string, Action>
                 {
-                    { "Rüstungsschuhe", () => {maxlife += 5; GetHealth(5); moveSpeed -= 0.5f; } },
+                    { "Ruestungsschuhe", () => {maxlife += 5; GetHealth(5); moveSpeed -= 0.5f; } },
                     { "Waffenwissen", () => {attackSpeed *= 0.8f; damage += 1.5f; maxlife -= 3; moveSpeed -= 0.5f;} },// need fixing movespeed
                     { "Schulausbildung(Amerika)", () => {attackSpeed *= 0.8f; } },
                     { "Gewichte", () => {} },
@@ -174,7 +199,7 @@ public class Player_Stats : MonoBehaviour
                     { "Maschine Pistole", () => {/* Add implementation for epic items */} },
                     { "Marksmanrifle", () => {/* Add implementation for epic items */} },
                     { "Glass Cannon", () => {/* Add implementation for epic items */} },
-                    { "Cedrics Fettrüstung", () => {/* Add implementation for epic items */} }
+                    { "Cedrics Fettruestung", () => {/* Add implementation for epic items */} }
                 },
             3 => new Dictionary<string, Action>
                 {
