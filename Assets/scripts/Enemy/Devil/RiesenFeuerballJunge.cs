@@ -12,18 +12,16 @@ public class RiesenFeuerballJunge : MonoBehaviour
     private bool fireBallActive = true;
     private readonly float damage = 75f;
 
+    private DealDamageToPlayer ddtp;
+
     private void Start()
     {
-        //devil = GetComponentInParent<GameObject>();
+        ddtp = GetComponent<DealDamageToPlayer>();
         player = GameObject.FindGameObjectWithTag("Player");
         FireBallRB = GetComponent<Rigidbody2D>();
         fireBallActive = true;
+        ddtp.dmg = damage;
     }
-    public float GetDamage()
-    {
-        return damage;
-    }
-
     private void Update()
     {
         if (player != null)

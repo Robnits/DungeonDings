@@ -118,22 +118,8 @@ public class Player_Stats : MonoBehaviour
 
         commonItems = new List<string>
         {
-<<<<<<< Updated upstream
-            "Piercing 1",
-            "Pistol",
-            "Helm",
-            "Mamas Latschen",
-            "Dornen",
-            "Fussball",
-            "Milch",
-            "quick mag",
-            "Kleines Waffenwissen",
-            "wenig Munni",
-            "Dieb"
-=======
             "Piercing 1", "Hartes Geschoss", "Helm", "Laufschuhe", "Super Dash", "Grosses Magazin", "Energy Drink", "Schneller Schuss",
             "Kleines Waffenwissen", "Licht und Schatten", "Big Shot"
->>>>>>> Stashed changes
         };
 
         rareItems = new List<string>
@@ -180,18 +166,6 @@ public class Player_Stats : MonoBehaviour
         {
             0 => new Dictionary<string, Action>
                 {
-<<<<<<< Updated upstream
-                    { "Pistol", () => {maxAmmunition += 1; weapon.ChangeBullets(1);}},
-                    { "Helm", () => {maxlife += 5f; GetHealth(5); } },
-                    { "Mamas Latschen", () => moveSpeed += 0.5f },
-                    { "Dornen", () => dornen = 1f },
-                    { "Milch", () => damage += 1f },
-                    { "quick mag", () => attackSpeed *= 0.9f },
-                    { "Kleines Waffenwissen", () => { attackSpeed *= 0.95f; damage += 0.5f; } },
-                    { "Dieb", () => damage += 1f },
-                    { "Fussball", () => moveSpeed += 0.5f},
-                    { "wenig Munni", () => { maxAmmunition += 1; ammunition += 1; weapon.ChangeBullets(ammunition);}}
-=======
                     { "Hartes Geschoss", () => damage += 1f },
                     { "Helm", () => {maxlife += 5f; GetHealth(5); } },
                     { "Laufschuhe", () => moveSpeed += 0.4f },
@@ -202,7 +176,6 @@ public class Player_Stats : MonoBehaviour
                     { "Big Shot", () => damage += 2f },
                     { "Grosses Magazin", () => {maxAmmunition += 1; BulletChanges(maxAmmunition); } },
                     { "Licht und Schatten", () => {{attackSpeed += 5f; maxAmmunition -= 1; BulletChanges(maxAmmunition);  } } }
->>>>>>> Stashed changes
 
                 },
             1 => new Dictionary<string, Action>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -50,23 +51,21 @@ public class TilemapVisualiser : MonoBehaviour
         tilemap.SetTile(tilePosition, tile);
     }
 
-    // Methode zum Zurücksetzen der Tilemaps
+    // Methode zum Zurï¿½cksetzen der Tilemaps
     public void Clear()
     {
+        GameObject parentObject = GameObject.FindGameObjectWithTag("shouldGetDestroyedAfterRebuild");
+        GameObject[] childObjects;
 
-        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
-        GameObject[] downSpawners = GameObject.FindGameObjectsWithTag("DOWN");
-        GameObject[] upSpawners = GameObject.FindGameObjectsWithTag("UP");
-        GameObject[] chests = GameObject.FindGameObjectsWithTag("Chest");
-        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        GameObject[] saeule = GameObject.FindGameObjectsWithTag("shouldGetDestroyedAfterRebuild");
-
-
-        GameObject[] allSpawns = spawners.Concat(downSpawners).Concat(upSpawners).Concat(spawners).Concat(chests).Concat(enemys).Concat(saeule).ToArray();
-
-        foreach (GameObject spawner in allSpawns)
+        childObjects = new GameObject[parentObject.transform.childCount];
+        for (int i = 0; i < parentObject.transform.childCount; i++)
         {
-            DestroyImmediate(spawner);
+            childObjects[i] = parentObject.transform.GetChild(i).gameObject;
+        }
+
+        foreach (GameObject todelte in childObjects)
+        {
+            DestroyImmediate(todelte);
         }
 
         floorTilemap.ClearAllTiles();

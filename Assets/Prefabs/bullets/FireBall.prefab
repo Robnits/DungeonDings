@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9031269921611166664}
   - component: {fileID: 2307541807259303530}
   - component: {fileID: 200428608356565013}
+  - component: {fileID: 8226831091138020440}
   m_Layer: 6
   m_Name: FireBall
   m_TagString: Enemy
@@ -55,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -161,3 +162,20 @@ CircleCollider2D:
   m_Offset: {x: 0.10821819, y: 0.024206638}
   serializedVersion: 2
   m_Radius: 0.19670327
+--- !u!114 &8226831091138020440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3010968035489139711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c1208faaa70bc4594b1fb5af65b42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poisondmg: 0
+  firedmg: 0
+  dmg: 0
+  dot: 0
+  damageTime: 0

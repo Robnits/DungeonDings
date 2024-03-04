@@ -168,7 +168,10 @@ public class OpenEinstellungen : MonoBehaviour
 
     private void OpenOrCloseMenu(bool x)
     {
-
+        if (canvasGroup != null)
+        {
+            
+        
         if (x)
             canvasGroup.alpha = 1f;
         else
@@ -177,6 +180,7 @@ public class OpenEinstellungen : MonoBehaviour
         canvasGroup.interactable = x;
         canvasGroup.enabled = true;
         canvasGroup.blocksRaycasts = x;
+        }
     }
     
     private void OpenOrCloseSettings(bool x)

@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446af09122c542a4c8b4e3b1bb133d23, type: 3}
   m_Name: easy
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  spawnChest: 50
-=======
-  spawnChest: 20
->>>>>>> Stashed changes
+  spawnChest: 4
   spawnSpawner: 1
   devilSpawnrate: 4

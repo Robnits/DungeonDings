@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2763654676552349976}
   - component: {fileID: 239182160244039843}
   - component: {fileID: 5935052851503895642}
+  - component: {fileID: 589520264547962942}
   m_Layer: 6
   m_Name: Charge-frame1
   m_TagString: Enemy
@@ -56,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1591113029
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: b03d2f57c56616f4f8008c108e6a7c9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -183,3 +184,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a859fe92abb504c8c9a823b6b8f1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &589520264547962942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195372357989073444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c1208faaa70bc4594b1fb5af65b42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poisondmg: 0
+  firedmg: 0
+  dmg: 0
+  dot: 0
+  damageTime: 0

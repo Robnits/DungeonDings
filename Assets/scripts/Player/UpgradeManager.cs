@@ -37,19 +37,11 @@ public class UpgradeManager : MonoBehaviour
         "Piercing 1",
         "Hartes Geschoss",
         "Helm",
-<<<<<<< Updated upstream
-        "Mamas Latschen",
-        "Dornen",
-        "Fussball",
-        "Milch",
-        "quick mag",
-=======
         "Laufschuhe",
         "Super Dash",
         "Grosses Magazin",
         "Energy Drink",
         "Schneller Schuss",
->>>>>>> Stashed changes
         "Kleines Waffenwissen",
         "Licht und Schatten",
         "Big Shot"

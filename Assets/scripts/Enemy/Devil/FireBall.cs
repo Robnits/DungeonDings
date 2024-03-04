@@ -11,18 +11,16 @@ public class FireBall : MonoBehaviour
     private Rigidbody2D FireBallRB;
     private bool fireBallActive = true;
     private readonly float damage = 30f;
+    private DealDamageToPlayer ddtp;
 
     private void Start()
     {
-        //devil = GetComponentInParent<GameObject>();
+        
         player = GameObject.FindGameObjectWithTag("Player");
         FireBallRB = GetComponent<Rigidbody2D>();
         fireBallActive = true;
-    }
-    public float GetDamage()
-    {
-        Destroy(gameObject);
-        return damage;
+        ddtp = GetComponent<DealDamageToPlayer>();
+        ddtp.dmg = damage;
     }
 
     private void Update()
@@ -50,8 +48,7 @@ public class FireBall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 7)
-            Destroy(gameObject);        
+        Destroy(gameObject);        
     }
 
     IEnumerator DestroyAfterTime()
