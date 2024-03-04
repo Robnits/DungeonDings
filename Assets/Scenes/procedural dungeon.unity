@@ -6510,7 +6510,7 @@ MonoBehaviour:
   ratspwaner: {fileID: 7542046107334347594, guid: e7e5a495684746c489acdb39478d9f21, type: 3}
   SpawnerSpawnPercantage: 1
   chests: {fileID: 2136266138557456138, guid: adfb66723eddcb34784e11cf73c1bb2f, type: 3}
-  ChestSpawnPercantage: 1
+  ChestSpawnPercantage: 15.8
   devils: {fileID: 2445331548484148877, guid: 50b750422071ef24f9735d4d4b880cd8, type: 3}
   devilSpawnPercantage: 4
   wuestengegner: {fileID: 1621385828209257054, guid: 52f0d8d3edb75794c88ac7190d7884a3, type: 3}

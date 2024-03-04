@@ -35,16 +35,24 @@ public class UpgradeManager : MonoBehaviour
         commonItems = new List<string>
     {
         "Piercing 1",
-        "Pistol",
+        "Hartes Geschoss",
         "Helm",
+<<<<<<< Updated upstream
         "Mamas Latschen",
         "Dornen",
         "Fussball",
         "Milch",
         "quick mag",
+=======
+        "Laufschuhe",
+        "Super Dash",
+        "Grosses Magazin",
+        "Energy Drink",
+        "Schneller Schuss",
+>>>>>>> Stashed changes
         "Kleines Waffenwissen",
-        "wenig Munni",
-        "Dieb"
+        "Licht und Schatten",
+        "Big Shot"
     };
 
         rareItems = new List<string>
