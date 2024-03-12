@@ -26,8 +26,6 @@ public class TilemapVisualiser : MonoBehaviour
     {
         randomBiom = Random.Range(0, 3);
     }
-
-
     // Methode zum Darstellen von Boden-Tiles an den angegebenen Positionen
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
@@ -51,7 +49,6 @@ public class TilemapVisualiser : MonoBehaviour
         tilemap.SetTile(tilePosition, tile);
     }
 
-    // Methode zum Zur�cksetzen der Tilemaps
     public void Clear()
     {
         GameObject parentObject = GameObject.FindGameObjectWithTag("shouldGetDestroyedAfterRebuild");

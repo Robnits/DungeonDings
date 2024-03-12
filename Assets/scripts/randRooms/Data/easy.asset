@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: easy
   m_EditorClassIdentifier: 
   spawnChest: 4
-  spawnSpawner: 1
+  spawnSpawner: 100
   devilSpawnrate: 4

@@ -14,7 +14,6 @@ public class Player_behjaviour : MonoBehaviour
     private GameObject scenenwechsel;
     private Cam_Follow cam;
     private Animator levelLoader;
-
     
     [SerializeField] private Animator anim;
     Player_Stats stats;

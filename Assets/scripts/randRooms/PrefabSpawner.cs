@@ -109,17 +109,17 @@ public class PrefabSpawner : MonoBehaviour
         {
             if(position.x >= 5 || position.x <= -5 && position.y >= 5 || position.y <= -5)
             {
-                float hilf = Random.Range(0, 100);
+                //switch
 
-                // Check if the position is already occupied in SpawnedPositions
+                float hilf = Random.Range(0, 1000);
+
                 if (hilf < SpawnerSpawnPercantage && !SpawnedPositions.Contains(position))
                 {
                     InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.RatSpawner);
                     SpawnedPositions.Add(position);
                 }
 
-                hilf = Random.Range(0, 100);
-                // Check again after spawning the RatSpawner
+                hilf = Random.Range(0, 1000);
                 if (hilf < ChestSpawnPercantage && !SpawnedPositions.Contains(position))
                 {
                     InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Chest);
