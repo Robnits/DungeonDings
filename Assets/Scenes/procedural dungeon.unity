@@ -2342,8 +2342,7 @@ MonoBehaviour:
   DropPotion: {fileID: 0}
   healthscript: {fileID: 276149311}
   life: 0
-  playerIsInRange: 0
-  playerIsInMelee: 0
+  playerIsInRange: 1
 --- !u!58 &107434386
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -87605,3 +87604,4 @@ SceneRoots:
   - {fileID: 832116076}
   - {fileID: 793131790}
   - {fileID: 1842791508}
+  - {fileID: 368102978}
