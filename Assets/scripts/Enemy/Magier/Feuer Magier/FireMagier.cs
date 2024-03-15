@@ -9,6 +9,7 @@ public class Firemagier : EnemysHauptklasse
     private Rigidbody2D rb;
 
     public bool playerIsInRange;
+
     void Start()
     {
         life = 5f;
@@ -19,6 +20,8 @@ public class Firemagier : EnemysHauptklasse
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
     }
+
+    
 
     void FixedUpdate()
     {
@@ -43,6 +46,8 @@ public class Firemagier : EnemysHauptklasse
                 Vector2 moveDirection = (player.transform.position - transform.position).normalized;
                 rb.velocity = moveDirection * speed;
             }
+
+            
         }
     }
 

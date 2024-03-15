@@ -13,9 +13,15 @@ public class MageFeuerballweopon : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(shootInterval());
     }
 
-
+    IEnumerator shootInterval()
+    {
+        yield return new WaitForSeconds(3);
+        FireFireball();
+        StartCoroutine(shootInterval());
+    }
     public void FireFireball()
     {
         GameObject bullet = Instantiate(fireBallPrefab, firepoint.position, firepoint.rotation);
