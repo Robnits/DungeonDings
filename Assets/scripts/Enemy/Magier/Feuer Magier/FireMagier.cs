@@ -18,7 +18,7 @@ public class Firemagier : EnemysHauptklasse
     {
         life = 5f;
         value = 10f;
-        speed = 1.5f;
+        speed = 4f;
         droprate = 90;
         healthscript.GetMaxhealth(life);
         player = GameObject.FindGameObjectWithTag("Player");
@@ -112,6 +112,7 @@ public class Firemagier : EnemysHauptklasse
         {
             StartCoroutine(MoveSidewards2());
         }
+
         yield return new WaitForSeconds(delay);
         isrotating = false;
         

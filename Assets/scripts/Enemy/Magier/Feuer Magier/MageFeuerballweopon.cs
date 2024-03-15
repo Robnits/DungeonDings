@@ -18,7 +18,7 @@ public class MageFeuerballweopon : MonoBehaviour
 
     IEnumerator shootInterval()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         FireFireball();
         StartCoroutine(shootInterval());
     }
