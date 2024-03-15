@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
+using System;
+using JetBrains.Annotations;
 
 public class Firemagier : EnemysHauptklasse
 {
 
     private Rigidbody2D rb;
+    private bool isrotating;
 
     public bool playerIsInRange;
+    public float delay = 1f;
 
     void Start()
     {
@@ -19,6 +23,7 @@ public class Firemagier : EnemysHauptklasse
         healthscript.GetMaxhealth(life);
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
+       
     }
 
     
@@ -49,9 +54,9 @@ public class Firemagier : EnemysHauptklasse
                     rb.velocity = moveDirection * speed;
                 } else 
                 {
-                    StartCoroutine(MoveSidewards());
+                    if (!isrotating)
+                        StartCoroutine(Randmove());
                 }
-
             }
         }
     }
@@ -69,7 +74,7 @@ public class Firemagier : EnemysHauptklasse
         }
 
     }
-    IEnumerator MoveSidewards()
+    IEnumerator MoveSidewards1()
     {
         float timePassed = 0;
         while (timePassed < 1 && player != null)
@@ -81,6 +86,35 @@ public class Firemagier : EnemysHauptklasse
 
             yield return null;
         }
+    }
+    IEnumerator MoveSidewards2()
+    {
+        float timePassed = 0;
+        while (timePassed < 1 && player != null)
+        {
+            Vector2 moveDirection = (player.transform.position - transform.position).normalized;
+            Vector2 perpendicularDirection = new Vector2(moveDirection.y, -moveDirection.x).normalized;
+            rb.velocity = speed * perpendicularDirection;
+            timePassed += Time.deltaTime;
+
+            yield return null;
+        }
+    }
+    IEnumerator Randmove()
+    {
+        isrotating = true;
+        int randommove = UnityEngine.Random.Range(0, 2);
+        if (randommove == 0)
+        {
+            StartCoroutine(MoveSidewards1());
+        }
+        else
+        {
+            StartCoroutine(MoveSidewards2());
+        }
+        yield return new WaitForSeconds(delay);
+        isrotating = false;
+        
     }
 }
 
