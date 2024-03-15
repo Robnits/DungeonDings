@@ -14,7 +14,7 @@ public class Firemagier : EnemysHauptklasse
     {
         life = 5f;
         value = 10f;
-        speed = 2.5f;
+        speed = 1.5f;
         droprate = 90;
         healthscript.GetMaxhealth(life);
         player = GameObject.FindGameObjectWithTag("Player");
@@ -37,17 +37,22 @@ public class Firemagier : EnemysHauptklasse
             // Rotate the enemy to face the player
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            if (distance < 2.1)
+            if (distance < 1.9)
             {
                 StartCoroutine(MoveBackwards());
             }
-            else
+            else 
             {
-                Vector2 moveDirection = (player.transform.position - transform.position).normalized;
-                rb.velocity = moveDirection * speed;
-            }
+                if (distance > 2.1)
+                {
+                    Vector2 moveDirection = (player.transform.position - transform.position).normalized;
+                    rb.velocity = moveDirection * speed;
+                } else 
+                {
+                    StartCoroutine(MoveSidewards());
+                }
 
-            
+            }
         }
     }
 
@@ -63,6 +68,19 @@ public class Firemagier : EnemysHauptklasse
             yield return null;
         }
 
+    }
+    IEnumerator MoveSidewards()
+    {
+        float timePassed = 0;
+        while (timePassed < 1 && player != null)
+        {
+            Vector2 moveDirection = (player.transform.position - transform.position).normalized;
+            Vector2 perpendicularDirection = new Vector2(-moveDirection.y, moveDirection.x).normalized;
+            rb.velocity = speed * perpendicularDirection;
+            timePassed += Time.deltaTime;
+
+            yield return null;
+        }
     }
 }
 

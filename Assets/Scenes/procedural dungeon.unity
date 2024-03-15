@@ -2191,7 +2191,7 @@ GameObject:
   - component: {fileID: 107434384}
   - component: {fileID: 107434385}
   - component: {fileID: 107434386}
-  - component: {fileID: 107434388}
+  - component: {fileID: 107434387}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -2379,8 +2379,8 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
---- !u!114 &107434388
+  m_Radius: 2.5
+--- !u!114 &107434387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
