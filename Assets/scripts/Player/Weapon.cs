@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
         {
             hasGranade = false;
             GameObject granade = Instantiate(granadePrefab, firepoint.position, firepoint.rotation * Quaternion.Euler(0, 0, 90));
-            granade.GetComponent<Rigidbody2D>().AddForce(1200 * stats.fireForce * firepoint.up, ForceMode2D.Force);
+            granade.GetComponent<Rigidbody2D>().AddForce(12 * stats.fireForce * firepoint.up, ForceMode2D.Force);
             StartCoroutine(GranadeCooldown());
         }
     }

@@ -54,7 +54,7 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
             }
 
             // Bodenfliesen visualisieren und W�nde erstellen
-            tilemapVisualiser.PaintFloorTiles(floorPositions[i]);
+            prefabSpawner.WhatshouldSpawn(tilemapVisualiser.PaintFloorTiles(floorPositions[i])); 
             StartCoroutine(prefabSpawner.WaitForSpawn(floorPositions[i]));
             WallGenerator.CreateWalls(floorPositions[i], tilemapVisualiser);
         }

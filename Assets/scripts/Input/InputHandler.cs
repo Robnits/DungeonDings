@@ -55,21 +55,21 @@ public class InputHandler : MonoBehaviour
     {
         if (!ctx.performed) return;
         if(player != null)
-            player.GetComponent<Player_behjaviour>().Shooting();
+            player.GetComponent<PlayerBehaviour>().Shooting();
     }
 
     private void OnDash(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
         if(player != null)
-            player.GetComponent<Player_behjaviour>().Dash();
+            player.GetComponent<PlayerBehaviour>().Dash();
     }
 
     private void OnGrenade(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
         if(player != null)
-            player.GetComponent<Player_behjaviour>().ThrowGranade();
+            player.GetComponent<PlayerBehaviour>().ThrowGranade();
     }
 
     private void OnInteract(InputAction.CallbackContext ctx)
@@ -83,13 +83,13 @@ public class InputHandler : MonoBehaviour
     {
         if (!ctx.performed) return;
         if(player != null)
-            player.GetComponent<Player_behjaviour>().LookAtPlayerCoursor(ctx.ReadValue<Vector2>());
+            player.GetComponent<PlayerBehaviour>().LookAtPlayerCoursor(ctx.ReadValue<Vector2>());
     }
     private void OnMousePositionChanged(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
         if(player != null)
-            player.GetComponent<Player_behjaviour>().LookAtPlayerMouse(Camera.main.ScreenToWorldPoint(ctx.ReadValue<Vector2>()));
+            player.GetComponent<PlayerBehaviour>().LookAtPlayerMouse(Camera.main.ScreenToWorldPoint(ctx.ReadValue<Vector2>()));
     }
 
     private void OnSettings(InputAction.CallbackContext ctx)
@@ -108,14 +108,14 @@ public class InputHandler : MonoBehaviour
             if(movementInput != null)
                 movement = movementInput.action.ReadValue<Vector2>();
             if (player != null)
-                player.GetComponent<Player_behjaviour>().MousePosition(Camera.main.ScreenToWorldPoint(mousePosition.action.ReadValue<Vector2>()));
+                player.GetComponent<PlayerBehaviour>().MousePosition(Camera.main.ScreenToWorldPoint(mousePosition.action.ReadValue<Vector2>()));
         HandlePlayerInput();
     }
 
     private void HandlePlayerInput()
     {
         if(player != null)
-            player.GetComponent<Player_behjaviour>().Movement(movement.x, movement.y);
+            player.GetComponent<PlayerBehaviour>().Movement(movement.x, movement.y);
         if(interactInput != null)
         isInteracting = interactInput.action.triggered;
     }

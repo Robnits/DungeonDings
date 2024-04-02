@@ -35,7 +35,7 @@ public class EnemysHauptklasse : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            life -= player.GetComponent<Player_behjaviour>().GetDamage(false);
+            life -= player.GetComponent<PlayerBehaviour>().GetDamage(false);
             if (life <= 0)
                 Death();
 
@@ -49,11 +49,14 @@ public class EnemysHauptklasse : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Granade"))
         {
-            life -= player.GetComponent<Player_behjaviour>().GetDamage(true);
-            if (life <= 0)
-                Death();
-            if (healthscript != null)
-                healthscript.GetDamaged(life);
+            if (collision.gameObject.GetComponent<GranadeScript>().IsExploding())
+            {
+                life -= player.GetComponent<PlayerBehaviour>().GetDamage(true);
+                if (life <= 0)
+                    Death();
+                if (healthscript != null)
+                    healthscript.GetDamaged(life);
+            }
         }
     }
 }

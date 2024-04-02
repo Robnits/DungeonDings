@@ -24,10 +24,12 @@ public class TilemapVisualiser : MonoBehaviour
 
     private void Awake()
     {
-        randomBiom = Random.Range(0, 3);
+        //randomBiom = Random.Range(0, 3);
+        randomBiom = 0;
     }
+
     // Methode zum Darstellen von Boden-Tiles an den angegebenen Positionen
-    public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
+    public int PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
         foreach (var position in floorPositions)
         {
@@ -41,7 +43,7 @@ public class TilemapVisualiser : MonoBehaviour
             else
                 PaintSingleTile(position, floorTilemap, tilesSO[randomBiom].tiles[randomValue % tilesSO[randomBiom].tiles.Count()]);
         }
-        
+        return randomBiom;
     }
     private void PaintSingleTile(Vector2Int position, Tilemap tilemap, TileBase tile)
     {

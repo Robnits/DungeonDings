@@ -47,6 +47,7 @@ public class Player_Stats : MonoBehaviour
         healthbarUI = GameObject.FindGameObjectWithTag("Healthbar").GetComponentInChildren<HealthbarUI>();
 
         lifeText = GameObject.Find("LifeText").GetComponentInChildren<TextMeshProUGUI>();
+        ChangeHealthbar();
         healthbarUI.SetHealth(life, maxlife);
 
         bulletUI = GameObject.FindGameObjectsWithTag("BulletUI");
@@ -55,7 +56,6 @@ public class Player_Stats : MonoBehaviour
         {
             item.SetActive(false);
         }
-        //GetDamage(0,0,0);
         BulletChanges(maxAmmunition);
     }
 
@@ -90,16 +90,21 @@ public class Player_Stats : MonoBehaviour
         }
     }
 
-    public void GetDamage(float enemydamage,float length,float dot)
+    public IEnumerator GetDamage(float enemydamage,float length,float dot)
     {
-
         life -= enemydamage;
         if (life < 0)
             life = 0;       
         
-        healthbarUI.SetHealth(life,maxlife);
-        lifeText.text = life.ToString() + "/" + maxlife.ToString();
-
+        while(length > 0)
+        {
+            life -= dot;
+            ChangeHealthbar();
+            length --;
+            yield return new WaitForSeconds(1);
+        }
+        ChangeHealthbar();
+        yield return null;
     }
     public void GetHealth(float health)
     {
@@ -108,10 +113,14 @@ public class Player_Stats : MonoBehaviour
         else
             if (life + health > maxlife)
                 life = maxlife;
+        ChangeHealthbar();
+    }
+
+    private void ChangeHealthbar()
+    {
         healthbarUI.SetHealth(life, maxlife);
         lifeText.text = life.ToString() + "/" + maxlife.ToString();
     }
-
 
     private void InstantiateLists()
     {

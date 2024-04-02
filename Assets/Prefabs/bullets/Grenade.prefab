@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 5513101965471625189}
   - component: {fileID: 8832222309907546231}
   - component: {fileID: 8738323403756819550}
-  - component: {fileID: 5116500091749668591}
   m_Layer: 0
   m_Name: Grenade
   m_TagString: Granade
@@ -160,7 +159,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.0037250519, y: 0}
   serializedVersion: 2
-  m_Radius: 0.07198906
+  m_Radius: 0.07
 --- !u!114 &5240434134457938186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +188,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -275,20 +274,3 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &5116500091749668591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6182896139692176702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97c1208faaa70bc4594b1fb5af65b42c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poisondmg: 0
-  firedmg: 0
-  dmg: 0
-  dot: 0
-  damageTime: 0

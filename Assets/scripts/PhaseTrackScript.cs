@@ -44,10 +44,10 @@ public class PhaseTrackScript : MonoBehaviour
         player.transform.position = new Vector3(0, -15, 0);
         while (player.transform.position.y < -2)
         {
-            player.GetComponent<Player_behjaviour>().Movement(0, 1);
+            player.GetComponent<PlayerBehaviour>().Movement(0, 1);
             yield return null;
         }
-        player.GetComponent<Player_behjaviour>().Movement(0, 0);
+        player.GetComponent<PlayerBehaviour>().Movement(0, 0);
         Sprechblase();
     }
 

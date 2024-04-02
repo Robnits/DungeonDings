@@ -10172,18 +10172,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1933180674}
-        m_TargetAssemblyTypeName: OpenEinstellungen, Assembly-CSharp
-        m_MethodName: CloseMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &555716091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45411,6 +45399,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1403830654}
   - component: {fileID: 1403830655}
+  - component: {fileID: 1403830656}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -45499,6 +45488,18 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
+--- !u!114 &1403830656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403830653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0468ad56bb6164699ad3d632f065ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1424918806
 GameObject:
   m_ObjectHideFlags: 0
@@ -86905,6 +86906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2076647873}
   - component: {fileID: 2076647874}
+  - component: {fileID: 2076647875}
   m_Layer: 5
   m_Name: Toggle (1)
   m_TagString: Untagged
@@ -86993,6 +86995,18 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
+--- !u!114 &2076647875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076647872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0468ad56bb6164699ad3d632f065ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2083017754
 GameObject:
   m_ObjectHideFlags: 0

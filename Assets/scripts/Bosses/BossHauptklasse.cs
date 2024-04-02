@@ -35,7 +35,7 @@ public class BossHauptklasse : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            life -= player.GetComponent<Player_behjaviour>().GetDamage(false);
+            life -= player.GetComponent<PlayerBehaviour>().GetDamage(false);
             if (life <= 0)
                 Death();
             if(neeko != null)
@@ -46,7 +46,7 @@ public class BossHauptklasse : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Granade"))
         {
-            life -= player.GetComponent<Player_behjaviour>().GetDamage(true);
+            life -= player.GetComponent<PlayerBehaviour>().GetDamage(true);
             if (life <= 0)
                 Death();
             if (neeko != null)

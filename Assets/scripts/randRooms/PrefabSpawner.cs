@@ -52,6 +52,7 @@ public class PrefabSpawner : MonoBehaviour
         SpawnerSpawnPercantage = difficult.spawnSpawner;
         ChestSpawnPercantage = difficult.spawnChest;
         devilSpawnPercantage = difficult.devilSpawnrate;
+        wuestengegnerSpawnPercantage = difficult.wuestengegnerSpawnPercantage;
     }
 
     public enum WhatGetSpawned
@@ -64,6 +65,14 @@ public class PrefabSpawner : MonoBehaviour
         Up,
         Saeule,
         wuestengegner
+    }
+
+    private int biom;
+    private enum WhichBiom
+    {
+        Default,
+        Snow,
+        Jungle
     }
 
     public IEnumerator WaitForSpawn(HashSet<Vector2Int> pos)
@@ -97,9 +106,16 @@ public class PrefabSpawner : MonoBehaviour
         InstantiatePrefabsThatSpawnOnMap(middlePos, WhatGetSpawned.Saeule);
 
         stairnumber++;
-        SpawnedPositions.Add(floorPositions.First());
-        SpawnedPositions.Add(floorPositions.Last());
         SpawnObjects(floorPositions);
+    }
+
+    public void WhatshouldSpawn(int a)
+    {
+        biom = a;
+    }
+
+    private int GiveRandomNumber(){
+        return Random.Range(0, 1000);
     }
 
     public void SpawnObjects(HashSet<Vector2Int> floorPositions)
@@ -109,40 +125,34 @@ public class PrefabSpawner : MonoBehaviour
         {
             if(position.x >= 5 || position.x <= -5 && position.y >= 5 || position.y <= -5)
             {
-                //switch
-
-                float hilf = Random.Range(0, 1000);
-
-                if (hilf < SpawnerSpawnPercantage && !SpawnedPositions.Contains(position))
+                switch ((WhichBiom)biom)
                 {
-                    InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.RatSpawner);
-                    SpawnedPositions.Add(position);
-                }
-
-                hilf = Random.Range(0, 1000);
-                if (hilf < ChestSpawnPercantage && !SpawnedPositions.Contains(position))
-                {
+                    case WhichBiom.Default:
+                        if (GiveRandomNumber() < SpawnerSpawnPercantage && !SpawnedPositions.Contains(position))
+                            InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.RatSpawner);
+                        
+                        if (GiveRandomNumber() < devilSpawnPercantage && !SpawnedPositions.Contains(position))
+                            InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Devil);
+                        break;
+                    case WhichBiom.Jungle:
+                        if (GiveRandomNumber() < wuestengegnerSpawnPercantage && !SpawnedPositions.Contains(position))
+                            InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.wuestengegner);
+                        break;
+                    case WhichBiom.Snow:
+                        print("test");
+                        break;
+                }              
+                if (GiveRandomNumber() < ChestSpawnPercantage && !SpawnedPositions.Contains(position))
                     InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Chest);
-                    SpawnedPositions.Add(position);
-                }
-                hilf = Random.Range(0, 1000);
-                if (hilf < devilSpawnPercantage && !SpawnedPositions.Contains(position))
-                {
-                    InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Devil);
-                    SpawnedPositions.Add(position);
-                }
-                hilf = Random.Range(0, 1000);
-                if (hilf < wuestengegnerSpawnPercantage && !SpawnedPositions.Contains(position))
-                {
-                    InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.wuestengegner);
-                    SpawnedPositions.Add(position);
-                }
             }
         }
     }
 
     private void InstantiatePrefabsThatSpawnOnMap(Vector2Int position, WhatGetSpawned whatGetGenerated)
     {
+        
+        SpawnedPositions.Add(position);
+        
         switch (whatGetGenerated)
         {
             case WhatGetSpawned.RatSpawner:

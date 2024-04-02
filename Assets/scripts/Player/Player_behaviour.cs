@@ -1,131 +1,124 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.Mathematics;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
-public class Player_behjaviour : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private Weapon weapon;
-    private GameObject scenenwechsel;
+    private GameObject sceneChange;
     private Cam_Follow cam;
     private Animator levelLoader;
-    
-    [SerializeField] private Animator anim;
-    Player_Stats stats;
 
-    Vector2 moveDirection;
-    Vector2 mousePosition;
-    private Vector2 lastCorserPos;
+    [SerializeField] private Animator anim;
+    private Player_Stats stats;
+
+    private Vector2 moveDirection;
+    private Vector2 mousePosition;
+    private Vector2 lastCursorPos;
 
     private bool invincibleAfterDmg = false;
-    private GameObject sprechblase;
-    private TextMeshPro sprechblaseText;
+    private GameObject speechBubble;
+    private TextMeshPro speechBubbleText;
     private Light2D light2d;
-    private Light2D zerilight2d;
-    private bool lastcursorInput;
-    private Vector2 CurrentMouseInput;
+    private Light2D zeroLight2d;
+    private bool lastCursorInput;
+    private Vector2 currentMouseInput;
     private bool dashing;
     private bool isDashAvailable;
 
     private void Awake()
     {
-        sprechblase = GameObject.Find("Sprechblase");
-        sprechblaseText = sprechblase.GetComponentInChildren<TextMeshPro>();
+        InitializeComponents();
+
+        mousePosition = Vector2.zero;
+        light2d.intensity = 0f;
+
+        if (GlobalVariables.isInBossFight)
+        {
+            // Adjust player position for boss fight
+            transform.position = new Vector3(0, -2f, 0);
+            zeroLight2d.intensity = 0f;
+        }
+
+        speechBubble.GetComponent<SpriteRenderer>().enabled = false;
+        speechBubbleText.text = null;
+    }
+
+    private void InitializeComponents()
+    {
+        speechBubble = GameObject.Find("Sprechblase");
+        speechBubbleText = speechBubble.GetComponentInChildren<TextMeshPro>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponentInChildren<Cam_Follow>();
         levelLoader = GameObject.Find("LevelLoader").GetComponentInChildren<Canvas>().GetComponentInChildren<Image>().GetComponentInChildren<Animator>();
         stats = gameObject.GetComponent<Player_Stats>();
-        scenenwechsel = GameObject.FindGameObjectWithTag("Respawn");
+        sceneChange = GameObject.FindGameObjectWithTag("Respawn");
         rb = GetComponent<Rigidbody2D>();
-        light2d = sprechblase.GetComponent<Light2D>();
-
-        mousePosition = new Vector2(0,0);
-
-        light2d.intensity = 0f;
-        zerilight2d = GetComponentInChildren<Light2D>();
-        if (GlobalVariables.isInBossFight)
-        {
-            //transform.position = new Vector3 (0, -30.9f, 0);
-            transform.position = new Vector3(0, -2f, 0);
-
-            zerilight2d.intensity = 0f;
-        }
-
-        sprechblase.GetComponent<SpriteRenderer>().enabled = false;
-        sprechblaseText.text = null;
+        light2d = speechBubble.GetComponent<Light2D>();
+        zeroLight2d = GetComponentInChildren<Light2D>();
     }
 
     public float GetDamage(bool isGranade)
     {
-        if (isGranade)
-            return (3f);
-        else
-            return (stats.damage * stats.baseDamage);
+        return isGranade ? 3f : stats.damage * stats.baseDamage;
     }
 
     public void Movement(float horizontalInput, float verticalInput)
     {
-        if (horizontalInput != 0 || verticalInput != 0)
-            anim.SetBool("isMoving", true);
-        else
-            anim.SetBool("isMoving", false);
+        anim.SetBool("isMoving", horizontalInput != 0 || verticalInput != 0);
 
         if (!dashing)
             moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
     }
 
-    public void LookAtPlayerCoursor(Vector2 courserPos)
+    public void LookAtPlayerCoursor(Vector2 cursorPos)
     {
-        lastcursorInput = true;
-    if (courserPos != null && courserPos != Vector2.zero)
-    {
-        mousePosition = courserPos + new Vector2(transform.position.x, transform.position.y);
-        lastCorserPos = courserPos;
+        lastCursorInput = true;
+        if (cursorPos != Vector2.zero)
+        {
+            mousePosition = cursorPos + new Vector2(transform.position.x, transform.position.y);
+            lastCursorPos = cursorPos;
+        }
     }
-    }
-    public void LookAtPlayerMouse(Vector2 courserPos)
+
+    public void LookAtPlayerMouse(Vector2 cursorPos)
     {
-        lastcursorInput = false;
-        mousePosition = courserPos;
+        lastCursorInput = false;
+        mousePosition = cursorPos;
     }
 
     private void Death()
     {
         levelLoader.SetTrigger("Start");
-        scenenwechsel.GetComponent<Scenemanager>().StartSwitch(1);
+        sceneChange.GetComponent<Scenemanager>().StartSwitch(1);
         Destroy(gameObject);
     }
-    
+
     public void MousePosition(Vector2 mousePos)
     {
-        CurrentMouseInput = mousePos;
+        currentMouseInput = mousePos;
     }
+
     private void FixedUpdate()
     {
-        if(lastcursorInput)
-            mousePosition = lastCorserPos + new Vector2(transform.position.x, transform.position.y);
-        else
-            mousePosition = CurrentMouseInput;
-        rb.velocity = new Vector2(moveDirection.x * stats.moveSpeed, moveDirection.y * stats.moveSpeed);
+        mousePosition = lastCursorInput ? lastCursorPos + new Vector2(transform.position.x, transform.position.y) : currentMouseInput;
+        rb.velocity = moveDirection * stats.moveSpeed;
         Vector2 aimdirection = mousePosition - rb.position;
         float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimangle;
-        
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 6 && !invincibleAfterDmg)
+        if (collision.gameObject.GetComponent<DealDamageToPlayer>() != null && !invincibleAfterDmg)
             StartCoroutine(InvincibleTime(collision));
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 6 && !invincibleAfterDmg && collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.GetComponent<DealDamageToPlayer>() != null && !invincibleAfterDmg)
             StartCoroutine(InvincibleTriggerTime(collision));
     }
 
@@ -134,12 +127,12 @@ public class Player_behjaviour : MonoBehaviour
         invincibleAfterDmg = true;
         StartCoroutine(cam.CameraShake(0.2f, 1f));
 
-
         var dmgscript = collision.gameObject.GetComponent<DealDamageToPlayer>();
-        stats.GetDamage(dmgscript.GetDamage(), dmgscript.GetTime(), dmgscript.DamageOverTime());
+        StartCoroutine(stats.GetDamage(dmgscript.GetDamage(), dmgscript.GetTime(), dmgscript.DamageOverTime()));
 
         if (stats.life <= 0)
             Death();
+
         yield return new WaitForSeconds(1);
         invincibleAfterDmg = false;
     }
@@ -150,10 +143,11 @@ public class Player_behjaviour : MonoBehaviour
         StartCoroutine(cam.CameraShake(0.2f, 1f));
 
         var dmgscript = collision.gameObject.GetComponent<DealDamageToPlayer>();
-        stats.GetDamage(dmgscript.GetDamage(), dmgscript.GetTime(), dmgscript.DamageOverTime());
+        StartCoroutine(stats.GetDamage(dmgscript.GetDamage(), dmgscript.GetTime(), dmgscript.DamageOverTime()));
 
         if (stats.life <= 0)
             Death();
+
         yield return new WaitForSeconds(0.5f);
         invincibleAfterDmg = false;
     }
@@ -181,8 +175,10 @@ public class Player_behjaviour : MonoBehaviour
             timePassed += Time.fixedDeltaTime;
             yield return null;
         }
+
         dashing = false;
         timePassed = 0;
+
         while (timePassed < stats.dashmaxCooldown * 50 + 1) // 50 muss zu hundert werden
         {
             stats.DashUI(timePassed);
@@ -197,21 +193,23 @@ public class Player_behjaviour : MonoBehaviour
     {
         if (hilf)
         {
-            sprechblase.GetComponent<SpriteRenderer>().enabled = true;
-            sprechblaseText.text = "Press E";
+            speechBubble.GetComponent<SpriteRenderer>().enabled = true;
+            speechBubbleText.text = "Press E";
             light2d.intensity = 0.8f;
         }
         else
         {
-            sprechblase.GetComponent<SpriteRenderer>().enabled = false;
-            sprechblaseText.text = null;
+            speechBubble.GetComponent<SpriteRenderer>().enabled = false;
+            speechBubbleText.text = null;
             light2d.intensity = 0f;
         }
     }
+
     public void ThrowGranade()
     {
         weapon.Granade();
     }
+
     private bool isSlowed;
 
     public void NotOnSlow()
@@ -219,6 +217,7 @@ public class Player_behjaviour : MonoBehaviour
         isSlowed = false;
         stats.moveSpeed = stats.maxMoveSpeed;
     }
+
     public void OnSlow(float slow)
     { 
         if (!isSlowed)

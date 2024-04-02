@@ -7,45 +7,45 @@ using Random = UnityEngine.Random;
 
 
 
-// Ein einfacher Dungeon-Generator, der zufällige Wege durchläuft
+// Ein einfacher Dungeon-Generator, der zufï¿½llige Wege durchlï¿½uft
 public class SimpleRandomWalkMapGenerator : AbstractDungeonGenerator
 {
-    // Parameter für den einfachen zufälligen Weg
+    // Parameter fï¿½r den einfachen zufï¿½lligen Weg
     [SerializeField]
     protected SimpleRandomWalkSO randomWalkParameters;
 
     public PrefabSpawner prefabSpawner;
 
-    // Methode für die Ausführung der prozeduralen Generierung
+    // Methode fï¿½r die Ausfï¿½hrung der prozeduralen Generierung
     protected override void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = new();
-        // Zufälliger Weg ausführen und Bodenpositionen darstellen
+        // Zufï¿½lliger Weg ausfï¿½hren und Bodenpositionen darstellen
         for (int i = 0; i < startPosition.Count(); i++)
         {
             floorPositions = RunRandomWalk(randomWalkParameters, startPosition[i]);
         }
         tilemapVisualiser.Clear();
-        tilemapVisualiser.PaintFloorTiles(floorPositions); 
+        prefabSpawner.WhatshouldSpawn(tilemapVisualiser.PaintFloorTiles(floorPositions)); 
         WallGenerator.CreateWalls(floorPositions, tilemapVisualiser);
     }
 
-    // Methode für das Ausführen eines einfachen zufälligen Wegs
+    // Methode fï¿½r das Ausfï¿½hren eines einfachen zufï¿½lligen Wegs
     protected HashSet<Vector2Int> RunRandomWalk(SimpleRandomWalkSO parameters, Vector2Int position)
     {
-        // Aktuelle Position für den zufälligen Weg
+        // Aktuelle Position fï¿½r den zufï¿½lligen Weg
         var currentPosition = position;
-        // Menge für die Bodenpositionen des zufälligen Wegs
+        // Menge fï¿½r die Bodenpositionen des zufï¿½lligen Wegs
         HashSet<Vector2Int> floorPositions = new();
 
-        // Iterationen für den zufälligen Weg durchführen
+        // Iterationen fï¿½r den zufï¿½lligen Weg durchfï¿½hren
         for (int i = 0; i < parameters.iterations; i++)
         {
-            // Zufälligen Weg erstellen und Bodenpositionen hinzufügen
+            // Zufï¿½lligen Weg erstellen und Bodenpositionen hinzufï¿½gen
             var path = ProceduralSpawn.SimpleRandomWalk(currentPosition, parameters.walklenght);
             floorPositions.UnionWith(path);          
             
-            // Wenn in jeder Iteration zufällig gestartet werden soll
+            // Wenn in jeder Iteration zufï¿½llig gestartet werden soll
             if (parameters.startRandomlyEachIteration)
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
         }

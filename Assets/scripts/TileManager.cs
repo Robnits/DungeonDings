@@ -23,12 +23,12 @@ public class TileManager : MonoBehaviour
         {
             if (tilemap.GetTile(gridPosition) == poisonTiles.tiles[i])
             {
-                player.GetComponent<Player_behjaviour>().NotOnSlow();
+                player.GetComponent<PlayerBehaviour>().NotOnSlow();
                 //player.GetComponent<Player_Stats>().GetDamage(poisonTiles.damage);
             }
             else
             {
-                player.GetComponent<Player_behjaviour>().OnSlow(poisonTiles.Slow);
+                player.GetComponent<PlayerBehaviour>().OnSlow(poisonTiles.Slow);
             }
         }
     }
