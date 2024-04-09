@@ -10,7 +10,7 @@ public class MageFeuerball : MonoBehaviour
     private readonly float speed = 2f;
     private Rigidbody2D MageFeuerballRB;
     private bool MageFeuerballActive = true;
-    private readonly float damage = 30f;
+    private readonly float damage = 10f;
     private DealDamageToPlayer ddtp;
 
     private void Start()
@@ -45,12 +45,16 @@ public class MageFeuerball : MonoBehaviour
             StartCoroutine(DestroyAfterTime());
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Destroy(gameObject);        
+    
+    
+    private void OnTriggerEnter2D(Collider2D colision){
+        if (colision.gameObject.CompareTag("Player"))
+        StartCoroutine(destroy());    
     }
-
+    IEnumerator destroy(){
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
    IEnumerator DestroyAfterTime()
     { 
         if (MageFeuerballActive)
