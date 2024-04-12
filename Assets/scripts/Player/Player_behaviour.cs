@@ -65,7 +65,7 @@ public class PlayerBehaviour : MonoBehaviour
         return isGranade ? 3f : stats.damage * stats.baseDamage;
     }
 
-    public void Movement(float horizontalInput, float verticalInput)
+    public void Movement(Vector2 movement)
     {
         anim.SetBool("isMoving", horizontalInput != 0 || verticalInput != 0);
 
@@ -73,20 +73,18 @@ public class PlayerBehaviour : MonoBehaviour
             moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
     }
 
-    public void LookAtPlayerCoursor(Vector2 cursorPos)
+    public void Movement(float horizontalInput, float verticalInput)
     {
-        lastCursorInput = true;
-        if (cursorPos != Vector2.zero)
-        {
-            mousePosition = cursorPos + new Vector2(transform.position.x, transform.position.y);
-            lastCursorPos = cursorPos;
-        }
+        anim.SetBool("isMoving", movement.x != 0 || movement.y != 0);
+
+        if (!dashing)
+            moveDirection = new Vector2(movement.x, movement.y).normalized;
     }
 
-    public void LookAtPlayerMouse(Vector2 cursorPos)
+
+    public void LookAtPlayer(Vector2 mousePos)
     {
-        lastCursorInput = false;
-        mousePosition = cursorPos;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePos);
     }
 
     private void Death()
