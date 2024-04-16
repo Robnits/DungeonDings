@@ -4,47 +4,58 @@ using UnityEngine;
 
 public class MageFeuerball : MonoBehaviour
 {
-
     private GameObject player;
+<<<<<<< Updated upstream
     //private GameObject devil;
     private readonly float speed = 2f;
     private Rigidbody2D MageFeuerballRB;
     private bool MageFeuerballActive = true;
     private readonly float damage = 10f;
+=======
+    private readonly float firedamage = 30f;
+>>>>>>> Stashed changes
     private DealDamageToPlayer ddtp;
+
+    public Rigidbody2D feuerballPrefab; 
+    public float feuerballSpeed = 8f; 
+    public float castInterval = 0.2f; 
+    private float lastCastTime; 
+
 
     private void Start()
     {
-        
         player = GameObject.FindGameObjectWithTag("Player");
-        MageFeuerballRB = GetComponent<Rigidbody2D>();
-        MageFeuerballActive = true;
         ddtp = GetComponent<DealDamageToPlayer>();
-        ddtp.dmg = damage;
+        ddtp.dmg = firedamage;
+        lastCastTime = castInterval; 
     }
 
-    private void Update()
+    void Update()
     {
-        if (player != null)
+        if (player != null && Time.time - lastCastTime > castInterval)
         {
+            // Berechnen Sie die Richtung zum Spieler
+            Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
 
-            Vector3 directionToPlayer = player.transform.position - transform.position;
+            // Umkehren der Richtung des Spielers, um die Flugrichtung des Projektils zu bestimmen
+            Vector2 fireballDirection = -directionToPlayer;
 
-            // Calculate the angle to rotate towards the player
-            float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+            // Bestimmen Sie den Punkt, an dem das Projektil abgefeuert werden soll (zum Beispiel 1 Einheit vor dem Feuermagier)
+            Vector2 fireballSpawnPoint = (Vector2)transform.position + fireballDirection * 1f;
 
-            // Rotate the enemy to face the player
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            // Erstellen Sie das Projektil
+            Rigidbody2D feuerballInstance = Instantiate(feuerballPrefab, fireballSpawnPoint, Quaternion.identity);
 
-            if (Vector3.Distance(transform.position, player.transform.position) > 0f)
-            {
-                Vector2 moveDirection = (player.transform.position - transform.position).normalized;
-                MageFeuerballRB.velocity = moveDirection * speed;
-            }
+            // Setzen Sie die Geschwindigkeit des Projektils
+            feuerballInstance.velocity = fireballDirection * feuerballSpeed;
 
-            StartCoroutine(DestroyAfterTime());
+            // Aktualisieren Sie die Zeit des letzten Feuerball-Casts
+            lastCastTime = Time.time;
+
+            StartCoroutine(DestroyAfterTime(feuerballInstance.gameObject)); // Übergeben Sie das GameObject des Projektils
         }
     }
+<<<<<<< Updated upstream
     
     
     private void OnTriggerEnter2D(Collider2D colision){
@@ -63,5 +74,18 @@ public class MageFeuerball : MonoBehaviour
             Destroy(gameObject);
             MageFeuerballActive = false;
         }
+=======
+
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
+    }
+
+    IEnumerator DestroyAfterTime(GameObject projectile)
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(projectile); // Zerstöre das übergebene Projektil-GameObject
+>>>>>>> Stashed changes
     }
 }
