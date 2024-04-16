@@ -9,19 +9,21 @@ using Random = UnityEngine.Random;
 public class Chest : MonoBehaviour
 {
     private UpgradeManager upgrademanager;
+    private InputHandler inputHandler;
     private Animator anim;
 
     private bool isInRange = false;
 
     private void Start()
     {
+        inputHandler = GameObject.Find("LevelLoader").GetComponent<InputHandler>();
         anim = GetComponent<Animator>();
         upgrademanager = GameObject.Find("SpawnerAndUpgradeHandler").GetComponent<UpgradeManager>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && isInRange)
+        if (inputHandler.IsPlayerInteracting() && isInRange)
             StartCoroutine(Animation());
     }
 

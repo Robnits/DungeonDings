@@ -13,3 +13,15 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+fileFormatVersion: 2
+guid: ecb6529758965954a9735f3fa387ab77
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - inputActionAsset: {fileID: -944628639613478452, guid: af321cd741950794591c07e94bd375cb, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

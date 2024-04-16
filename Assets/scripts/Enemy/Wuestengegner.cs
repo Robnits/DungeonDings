@@ -11,7 +11,7 @@ public class Wuestengegner : EnemysHauptklasse
     {
         dealDamageToPlayer = GetComponent<DealDamageToPlayer>();
         //dealDamageToPlayer.dmg = 7;
-        speed = 2.55f;
+        speed = 2.4f;
         maxlife = 3;
         life = maxlife;
         value = 3;

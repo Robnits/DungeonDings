@@ -542,10 +542,7 @@ GameObject:
   - component: {fileID: 519885347}
   - component: {fileID: 519885346}
   - component: {fileID: 519885348}
-<<<<<<< Updated upstream
   - component: {fileID: 519885349}
-=======
->>>>>>> Stashed changes
   m_Layer: 5
   m_Name: Image (3)
   m_TagString: Untagged
@@ -619,7 +616,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 519885344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: 15f39c3d7d7497f42a19520cfe0aa09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -668,12 +664,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 100, y: 100}
   m_EdgeRadius: 0
-=======
-  m_Script: {fileID: 11500000, guid: 2d3fbb54959de2b43bb20d2946595537, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  list: []
->>>>>>> Stashed changes
 --- !u!1 &1836926081
 GameObject:
   m_ObjectHideFlags: 0
