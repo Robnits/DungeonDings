@@ -24,7 +24,7 @@ public class IceBallweopon : MonoBehaviour
     }
     public void FireFireball()
     {
-        GameObject bullet = Instantiate(fireBallPrefab, firepoint.position, firepoint.rotation);
-        bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * fireforce;
+        // GameObject bullet = Instantiate(iceBallPrefab, firepoint.position, firepoint.rotation);
+        // bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * fireforce;
     }
 }

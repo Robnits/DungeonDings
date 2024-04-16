@@ -13,13 +13,8 @@ GameObject:
   - component: {fileID: 7548677089970277533}
   - component: {fileID: -7198263949769643289}
   - component: {fileID: 8162124663506248735}
-<<<<<<< Updated upstream
   - component: {fileID: 2293529866541103274}
   m_Layer: 6
-=======
-  - component: {fileID: 6256567048096951745}
-  m_Layer: 0
->>>>>>> Stashed changes
   m_Name: MageFireball
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -147,21 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c1208faaa70bc4594b1fb5af65b42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
   poisondmg: 1
   firedmg: 0
   dmg: 0
   dot: 2
   damageTime: 5
 --- !u!58 &2293529866541103274
-=======
-  poisondmg: 0
-  firedmg: 1
-  dmg: 2
-  dot: 4
-  damageTime: 2
---- !u!58 &6256567048096951745
->>>>>>> Stashed changes
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,18 +176,9 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-<<<<<<< Updated upstream
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0075327307, y: 0.0075327307}
   serializedVersion: 2
   m_Radius: 0.078931436
-=======
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.007991202, y: 0.0066593587}
-  serializedVersion: 2
-  m_Radius: 0.06519281
->>>>>>> Stashed changes

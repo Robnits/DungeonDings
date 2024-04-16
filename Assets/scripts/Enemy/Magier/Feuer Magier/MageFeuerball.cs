@@ -5,15 +5,12 @@ using UnityEngine;
 public class MageFeuerball : MonoBehaviour
 {
     private GameObject player;
-<<<<<<< Updated upstream
     //private GameObject devil;
     private readonly float speed = 2f;
     private Rigidbody2D MageFeuerballRB;
     private bool MageFeuerballActive = true;
     private readonly float damage = 10f;
-=======
     private readonly float firedamage = 30f;
->>>>>>> Stashed changes
     private DealDamageToPlayer ddtp;
 
     public Rigidbody2D feuerballPrefab; 
@@ -52,10 +49,9 @@ public class MageFeuerball : MonoBehaviour
             // Aktualisieren Sie die Zeit des letzten Feuerball-Casts
             lastCastTime = Time.time;
 
-            StartCoroutine(DestroyAfterTime(feuerballInstance.gameObject)); // Übergeben Sie das GameObject des Projektils
+            StartCoroutine(DestroyAfterTime(feuerballInstance.gameObject)); // ï¿½bergeben Sie das GameObject des Projektils
         }
     }
-<<<<<<< Updated upstream
     
     
     private void OnTriggerEnter2D(Collider2D colision){
@@ -74,9 +70,8 @@ public class MageFeuerball : MonoBehaviour
             Destroy(gameObject);
             MageFeuerballActive = false;
         }
-=======
 
-    
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(gameObject);
@@ -85,7 +80,6 @@ public class MageFeuerball : MonoBehaviour
     IEnumerator DestroyAfterTime(GameObject projectile)
     {
         yield return new WaitForSeconds(3f);
-        Destroy(projectile); // Zerstöre das übergebene Projektil-GameObject
->>>>>>> Stashed changes
+        Destroy(projectile); // Zerstï¿½re das ï¿½bergebene Projektil-GameObject
     }
 }
