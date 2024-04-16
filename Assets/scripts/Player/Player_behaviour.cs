@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using UnityEngine.U2D.IK; 
 
 public class PlayerBehaviour : MonoBehaviour
 {

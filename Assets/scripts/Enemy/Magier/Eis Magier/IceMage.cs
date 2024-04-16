@@ -5,7 +5,7 @@ using static UnityEngine.Rendering.DebugUI;
 using System;
 using JetBrains.Annotations;
 
-public class Firemagier : EnemysHauptklasse
+public class IceMage: EnemysHauptklasse
 {
 
     private Rigidbody2D rb;
@@ -16,17 +16,17 @@ public class Firemagier : EnemysHauptklasse
 
     void Start()
     {
-        life = 3f;
+        life = 10f;
         value = 10f;
-        speed = 3f;
+        speed = 1.2f;
         droprate = 90;
         healthscript.GetMaxhealth(life);
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
-       
+
     }
 
-    
+
 
     void FixedUpdate()
     {
@@ -46,13 +46,14 @@ public class Firemagier : EnemysHauptklasse
             {
                 StartCoroutine(MoveBackwards());
             }
-            else 
+            else
             {
                 if (distance > 3)
                 {
                     Vector2 moveDirection = (player.transform.position - transform.position).normalized;
                     rb.velocity = moveDirection * speed;
-                } else 
+                }
+                else
                 {
                     if (!isrotating)
                         StartCoroutine(Randmove());
