@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireSlime : MonoBehaviour
+public class FireSlime : EnemysHauptklasse
 {
     public DevilFireBall weapon;
 
@@ -17,7 +17,7 @@ public class FireSlime : MonoBehaviour
     void Start()
     {
         life = 15f;
-        damage = 25f;
+        //damage = 25f;
         value = 10f;
         speed = 0.3f;
         droprate = 90;
