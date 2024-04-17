@@ -7,12 +7,12 @@ public class IceBallweopon : MonoBehaviour
     // Start is called before the first frame updatepublic GameObject fireBallPrefab;
    
     public Transform firepoint;
-    private readonly float fireforce = 2f;
-    private GameObject player;
+    //private readonly float fireforce = 2f;
+    //private GameObject player;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(shootInterval());
     }
 

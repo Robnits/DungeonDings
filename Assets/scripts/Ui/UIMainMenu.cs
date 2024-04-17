@@ -6,19 +6,13 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 
-public class OpenEinstellungen : MonoBehaviour
+public class UIMainMenu : MonoBehaviour
 {
-
+    [SerializeField]
     private CanvasGroup canvasGroup;
 
     [SerializeField] 
     private CanvasGroup CanvasGroupSettings;
-
-    [SerializeField] 
-    private CanvasGroup canvasGroupSteuerungUI;
-
-    [SerializeField] 
-    private CanvasGroup canvasGroupButtonChange;
 
     [SerializeField] 
     private Slider sliderSFX;
@@ -42,16 +36,8 @@ public class OpenEinstellungen : MonoBehaviour
 
     void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        
-
-        if (PlayerPrefs.HasKey("Tutorialhelp"))
-            LoadTutorial();
-
         InstantiateVolume();
         InstantiateResolution();
-
-        OpenSettings(0);
     }
 
     private void InstantiateVolume()
@@ -135,27 +121,18 @@ public class OpenEinstellungen : MonoBehaviour
             dropdown.AddOptions(options);
             dropdown.value = currentIndex;
             dropdown.RefreshShownValue();
-            SetResolution(currentIndex);
         }
     }
 
     public void OpenSettings(int x)
     {
         if (x != 0)
-        {
             settingsIsOpen = true;
-            Time.timeScale = 0;
-        }
         else
             settingsIsOpen = false;
         
         switch (x) 
         {
-            case 0:
-                Time.timeScale = 1;
-                OpenOrCloseMenu(false);
-                OpenOrCloseSettings(false);
-                break;
             case 1:
                 OpenOrCloseSettings(false);
                 OpenOrCloseMenu(true);
@@ -168,35 +145,27 @@ public class OpenEinstellungen : MonoBehaviour
     }
 
     private void OpenOrCloseMenu(bool x)
-    {
-        if (canvasGroup != null)
-        {
-            
-        
+    {        
         if (x)
             canvasGroup.alpha = 1f;
-        else
-            canvasGroup.alpha = 0f;
+
         
         canvasGroup.interactable = x;
         canvasGroup.enabled = true;
         canvasGroup.blocksRaycasts = x;
-        }
+        
     }
     
     private void OpenOrCloseSettings(bool x)
     {
-        if(canvasGroup != null)
-        {
-            if (x)
-                CanvasGroupSettings.alpha = 1f;
-            else
-                CanvasGroupSettings.alpha = 0f;
-    
-            CanvasGroupSettings.interactable = x;
-            CanvasGroupSettings.enabled = true;
-            CanvasGroupSettings.blocksRaycasts = x;
-        }
+        if (x)
+            CanvasGroupSettings.alpha = 1f;
+        else
+            CanvasGroupSettings.alpha = 0f; 
+        CanvasGroupSettings.interactable = x;
+        CanvasGroupSettings.enabled = true;
+        CanvasGroupSettings.blocksRaycasts = x;
+        
     }
 
     public void Quit()
@@ -213,23 +182,5 @@ public class OpenEinstellungen : MonoBehaviour
     {
         Resolution resolution = resolutions[resolutionIndex * 5];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-    }
-
-    
-    public void ShowSteuerung(bool alpha)
-    {
-        canvasGroupSteuerungUI.alpha = alpha ? 1 : 0;
-        
-        PlayerPrefs.SetInt("Tutorialhelp", alpha ? 1 : 0);
-    }
-
-    private void LoadTutorial()
-    {
-        if (toggle != null)
-        {
-            bool showTutorial = PlayerPrefs.GetInt("Tutorialhelp") == 1;
-            canvasGroupSteuerungUI.alpha = showTutorial ? 1 : 0;
-            toggle.isOn = showTutorial;
-        }
     }
 }

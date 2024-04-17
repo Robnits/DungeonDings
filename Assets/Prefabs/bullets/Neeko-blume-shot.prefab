@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 5999773328765969560}
   - component: {fileID: 620504911875712221}
   - component: {fileID: 5577467848230722021}
-  m_Layer: 0
+  - component: {fileID: 7175350764513399127}
+  - component: {fileID: 6335002590545467146}
+  m_Layer: 8
   m_Name: Neeko-blume-shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,6 +147,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poisondmg: 0
   firedmg: 0
-  dmg: 0
+  dmg: 5
   dot: 0
   damageTime: 0
+--- !u!50 &7175350764513399127
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6035602937979023589}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &6335002590545467146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6035602937979023589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e635d1d6c4de70e4c86844d41b728366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

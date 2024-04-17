@@ -1,29 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
-public class NeekoPlant : MonoBehaviour
+public class NeekoPlant : EnemysHauptklasse
 {
-    [SerializeField]
-    private List<Transform> firepoints; // Changed to use Transform instead of GameObject
+    public Transform[] firepoints = new Transform[8]; 
     
+
     [SerializeField]
     private GameObject featherProjectile;
 
-    // Start is called before the first frame update
     void Start()
     {
+        InstantiateStats();
+        player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(ThrowLeaf());
-        Debug.Log("Number of fire points: " + firepoints.Count);
+    }
+
+    private void InstantiateStats()
+    {
+        life = 3f;
+        value = 10f;
+        droprate = 20;
     }
 
     IEnumerator ThrowLeaf()
     {
         yield return new WaitForSeconds(5);
-        foreach (Transform firepoint in firepoints)
+        for (int i = 0; i < firepoints.Length; i++)
         {
-            GameObject bullet = Instantiate(featherProjectile, firepoint.position, firepoint.rotation * Quaternion.Euler(0, 0, 90));
-            bullet.GetComponent<Rigidbody2D>().AddForce(firepoint.up * 2, ForceMode2D.Impulse); // Changed to ForceMode2D.Impulse
+            
+            GameObject test =  Instantiate(featherProjectile, firepoints[i].position, firepoints[i].rotation);
+            test.GetComponent<Rigidbody2D>().velocity = new ((firepoints[i].position.x - transform.position.x) * 10 , (firepoints[i].position.y - transform.position.y) * 10);
+            print(firepoints[i]);
         }
         StartCoroutine(ThrowLeaf());
     }

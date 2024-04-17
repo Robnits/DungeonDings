@@ -12,6 +12,8 @@ public class Player_Stats : MonoBehaviour
     [SerializeField]
     private GameObject[] bulletUI;
 
+    private PlayerBehaviour playerScript;
+
 
     // Player stats
     public float maxMoveSpeed;
@@ -40,6 +42,7 @@ public class Player_Stats : MonoBehaviour
         InstantiateStats();
         InstantiateLists();
         InstantiateUi();
+        playerScript = GetComponent<PlayerBehaviour>();
     }
 
     private void InstantiateUi()
@@ -100,11 +103,20 @@ public class Player_Stats : MonoBehaviour
         {
             life -= dot;
             ChangeHealthbar();
+            playerScript.CameraShake();
+            CheckIfDeath();
             length --;
             yield return new WaitForSeconds(1);
         }
         ChangeHealthbar();
         yield return null;
+    }
+
+
+    private void CheckIfDeath()
+    {
+        if (life <= 0)
+           playerScript.Death();
     }
     public void GetHealth(float health)
     {

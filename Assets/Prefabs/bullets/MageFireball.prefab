@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 064806f01cde4624da1c2421d490d3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feuerballPrefab: {fileID: 0}
+  feuerballPrefab: {fileID: -7198263949769643289}
   feuerballSpeed: 0.5
   castInterval: 0.2
 --- !u!50 &-7198263949769643289
@@ -142,8 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c1208faaa70bc4594b1fb5af65b42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poisondmg: 1
-  firedmg: 0
+  poisondmg: 0
+  firedmg: 1
   dmg: 0
   dot: 2
   damageTime: 5

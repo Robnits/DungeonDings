@@ -89,8 +89,11 @@ public class PlayerBehaviour : MonoBehaviour
         lastCursorInput = false;
         mousePosition = cursorPos;
     }
-
-    private void Death()
+    public void CameraShake()
+    {
+        StartCoroutine(cam.CameraShake(0.2f, 1f));
+    }
+    public void Death()
     {
         levelLoader.SetTrigger("Start");
         sceneChange.GetComponent<Scenemanager>().StartSwitch(1);
@@ -126,8 +129,7 @@ public class PlayerBehaviour : MonoBehaviour
     IEnumerator InvincibleTriggerTime(Collider2D collision)
     {
         invincibleAfterDmg = true;
-        StartCoroutine(cam.CameraShake(0.2f, 1f));
-
+        CameraShake();
         var dmgscript = collision.gameObject.GetComponent<DealDamageToPlayer>();
         StartCoroutine(stats.GetDamage(dmgscript.GetDamage(), dmgscript.GetTime(), dmgscript.DamageOverTime()));
 
@@ -141,8 +143,7 @@ public class PlayerBehaviour : MonoBehaviour
     IEnumerator InvincibleTime(Collision2D collision)
     {
         invincibleAfterDmg = true;
-        StartCoroutine(cam.CameraShake(0.2f, 1f));
-
+        CameraShake();
         var dmgscript = collision.gameObject.GetComponent<DealDamageToPlayer>();
         StartCoroutine(stats.GetDamage(dmgscript.GetDamage(), dmgscript.GetTime(), dmgscript.DamageOverTime()));
 

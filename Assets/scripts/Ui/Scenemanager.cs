@@ -25,6 +25,11 @@ public class Scenemanager : MonoBehaviour
         StartCoroutine(Scenswitch(scene));
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     private IEnumerator Scenswitch(int scene)
     {
         LevelLoaderAnim.SetTrigger("Start");
