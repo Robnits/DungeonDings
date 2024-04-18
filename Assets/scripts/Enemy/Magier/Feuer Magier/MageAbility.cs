@@ -9,7 +9,8 @@ public class MageDamage : MonoBehaviour
     public GameObject damagePrefab;
 
     private float lastSpawnTime;
-    private readonly float spawnInterval = 5f;
+    private readonly float spawnInterval = 8f; // Ändere das Spawn-Intervall auf 8 Sekunden
+    private readonly float damageDuration = 5f; // Lebensdauer des Schadens
 
     private CircleCollider2D cc2D;
 
@@ -32,16 +33,15 @@ public class MageDamage : MonoBehaviour
 
     void SpawnDamage()
     {
-        Vector3 spawnPosition = player.transform.position - new Vector3(0f, 1f, 0f);
-        Instantiate(damagePrefab, spawnPosition, Quaternion.identity);
+        Vector3 spawnPosition = player.transform.position - new Vector3(0f, 0f, 0f);
+        GameObject damageInstance = Instantiate(damagePrefab, spawnPosition, Quaternion.identity);
+        Destroy(damageInstance, damageDuration); // Zerstöre das Schadensobjekt nach damageDuration Sekunden
     }
    
-
-   IEnumerator EnableColliderAfterDelay()
+    IEnumerator EnableColliderAfterDelay()
     {
         cc2D.enabled = false;
         yield return new WaitForSeconds(1.5f);
         cc2D.enabled = true;
     }
 }
-

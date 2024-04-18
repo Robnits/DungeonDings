@@ -5,7 +5,7 @@ using UnityEngine;
 public class MageFireball : MonoBehaviour
 {
     private GameObject player;
-    private readonly float fireDamage = 30f;
+    private readonly float fireDamage = 5f;
     private DealDamageToPlayer ddtp;
     private float lastCastTime;
 

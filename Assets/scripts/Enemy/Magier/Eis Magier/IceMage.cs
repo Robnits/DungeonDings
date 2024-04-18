@@ -16,7 +16,7 @@ public class IceMage: EnemysHauptklasse
 
     void Start()
     {
-        life = 10f;
+        life = 1f;
         value = 10f;
         speed = 1.2f;
         droprate = 90;
@@ -42,13 +42,13 @@ public class IceMage: EnemysHauptklasse
             // Rotate the enemy to face the player
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            if (distance < 1.5)
+            if (distance < 2)
             {
                 StartCoroutine(MoveBackwards());
             }
             else
             {
-                if (distance > 3)
+                if (distance > 5)
                 {
                     Vector2 moveDirection = (player.transform.position - transform.position).normalized;
                     rb.velocity = moveDirection * speed;

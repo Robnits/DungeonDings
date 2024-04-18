@@ -50,12 +50,15 @@ public class Firemagier : EnemysHauptklasse
             {
                 if (distance > 3)
                 {
-                    Vector2 moveDirection = (player.transform.position - transform.position).normalized;
-                    rb.velocity = moveDirection * speed;
+                    /*Vector2 moveDirection = (player.transform.position - transform.position).normalized;
+                    rb.velocity = moveDirection * speed;*/
+                    StartCoroutine(MoveForwards());
                 } else 
                 {
                     if (!isrotating)
+                    {
                         StartCoroutine(Randmove());
+                    }
                 }
             }
         }
@@ -63,7 +66,8 @@ public class Firemagier : EnemysHauptklasse
 
     IEnumerator MoveBackwards()
     {
-        float backwardDuration = 0.01f;
+        yield return new WaitForSeconds(0.1f);
+        float backwardDuration = 0.1f;
         float timePassed = 0;
         while (timePassed < backwardDuration && player != null)
         {
@@ -74,6 +78,23 @@ public class Firemagier : EnemysHauptklasse
             yield return null;
         }
         rb.velocity = Vector2.zero;
+    }
+    
+    IEnumerator MoveForwards()
+    {
+        yield return new WaitForSeconds(0.01f);
+        float forwardDuration = 0.1f;
+        float timePassed = 0;
+        while (timePassed < forwardDuration && player != null)
+        {
+            Vector2 moveDirection = (player.transform.position - transform.position).normalized;
+            rb.velocity = speed * moveDirection;
+            timePassed += Time.deltaTime;
+
+            yield return null;
+        }
+        rb.velocity = Vector2.zero;
+
     }
     IEnumerator MoveSidewards1()
     {
