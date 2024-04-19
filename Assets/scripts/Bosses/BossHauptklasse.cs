@@ -13,10 +13,12 @@ public class BossHauptklasse : MonoBehaviour
     protected float speed;
     public float life;
     protected float damage;
-    protected float maxlife;
+    public float maxlife;
     public Neeko neeko;
     public NeekoClones neekoClones;
     public GameObject Sprechblase;
+    public PhaseTrackScript phaseTrackScript;
+
 
     protected void Death()
     {
@@ -36,10 +38,16 @@ public class BossHauptklasse : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             life -= player.GetComponent<PlayerBehaviour>().GetDamage(false);
-            if (life <= 0)
-                Death();
+            if (life <= 0){
+                StartCoroutine(phaseTrackScript.PhaseChange());
+                neeko.NextPhase();
+            }
             if(neeko != null)
-                neeko.SetHealthbar();
+            {
+                if(neeko.BattlePhase == 2)
+                    neeko.SetHealthbar();
+            }        
+                
         }
     }
     protected void OnTriggerEnter2D(Collider2D collision)
@@ -47,8 +55,10 @@ public class BossHauptklasse : MonoBehaviour
         if (collision.gameObject.CompareTag("Granade"))
         {
             life -= player.GetComponent<PlayerBehaviour>().GetDamage(true);
-            if (life <= 0)
-                Death();
+            if (life <= 0 && neeko.phaseTrackScript.phasen == 1){
+                StartCoroutine(phaseTrackScript.PhaseChange());
+                neeko.NextPhase();
+            }
             if (neeko != null)
                 neeko.SetHealthbar();
         }

@@ -6,7 +6,6 @@ public class FeatherNeeko : MonoBehaviour
     private GameObject player;
     private readonly float speed = 2f;
     private Rigidbody2D FireBallRB;
-    private readonly float damage = 30f;
     private DealDamageToPlayer ddtp;
     private void Start()
     {
@@ -20,7 +19,6 @@ public class FeatherNeeko : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         FireBallRB = GetComponent<Rigidbody2D>();
         ddtp = GetComponent<DealDamageToPlayer>();
-        ddtp.dmg = damage;
     }
 
     private void Update()
@@ -35,9 +33,12 @@ public class FeatherNeeko : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer != 6)
-            Destroy(gameObject);
+            StartCoroutine(DestroyAfterDamage());
     }
-
+    IEnumerator DestroyAfterDamage(){
+        yield return new WaitForSeconds(.1f);
+        Destroy(gameObject);
+    }
     private IEnumerator DestroyAfterTime()
     {
         yield return new WaitForSeconds(3f);

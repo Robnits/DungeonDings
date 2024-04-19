@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
 
 public class PhaseTrackScript : MonoBehaviour
 {
-    private int phasen = 0;
+    public int phasen = 0;
     private GameObject player;
     private Animator LevelLoaderAnim;
     public Neeko Neeko;
@@ -21,12 +22,14 @@ public class PhaseTrackScript : MonoBehaviour
 
     public List<GameObject> RotationPoints;
 
+    private CircleCollider2D startFight;
     private void Start()
     {
         Healthleiste.alpha = 0;
         player = GameObject.FindGameObjectWithTag("Player");
         playerIsAllowedToMove = true;
         LevelLoaderAnim = GameObject.Find("Transition").GetComponentInChildren<Animator>();
+        startFight = GetComponent<CircleCollider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,7 +39,12 @@ public class PhaseTrackScript : MonoBehaviour
             phasen++;
             playerIsAllowedToMove = false;
             StartCoroutine(MovePlayerTowardsNeeko());
+            startFight.radius = 5;
         }
+    }
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.CompareTag("Player") && phasen == 1)
+            player.transform.position = gameObject.transform.position;
     }
     private IEnumerator MovePlayerTowardsNeeko()
     {
@@ -53,7 +61,6 @@ public class PhaseTrackScript : MonoBehaviour
 
     private void Sprechblase() //still no movement
     {
-        
         StartCoroutine(DunkelHell());
     }
 
@@ -66,17 +73,40 @@ public class PhaseTrackScript : MonoBehaviour
         normalMusic.mute = true;
         Rennala.Play();
         NeekoBattlePhase1();
-        yield return new WaitForSeconds(1);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
+        //yield return new WaitForSeconds();
         playerIsAllowedToMove = true;
-        LevelLoaderAnim.SetTrigger("End");
-        Healthleiste.alpha = 1;
         globalLight.intensity = 0.8f;
+        LevelLoaderAnim.SetTrigger("End");
     }
+
+    public IEnumerator PhaseChange(){
+        phasen = 2;
+        playerIsAllowedToMove = false;
+        player.transform.position = new Vector2(transform.position.x, transform.position.y - 2);
+        LevelLoaderAnim.SetTrigger("Start");
+        StartCoroutine(Loadhealthbar());
+        yield return new WaitForSeconds(2);
+        LevelLoaderAnim.SetTrigger("End");
+        Neeko.talkIsOver = true;
+        playerIsAllowedToMove = true;
+    }
+
+    private IEnumerator Loadhealthbar(){
+        Neeko.maxlife = 30;
+        int animtime = 150;
+        while(animtime > 0)
+        {
+            Neeko.life += 0.2f;
+            Neeko.SetHealthbar();
+            yield return new WaitForSeconds(0.01f);
+            animtime --;
+        }
+    }
+
     private void NeekoBattlePhase1()
     {
         SpawnNeekos(15);
-        //Neeko clone Spawnen rotieren im uhrzeigersinn
     }
 
     private void SpawnNeekos(int anzahl)
@@ -84,9 +114,9 @@ public class PhaseTrackScript : MonoBehaviour
         for (int i = 0; i < anzahl; i++)
         {
             GameObject neekoClone = Instantiate(neekoFakePrefab, player.transform.position, quaternion.identity);
-            neekoClone.GetComponentInChildren<NeekoClones>().StartRotate(RotationPoints[i]);
+            neekoClone.GetComponentInChildren<NeekoClones>().StartRotate(RotationPoints[i], phasen);
         }
-        Neeko.StartRotate(RotationPoints[15]);
+        Neeko.StartRotate(RotationPoints[15], phasen);
     }
 
     private void Update()

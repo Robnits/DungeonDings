@@ -29,9 +29,11 @@ public class MageFireball : MonoBehaviour
         Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
         Vector2 fireballDirection = -directionToPlayer;
         Vector2 fireballSpawnPoint = (Vector2)transform.position + fireballDirection * 1f;
-
-        Rigidbody2D fireballInstance = Instantiate(fireballPrefab, fireballSpawnPoint, Quaternion.identity);
-        fireballInstance.velocity = fireballDirection * fireballSpeed;
+        if (fireballPrefab != null)
+        {
+            Rigidbody2D fireballInstance = Instantiate(fireballPrefab, fireballSpawnPoint, Quaternion.identity);
+            fireballInstance.velocity = fireballDirection * fireballSpeed;
+        }
         lastCastTime = Time.time;
 
         StartCoroutine(DestroyAfterTime());

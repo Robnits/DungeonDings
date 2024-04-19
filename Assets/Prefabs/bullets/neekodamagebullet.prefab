@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7767918944724559231}
   - component: {fileID: 3711311413517627173}
   m_Layer: 0
-  m_Name: Neeko-attack-AA
+  m_Name: neekodamagebullet
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,6 +186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poisondmg: 0
   firedmg: 0
-  dmg: 1
+  dmg: 5
   dot: 0
   damageTime: 0

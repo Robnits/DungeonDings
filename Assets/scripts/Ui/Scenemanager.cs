@@ -48,6 +48,9 @@ public class Scenemanager : MonoBehaviour
             case 3:
                 SceneManager.LoadScene("MarcelBossfight", LoadSceneMode.Single);
                 break;
+            case 4:
+                SceneManager.LoadScene("Death", LoadSceneMode.Single);
+                break;
         }
     }
 }

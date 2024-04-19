@@ -96,7 +96,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void Death()
     {
         levelLoader.SetTrigger("Start");
-        sceneChange.GetComponent<Scenemanager>().StartSwitch(1);
+        sceneChange.GetComponent<Scenemanager>().StartSwitch(4);
         Destroy(gameObject);
     }
 

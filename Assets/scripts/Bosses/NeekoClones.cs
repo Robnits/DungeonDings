@@ -8,7 +8,6 @@ public class NeekoClones : BossHauptklasse
     private int BattlePhase = 0;
     public float circleRadius = 5f;
     private GameObject rotationPoint;
-    public PhaseTrackScript phaseTrackScript;
     private Rigidbody2D rb;
     public GameObject firePoint;
     public GameObject NeekoProjectile;
@@ -25,30 +24,26 @@ public class NeekoClones : BossHauptklasse
         Sprechblase.transform.localScale = new Vector3(0.15f, 0.15f, 1);
     }
 
-
-    
     private void Update()
     { 
         Sprechblase.transform.localScale = new Vector3(0.15f, 0.15f, 1);
-        switch (BattlePhase)
+        if (BattlePhase == 1)
         {
-            case 0:
-                    
-                break;
-            case 1:
-                transform.position = rotationPoint.transform.position;
-                Vector2 aimdirection = new Vector2(player.transform.position.x,player.transform.position.y) - rb.position;
-                float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg + 90;
-                rb.rotation = aimangle;
-                if(canshootagain)
-                    StartCoroutine(Shoot());
-                break;
+            transform.position = rotationPoint.transform.position;
+            Vector2 aimdirection = new Vector2(player.transform.position.x,player.transform.position.y) - rb.position;
+            float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg + 90;
+            rb.rotation = aimangle;
+            if(canshootagain)
+                StartCoroutine(Shoot());
         }
+        if (phaseTrackScript.phasen	== 2)
+            Destroy(transform.parent.gameObject);
+        
     }
-    public void StartRotate(GameObject phaseRotationPoint)
+    public void StartRotate(GameObject phaseRotationPoint, int phase)
     {
         rotationPoint = phaseRotationPoint;
-        BattlePhase++;
+        BattlePhase = phase;
     }
 
     IEnumerator Shoot()

@@ -11038,6 +11038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc08c83cf338d5c4a802d71f5184c49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phasen: 0
   Neeko: {fileID: 7768244521920802851}
   Healthleiste: {fileID: 1766534514}
   neekoFakePrefab: {fileID: 4152866003100568616, guid: 0a28d28250b0a564b8eba29654f846e8, type: 3}
@@ -30192,7 +30193,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &1766534513
 RectTransform:
@@ -32318,13 +32319,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthbar: {fileID: 2047517442}
   life: 100
+  maxlife: 0
   neeko: {fileID: 7768244521920802851}
   neekoClones: {fileID: 0}
   Sprechblase: {fileID: 1568439349730902126}
-  circleRadius: 5
   phaseTrackScript: {fileID: 648289864}
-  firePoint: {fileID: 5746329437701438606}
-  NeekoProjectile: {fileID: 5014600387509515146, guid: c7560e63edcc0a94e9cb6650a3efb11e, type: 3}
+  BattlePhase: 0
+  circleRadius: 5
+  talkIsOver: 0
+  firePoint: {fileID: 4164403900279078008}
+  NeekoProjectile: {fileID: 5014600387509515146, guid: c0ba4d7efd8505447a382e0b9931cee2, type: 3}
   playerIsInRange: 0
   delay: 0
 --- !u!23 &8109098094607554730
@@ -32378,7 +32382,7 @@ Transform:
   m_GameObject: {fileID: 4164403900279078008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.31, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32388,6 +32392,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1766534513}
   - {fileID: 640233856}
   - {fileID: 901917619}
   - {fileID: 243970086}
@@ -32397,6 +32402,5 @@ SceneRoots:
   - {fileID: 2036688859}
   - {fileID: 50795075}
   - {fileID: 2109265883530133864}
-  - {fileID: 1766534513}
   - {fileID: 648289866}
   - {fileID: 721755405}

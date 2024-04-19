@@ -34,8 +34,11 @@ public class MageDamage : MonoBehaviour
     void SpawnDamage()
     {
         Vector3 spawnPosition = player.transform.position - new Vector3(0f, 0f, 0f);
-        GameObject damageInstance = Instantiate(damagePrefab, spawnPosition, Quaternion.identity);
-        Destroy(damageInstance, damageDuration); // Zerstöre das Schadensobjekt nach damageDuration Sekunden
+        if (damagePrefab != null)
+        {
+            GameObject damageInstance = Instantiate(damagePrefab, spawnPosition, Quaternion.identity);
+            Destroy(damageInstance, damageDuration); // Zerstöre das Schadensobjekt nach damageDuration Sekunden
+        }
     }
    
     IEnumerator EnableColliderAfterDelay()

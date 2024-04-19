@@ -34,8 +34,8 @@ public class NeekoPlant : EnemysHauptklasse
             
             GameObject test =  Instantiate(featherProjectile, firepoints[i].position, firepoints[i].rotation);
             test.GetComponent<Rigidbody2D>().velocity = new ((firepoints[i].position.x - transform.position.x) * 10 , (firepoints[i].position.y - transform.position.y) * 10);
-            print(firepoints[i]);
         }
-        StartCoroutine(ThrowLeaf());
+        yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject);
     }
 }
