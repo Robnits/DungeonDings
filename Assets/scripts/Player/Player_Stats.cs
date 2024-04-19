@@ -80,17 +80,7 @@ public class Player_Stats : MonoBehaviour
 
     }
 
-     void Update()
-    {
-        moveSpeed = CalculateMoveSpeed(); 
-    }
-
-    float CalculateMoveSpeed()
-    {
-        float calculatedSpeed = maxMoveSpeed;
-        return calculatedSpeed;
-    }
-
+    
     public void BulletChanges(int ammo)
     {
         foreach (var item in bulletUI)

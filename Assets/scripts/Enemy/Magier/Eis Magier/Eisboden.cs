@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Eisboden : MonoBehaviour
 {
-    public GameObject player; // Referenz auf den Spieler
-    public GameObject damagePrefab; // Prefab für den Eisboden
-    public float slowFactor = 0.5f; // Verlangsamungsfaktor für den Spieler
+    public PlayerBehaviour player; 
+    public GameObject damagePrefab; 
 
     private float lastSpawnTime;
     private readonly float spawnInterval = 8f; // Intervall für den Eisboden-Spawn
@@ -15,7 +14,7 @@ public class Eisboden : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
         lastSpawnTime = Time.time;
         cc2D = GetComponent<CircleCollider2D>();
         StartCoroutine(EnableColliderAfterDelay());
@@ -32,9 +31,9 @@ public class Eisboden : MonoBehaviour
 
     void SpawnDamage()
     {
-        Vector3 spawnPosition = player.transform.position; // Eisboden auf Spielerposition spawnen
+        Vector3 spawnPosition = player.transform.position; 
         GameObject damageInstance = Instantiate(damagePrefab, spawnPosition, Quaternion.identity);
-        Destroy(damageInstance, spawnInterval); // Eisboden nach spawnInterval Sekunden zerstören
+        Destroy(damageInstance, spawnInterval); 
     }
 
     IEnumerator EnableColliderAfterDelay()
@@ -48,12 +47,9 @@ public class Eisboden : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            // Den Spieler verlangsamen
-            Player_Stats playerStats = other.gameObject.GetComponent<Player_Stats>();
-            if (playerStats != null)
-            {
-                playerStats.moveSpeed *= slowFactor; // Verlangsame die Bewegungsgeschwindigkeit des Spielers
-            }
+            player.OnSlow(1.5f);
+
+            
         }
     }
 
@@ -61,12 +57,8 @@ public class Eisboden : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            // Die Verlangsamung rückgängig machen, wenn der Spieler den Eisboden verlässt
-            Player_Stats playerStats = other.gameObject.GetComponent<Player_Stats>();
-            if (playerStats != null)
-            {
-                playerStats.moveSpeed /= slowFactor; // Stelle die normale Bewegungsgeschwindigkeit des Spielers wieder her
-            }
+            player.NotOnSlow();
+           
         }
     }
 }

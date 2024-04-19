@@ -225,6 +225,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (!isSlowed)
         {
             isSlowed = true;
+            print("Hallo");
             stats.moveSpeed -= slow;
         }
     }

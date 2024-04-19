@@ -36,10 +36,8 @@ public class IceMage: EnemysHauptklasse
 
             Vector3 directionToPlayer = player.transform.position - transform.position;
 
-            // Calculate the angle to rotate towards the player
             float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg + 90;
 
-            // Rotate the enemy to face the player
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             if (distance < 2)
