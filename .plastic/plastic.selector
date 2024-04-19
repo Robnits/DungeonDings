@@ -1,4 +1,0 @@
-repository "DungeonDings@Robnits@cloud"
-  path "/"
-    br "/main"
-    co "/main"
