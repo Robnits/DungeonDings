@@ -5,7 +5,6 @@ using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-
 public class UIMainMenu : MonoBehaviour
 {
     [SerializeField]
@@ -118,7 +117,7 @@ public class UIMainMenu : MonoBehaviour
 
         if (dropdown != null)
         {
-            dropdown.AddOptions(options);
+            dropdown.AddOptions(options); 
             dropdown.value = currentIndex;
             dropdown.RefreshShownValue();
         }
@@ -180,7 +179,7 @@ public class UIMainMenu : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex * 5];
+        Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 }

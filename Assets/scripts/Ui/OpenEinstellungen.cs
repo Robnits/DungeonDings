@@ -211,15 +211,14 @@ public class OpenEinstellungen : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex * 5];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Resolution resolution = resolutions[resolutionIndex]; 
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
     }
 
     
     public void ShowSteuerung(bool alpha)
     {
         canvasGroupSteuerungUI.alpha = alpha ? 1 : 0;
-        
         PlayerPrefs.SetInt("Tutorialhelp", alpha ? 1 : 0);
     }
 

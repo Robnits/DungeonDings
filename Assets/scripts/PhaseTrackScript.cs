@@ -85,23 +85,20 @@ public class PhaseTrackScript : MonoBehaviour
         playerIsAllowedToMove = false;
         player.transform.position = new Vector2(transform.position.x, transform.position.y - 2);
         LevelLoaderAnim.SetTrigger("Start");
-        StartCoroutine(Loadhealthbar());
+        print("1");
+        Loadhealthbar();
+        print("2");
         yield return new WaitForSeconds(2);
         LevelLoaderAnim.SetTrigger("End");
         Neeko.talkIsOver = true;
         playerIsAllowedToMove = true;
     }
 
-    private IEnumerator Loadhealthbar(){
+    private void Loadhealthbar()
+    {
         Neeko.maxlife = 30;
-        int animtime = 150;
-        while(animtime > 0)
-        {
-            Neeko.life += 0.2f;
-            Neeko.SetHealthbar();
-            yield return new WaitForSeconds(0.01f);
-            animtime --;
-        }
+        Neeko.life = Neeko.maxlife;
+        Neeko.SetHealthbar();
     }
 
     private void NeekoBattlePhase1()

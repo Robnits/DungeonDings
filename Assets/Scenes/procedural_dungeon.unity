@@ -82563,6 +82563,7 @@ GameObject:
   - component: {fileID: 1778263656}
   - component: {fileID: 1778263655}
   - component: {fileID: 1778263654}
+  - component: {fileID: 1778263658}
   m_Layer: 5
   m_Name: AugmentAuswahl
   m_TagString: Untagged
@@ -82655,6 +82656,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &1778263658
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778263653}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1809204423
 GameObject:
   m_ObjectHideFlags: 0

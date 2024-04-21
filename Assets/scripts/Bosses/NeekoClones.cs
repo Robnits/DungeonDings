@@ -27,7 +27,7 @@ public class NeekoClones : BossHauptklasse
     private void Update()
     { 
         Sprechblase.transform.localScale = new Vector3(0.15f, 0.15f, 1);
-        if (BattlePhase == 1)
+        if (BattlePhase == 1 && player != null)
         {
             transform.position = rotationPoint.transform.position;
             Vector2 aimdirection = new Vector2(player.transform.position.x,player.transform.position.y) - rb.position;
