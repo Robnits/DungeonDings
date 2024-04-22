@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 5116431726028325857}
   - component: {fileID: 329686252167463472}
   - component: {fileID: 411615014819932400}
+  - component: {fileID: -4423513358028609659}
   m_Layer: 0
   m_Name: Neeko-blume-cd1
   m_TagString: Untagged
@@ -269,6 +270,33 @@ MonoBehaviour:
   - {fileID: 79213375072790711}
   - {fileID: 5123777602993742097}
   featherProjectile: {fileID: 6035602937979023589, guid: c7168850347cd8946b39770b78dc8d41, type: 3}
+--- !u!50 &-4423513358028609659
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488838397598272758}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &2937360223149308799
 GameObject:
   m_ObjectHideFlags: 0

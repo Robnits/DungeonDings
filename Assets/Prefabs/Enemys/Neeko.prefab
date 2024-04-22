@@ -157,15 +157,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3
-  m_fontSizeBase: 3
+  m_fontSize: 5.2
+  m_fontSizeBase: 5.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -262,8 +262,8 @@ Transform:
   m_GameObject: {fileID: 5946314816816166227}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.99, y: 0.63, z: -0.36483413}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0.8259, y: 0.5032, z: -0.36483413}
+  m_LocalScale: {x: 2.5128, y: 2.7926, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8427396362288346533}
@@ -498,10 +498,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthbar: {fileID: 2672826400987724656}
   life: 10
+  maxlife: 0
   neeko: {fileID: 0}
   neekoClones: {fileID: 2787525962548810383}
   Sprechblase: {fileID: 2672826400987724656}
-  circleRadius: 5
   phaseTrackScript: {fileID: 0}
+  circleRadius: 5
   firePoint: {fileID: 655574447385642854}
   NeekoProjectile: {fileID: 5014600387509515146, guid: c7560e63edcc0a94e9cb6650a3efb11e, type: 3}

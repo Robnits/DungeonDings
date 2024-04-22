@@ -1,24 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class FeatherNeeko : MonoBehaviour
+public class phase2NeekoBullet : MonoBehaviour
 {
-    private GameObject player;
-    private readonly float speed = 2f;
+    private readonly float speed = 4f;
     private Rigidbody2D FireBallRB;
-    private DealDamageToPlayer ddtp;
     private void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        Vector2 directionToPlayer = player.transform.position - transform.position;
-
-        // Calculate the angle to rotate towards the player
-        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 90;
-
-        // Rotate the feather to face the player
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         FireBallRB = GetComponent<Rigidbody2D>();
-        ddtp = GetComponent<DealDamageToPlayer>();
     }
 
     private void Update()
@@ -32,7 +21,7 @@ public class FeatherNeeko : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer != 6)
+        if(collision.gameObject.layer != 6 && collision.gameObject.layer != 9)
             StartCoroutine(DestroyAfterDamage());
     }
     IEnumerator DestroyAfterDamage(){

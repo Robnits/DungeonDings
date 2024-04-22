@@ -31887,7 +31887,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2109265883530133864}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Neeko
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32008,7 +32008,7 @@ GameObject:
   - component: {fileID: 4911138437043687099}
   - component: {fileID: 8109098094607554730}
   - component: {fileID: 3552752797978231289}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32079,8 +32079,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3
-  m_fontSizeBase: 3
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -32160,7 +32160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8759748060131284779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32228,7 +32228,7 @@ GameObject:
   - component: {fileID: 3911923764651795192}
   - component: {fileID: 1145783584411516546}
   - component: {fileID: 7768244521920802851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Neeko
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32246,7 +32246,7 @@ GameObject:
   - component: {fileID: 5461557215575400545}
   - component: {fileID: 1282901875049096834}
   - component: {fileID: 4965718173072977583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprechblase(Neeko)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32329,6 +32329,8 @@ MonoBehaviour:
   talkIsOver: 0
   firePoint: {fileID: 4164403900279078008}
   NeekoProjectile: {fileID: 5014600387509515146, guid: c0ba4d7efd8505447a382e0b9931cee2, type: 3}
+  phase2NeekoProjectile: {fileID: 5014600387509515146, guid: 6ce1a66ee1259374b9396c024ff6396d, type: 3}
+  plantPrefab: {fileID: 1488838397598272758, guid: 1b0f28107cd7a0e468550c431ad38bb2, type: 3}
   playerIsInRange: 0
   delay: 0
 --- !u!23 &8109098094607554730

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -15,18 +16,19 @@ public class NeekoClones : BossHauptklasse
 
     private void Start()
     {
+        sprechblase = transform.parent.gameObject.transform.GetComponentInChildren<FollowPlayre>().gameObject;
+        sprechblase.GetComponent<SpriteRenderer>().enabled = false;
         rb = GetComponent<Rigidbody2D>();
         if (phaseTrackScript == null)
             phaseTrackScript = GameObject.Find("PhaseTracker").GetComponent<PhaseTrackScript>();
         player = GameObject.FindGameObjectWithTag("Player");
         life = 10f;
         damage = 0;
-        Sprechblase.transform.localScale = new Vector3(0.15f, 0.15f, 1);
+        sprechblase.transform.localScale = new Vector3(0.15f, 0.15f, 1);
     }
 
     private void Update()
     { 
-        Sprechblase.transform.localScale = new Vector3(0.15f, 0.15f, 1);
         if (BattlePhase == 1 && player != null)
         {
             transform.position = rotationPoint.transform.position;
@@ -53,5 +55,15 @@ public class NeekoClones : BossHauptklasse
         GameObject bullet = Instantiate(NeekoProjectile, firePoint.transform.position, firePoint.transform.rotation * Quaternion.Euler(0, 0, 90));
         bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.up * 2, ForceMode2D.Force);
         StartCoroutine(Shoot());
+    }
+
+    public IEnumerator Banter()
+    {
+        sprechblase.transform.localScale = new Vector3(2.5f, 2.7f, 1);
+        sprechblase.GetComponent<SpriteRenderer>().enabled = true;
+        sprechblase.GetComponentInChildren<TextMeshPro>().text = "Falscher gegner";
+        yield return new WaitForSeconds(1);
+        sprechblase.GetComponentInChildren<TextMeshPro>().text = "";
+        sprechblase.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

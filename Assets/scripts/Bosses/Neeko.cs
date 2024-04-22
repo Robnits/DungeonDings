@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -12,6 +15,8 @@ public class Neeko : BossHauptklasse
     private Rigidbody2D rb;
     public GameObject firePoint;
     public GameObject NeekoProjectile;
+    public GameObject phase2NeekoProjectile;
+    public GameObject plantPrefab;
     private bool canshootagain = true;
     private bool isMovingRandomly;
     private Vector2 randomMoveDirection;
@@ -21,17 +26,17 @@ public class Neeko : BossHauptklasse
     public bool playerIsInRange;
     public float delay = 0.0f;
 
+    private int counter = 0;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         if (phaseTrackScript == null)
             phaseTrackScript = GameObject.Find("PhaseTracker").GetComponent<PhaseTrackScript>();
         player = GameObject.FindGameObjectWithTag("Player");
-        maxlife = 2;
+        maxlife = 10;
         life = maxlife;
         damage = 5;
         speed = 2.2f;
-        //SetHealthbar();
     }
     public void NextPhase(){
         BattlePhase ++;
@@ -39,11 +44,16 @@ public class Neeko : BossHauptklasse
     public void SetHealthbar()
     {
         if(healthbar != null)
+        {
             healthbar.transform.localScale = new Vector3(life / maxlife, 1, 1);
+            if(life < 0)
+                healthbar.transform.localScale = new Vector3(0, 1, 1);
+        }
     }
 
     private void Update()
     {
+        LookAtPlayer();
         switch (BattlePhase)
         {
             case 0:
@@ -52,17 +62,18 @@ public class Neeko : BossHauptklasse
             case 1:
                 healthbar.GetComponentInParent<CanvasGroup>().alpha = 0;
                 transform.position = rotationPoint.transform.position;
-                LookAtPlayer();
+                
                 if(canshootagain)
                     StartCoroutine(Shoot());
                 
                 break;
             case 2:
+            
                 healthbar.GetComponentInParent<CanvasGroup>().alpha = 1;
+                
                 if (isMovingRandomly && talkIsOver == true)
                 {
                     randomMoveTimer += Time.deltaTime;
-                    LookAtPlayer();
                     if (randomMoveTimer < randomMoveDuration)
                         rb.velocity = randomMoveDirection * speed;
                     else
@@ -71,6 +82,7 @@ public class Neeko : BossHauptklasse
                         rb.velocity = Vector2.zero;
                     }
                 }
+                
                 break;
             case 3:
                 Destroy(transform.parent.gameObject);
@@ -78,6 +90,7 @@ public class Neeko : BossHauptklasse
         }
     }
     private void FixedUpdate() {
+        
         if (BattlePhase == 2 && talkIsOver == true)
         {
             if (player != null)
@@ -117,20 +130,43 @@ public class Neeko : BossHauptklasse
         rb.rotation = aimangle;
     }
 
+
+    private bool waitFirst = true;
     IEnumerator Shoot()
-    {
+    {            
+        
         canshootagain = false;
         if (BattlePhase == 1){
-        yield return new WaitForSeconds(1);//Random.Range(2,5));
-        GameObject bullet = Instantiate(NeekoProjectile, firePoint.transform.position, firePoint.transform.rotation * Quaternion.Euler(0, 0, 90));
-        bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.up * 2, ForceMode2D.Force);
-        }else{
+            yield return new WaitForSeconds(UnityEngine.Random.Range(2,5));
             GameObject bullet = Instantiate(NeekoProjectile, firePoint.transform.position, firePoint.transform.rotation * Quaternion.Euler(0, 0, 90));
-            bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.up * 5, ForceMode2D.Force);
+            bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.transform.up * 2, ForceMode2D.Force);
+        }else{
+            if(waitFirst){
+                yield return new WaitForSeconds(1f);
+                waitFirst = false;
+            }
+            yield return new WaitForSeconds(0.5f);
+            if(counter == 2){
+                counter = 0;
+                ShootPlant(firePoint.transform.rotation);
+                yield return new WaitForSeconds(1);
+            }
+            for (int i = -3; i < 3; i++)
+            {
+                Quaternion rotation = firePoint.transform.rotation * Quaternion.Euler(0, 0, 180 + i * 3);
+                GameObject bullet = Instantiate(phase2NeekoProjectile, firePoint.transform.position, rotation);
+                bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * 10, ForceMode2D.Impulse);
+                yield return new WaitForSeconds(0.1f);
+            }
+            counter ++;
         }
-
-
         StartCoroutine(Shoot());
+    }
+
+    private void ShootPlant(Quaternion angleToPLayer)
+    {
+        GameObject plant = Instantiate(plantPrefab, firePoint.transform.position, quaternion.Euler(0, 0, UnityEngine.Random.Range(-45, 45)) * angleToPLayer);
+        plant.GetComponent<Rigidbody2D>().AddForce(plant.transform.up * 3, ForceMode2D.Impulse);
     }
 
     IEnumerator MoveBackwards()
@@ -147,8 +183,6 @@ public class Neeko : BossHauptklasse
         }
         rb.velocity = Vector2.zero;
         yield return new WaitForSeconds(delay);
-        
-
     }
     IEnumerator MoveForwards()
     {
@@ -173,7 +207,7 @@ public class Neeko : BossHauptklasse
             if (!playerIsInRange && !isMovingRandomly)
             {
                 isMovingRandomly = true;
-                randomMoveDirection = Random.insideUnitCircle.normalized;
+                randomMoveDirection = UnityEngine.Random.insideUnitCircle.normalized;
                 randomMoveTimer = 0.0f;
             }
             else if (playerIsInRange)
@@ -182,6 +216,14 @@ public class Neeko : BossHauptklasse
             yield return new WaitForSeconds(delay);
 
         }
+    }
+
+    public IEnumerator Sprechblaseninhalt(string text, float time){
+        sprechblase.GetComponent<SpriteRenderer>().enabled = true;
+        sprechblase.GetComponentInChildren<TextMeshPro>().text = text;
+        yield return new WaitForSeconds(time);
+        sprechblase.GetComponent<SpriteRenderer>().enabled = false;
+        sprechblase.GetComponentInChildren<TextMeshPro>().text = "";
     }
 
 }

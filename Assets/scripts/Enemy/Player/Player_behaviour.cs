@@ -40,7 +40,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (GlobalVariables.isInBossFight)
         {
             // Adjust player position for boss fight
-            transform.position = new Vector3(0, -2f, 0);
+            transform.position = new Vector3(0, -26f, 0);
             zeroLight2d.intensity = 0f;
         }
 
