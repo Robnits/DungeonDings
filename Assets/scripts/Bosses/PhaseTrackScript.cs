@@ -39,7 +39,7 @@ public class PhaseTrackScript : MonoBehaviour
             phasen++;
             playerIsAllowedToMove = false;
             StartCoroutine(MovePlayerTowardsNeeko());
-            
+            startFight.radius = 5;
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
@@ -59,9 +59,8 @@ public class PhaseTrackScript : MonoBehaviour
         Sprechblase();
     }
 
-    private void Sprechblase()
+    private void Sprechblase() //still no movement
     {
-
         StartCoroutine(DunkelHell());
     }
 
@@ -77,7 +76,6 @@ public class PhaseTrackScript : MonoBehaviour
         yield return new WaitForSeconds(2);
         //yield return new WaitForSeconds();
         playerIsAllowedToMove = true;
-        startFight.radius = 5;
         globalLight.intensity = 0.8f;
         LevelLoaderAnim.SetTrigger("End");
     }
@@ -87,23 +85,20 @@ public class PhaseTrackScript : MonoBehaviour
         playerIsAllowedToMove = false;
         player.transform.position = new Vector2(transform.position.x, transform.position.y - 2);
         LevelLoaderAnim.SetTrigger("Start");
-        StartCoroutine(Loadhealthbar());
+        print("1");
+        Loadhealthbar();
+        print("2");
         yield return new WaitForSeconds(2);
-        
-    }
-
-    private IEnumerator Loadhealthbar()
-    {
-        Neeko.maxlife = 50;
-        while (Neeko.life < Neeko.maxlife){
-            Neeko.life += 0.25f;
-            yield return new WaitForSeconds(0.01f);
-            Neeko.SetHealthbar();
-        }
         LevelLoaderAnim.SetTrigger("End");
         Neeko.talkIsOver = true;
         playerIsAllowedToMove = true;
-        
+    }
+
+    private void Loadhealthbar()
+    {
+        Neeko.maxlife = 30;
+        Neeko.life = Neeko.maxlife;
+        Neeko.SetHealthbar();
     }
 
     private void NeekoBattlePhase1()
