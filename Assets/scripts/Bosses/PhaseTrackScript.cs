@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -61,7 +62,13 @@ public class PhaseTrackScript : MonoBehaviour
 
     private IEnumerator Sprechblase()
     {
-        StartCoroutine(Neeko.Sprechblaseninhalt("Wie hast du es hierher geschafft?", 3));
+        StartCoroutine(Neeko.Sprechblaseninhalt("Ich habe schon viel von dir gehört...", 2));
+        yield return new WaitForSeconds(2);
+        StartCoroutine(Neeko.Sprechblaseninhalt("Dein Ruhm blüht wie eine zarte Knospe,...", 3)); 
+        yield return new WaitForSeconds(3);
+        StartCoroutine(Neeko.Sprechblaseninhalt("...doch ich werde dich wie Unkraut ausreißen", 3));
+        yield return new WaitForSeconds(3);
+        StartCoroutine(Neeko.Sprechblaseninhalt("Es wird Zeit dir ein Ende zu setzen!", 3)); 
         yield return new WaitForSeconds(3);
         StartCoroutine(DunkelHell());
     }
