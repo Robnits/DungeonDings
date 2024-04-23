@@ -56,12 +56,13 @@ public class PhaseTrackScript : MonoBehaviour
             yield return null;
         }
         player.GetComponent<PlayerBehaviour>().Movement(0, 0);
-        Sprechblase();
+        StartCoroutine(Sprechblase());
     }
 
-    private void Sprechblase()
+    private IEnumerator Sprechblase()
     {
         StartCoroutine(Neeko.Sprechblaseninhalt("Wie hast du es hierher geschafft?", 3));
+        yield return new WaitForSeconds(3);
         StartCoroutine(DunkelHell());
     }
 
