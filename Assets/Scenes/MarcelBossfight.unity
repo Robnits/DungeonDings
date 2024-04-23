@@ -32025,15 +32025,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 3
+  m_fontSizeBase: 3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -32132,19 +32132,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.0057, y: -0.0029}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4965718173072977583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7085978496193007181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8ee053d5f2cc02488d006bf7bd3ee31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 5746329437701438606}
 --- !u!4 &5461557215575400545
 Transform:
   m_ObjectHideFlags: 0
@@ -32154,8 +32141,8 @@ Transform:
   m_GameObject: {fileID: 7085978496193007181}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.99, y: 0.63, z: -0.36483413}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 1.3, y: 0.63, z: -0.36483413}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4911138437043687099}
@@ -32191,7 +32178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5461557215575400545}
   - component: {fileID: 1282901875049096834}
-  - component: {fileID: 4965718173072977583}
+  - component: {fileID: 7085978496193007182}
   m_Layer: 6
   m_Name: Sprechblase(Neeko)
   m_TagString: Untagged
@@ -32199,6 +32186,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7085978496193007182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7085978496193007181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c098122094098154c9f7620df8a65670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5746329437701438606}
 --- !u!212 &7768244521920802850
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -32219,7 +32219,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -32268,7 +32268,7 @@ MonoBehaviour:
   maxlife: 0
   neeko: {fileID: 7768244521920802851}
   neekoClones: {fileID: 0}
-  sprechblase: {fileID: 0}
+  sprechblase: {fileID: 7085978496193007181}
   phaseTrackScript: {fileID: 648289864}
   BattlePhase: 0
   circleRadius: 5

@@ -50,7 +50,7 @@ public class PhaseTrackScript : MonoBehaviour
     {
 
         player.transform.position = new Vector3(0, -15, 0);
-        while (player.transform.position.y < -2)
+        while (player.transform.position.y < -1.3f)
         {
             player.GetComponent<PlayerBehaviour>().Movement(0, 1);
             yield return null;
@@ -61,12 +61,13 @@ public class PhaseTrackScript : MonoBehaviour
 
     private void Sprechblase()
     {
-
+        StartCoroutine(Neeko.Sprechblaseninhalt("Wie hast du es hierher geschafft?", 3));
         StartCoroutine(DunkelHell());
     }
 
     IEnumerator DunkelHell()
     {
+        yield return new WaitForSeconds(3);
         LevelLoaderAnim.SetTrigger("Start");
         yield return new WaitForSeconds(0.6f);
         globalLight.intensity = 0.01f;

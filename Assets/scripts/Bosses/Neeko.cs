@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using static UnityEngine.GraphicsBuffer;
 
 public class Neeko : BossHauptklasse
@@ -37,6 +38,8 @@ public class Neeko : BossHauptklasse
         life = maxlife;
         damage = 5;
         speed = 2.2f;
+        sprechblase.GetComponent<SpriteRenderer>().enabled = false;
+
     }
     public void NextPhase(){
         BattlePhase ++;

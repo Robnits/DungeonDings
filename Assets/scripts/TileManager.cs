@@ -18,17 +18,20 @@ public class TileManager : MonoBehaviour
 
     void Update()
     {
-        Vector3Int gridPosition = tilemap.WorldToCell(player.transform.position);
-        for (int i = 0; i < poisonTiles.tiles.Length; i++)
+        if (player != null)
         {
-            if (tilemap.GetTile(gridPosition) == poisonTiles.tiles[i])
+            Vector3Int gridPosition = tilemap.WorldToCell(player.transform.position);
+            for (int i = 0; i < poisonTiles.tiles.Length; i++)
             {
-                player.GetComponent<PlayerBehaviour>().NotOnSlow();
-                //player.GetComponent<Player_Stats>().GetDamage(poisonTiles.damage);
-            }
-            else
-            {
-                player.GetComponent<PlayerBehaviour>().OnSlow(poisonTiles.Slow);
+                if (tilemap.GetTile(gridPosition) == poisonTiles.tiles[i])
+                {
+                    player.GetComponent<PlayerBehaviour>().NotOnSlow();
+                    //player.GetComponent<Player_Stats>().GetDamage(poisonTiles.damage);
+                }
+                else
+                {
+                    player.GetComponent<PlayerBehaviour>().OnSlow(poisonTiles.Slow);
+                }
             }
         }
     }
