@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 475710045282540006}
   - component: {fileID: 4554645749472576924}
   - component: {fileID: 2787525962548810383}
+  - component: {fileID: 7768096109130378193}
   m_Layer: 6
   m_Name: Neeko
   m_TagString: Enemy
@@ -501,8 +502,29 @@ MonoBehaviour:
   maxlife: 0
   neeko: {fileID: 0}
   neekoClones: {fileID: 2787525962548810383}
-  Sprechblase: {fileID: 2672826400987724656}
+  sprechblase: {fileID: 0}
   phaseTrackScript: {fileID: 0}
   circleRadius: 5
   firePoint: {fileID: 655574447385642854}
   NeekoProjectile: {fileID: 5014600387509515146, guid: c7560e63edcc0a94e9cb6650a3efb11e, type: 3}
+--- !u!95 &7768096109130378193
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9181975534224820112}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c044008e5d0fec04c869dc633e76e89f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
