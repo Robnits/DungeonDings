@@ -144,7 +144,6 @@ GameObject:
   - component: {fileID: 5272426079843019930}
   - component: {fileID: 8231118366747237014}
   - component: {fileID: 4669147069113329850}
-  - component: {fileID: 5648848700387586950}
   - component: {fileID: 8200647137518481444}
   m_Layer: 0
   m_Name: Ice-Magier
@@ -282,20 +281,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5648848700387586950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834367451155603859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cccc762e94e42014dbd6f47b5bd115c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireBallPrefab: {fileID: 0}
-  firepoint: {fileID: 0}
 --- !u!114 &8200647137518481444
 MonoBehaviour:
   m_ObjectHideFlags: 0

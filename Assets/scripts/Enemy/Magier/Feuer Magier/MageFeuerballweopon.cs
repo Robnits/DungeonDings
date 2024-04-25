@@ -30,6 +30,4 @@ public class MageFeuerballweopon : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * fireforce;
         }
     }
-
-
 }

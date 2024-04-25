@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class IceBallweopon : MonoBehaviour
 {
-    // Start is called before the first frame updatepublic GameObject fireBallPrefab;
    
+    public GameObject iceBallPrefab;
     public Transform firepoint;
-    //private readonly float fireforce = 2f;
-    //private GameObject player;
+    private readonly float fireforce = 2f;
+    private GameObject player;
 
     private void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(shootInterval());
     }
 
@@ -24,7 +24,10 @@ public class IceBallweopon : MonoBehaviour
     }
     public void FireFireball()
     {
-        // GameObject bullet = Instantiate(iceBallPrefab, firepoint.position, firepoint.rotation);
-        // bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * fireforce;
+        if(iceBallPrefab != null)
+        {
+            GameObject bullet = Instantiate(iceBallPrefab, firepoint.position, firepoint.rotation);
+            bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * fireforce;
+        }
     }
 }

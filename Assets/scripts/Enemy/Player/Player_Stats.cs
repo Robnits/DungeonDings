@@ -72,7 +72,7 @@ public class player_Stats : MonoBehaviour
         attackSpeed = 1f;
         dornen = 0f;
         baseDamage = 1f + GlobalVariables.damageUpgrade - 1;
-        damage = 1f;
+        damage = 2f;
         dashmaxCooldown = 5f;
 
     }

@@ -16,7 +16,7 @@ public class IceMage: EnemysHauptklasse
 
     void Start()
     {
-        life = 1f;
+        life = 15f;
         value = 10f;
         speed = 1.2f;
         droprate = 90;

@@ -29,7 +29,8 @@ public class TilemapVisualiser : MonoBehaviour
 
     private void Awake()
     {
-        randomBiom = Random.Range(0, 2);
+        randomBiom = Random.Range(0, 3);
+        
     }
 
     // Methode zum Darstellen von Boden-Tiles an den angegebenen Positionen
