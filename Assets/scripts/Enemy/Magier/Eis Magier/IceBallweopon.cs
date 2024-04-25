@@ -6,7 +6,7 @@ public class IceBallweopon : MonoBehaviour
 {
    
     public GameObject iceBallPrefab;
-    public Transform firepoint;
+    public Transform firepointI;
     private readonly float fireforce = 2f;
     private GameObject player;
 
@@ -26,7 +26,7 @@ public class IceBallweopon : MonoBehaviour
     {
         if(iceBallPrefab != null)
         {
-            GameObject bullet = Instantiate(iceBallPrefab, firepoint.position, firepoint.rotation);
+            GameObject bullet = Instantiate(iceBallPrefab, firepointI.position, firepointI.rotation);
             bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * fireforce;
         }
     }
