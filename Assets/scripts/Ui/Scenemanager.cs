@@ -13,15 +13,10 @@ public class Scenemanager : MonoBehaviour
         LevelLoaderAnim =  GameObject.Find("Transition").GetComponentInChildren<Animator>();
     }
 
-    public enum Scene
-    {
-        Shop,
-        MainMenu,
-        proceduralDungeon
-    }
-
     public void StartSwitch(int scene)
     {
+        if (scene == 1)
+            Time.timeScale = 1f;
         StartCoroutine(Scenswitch(scene));
     }
 

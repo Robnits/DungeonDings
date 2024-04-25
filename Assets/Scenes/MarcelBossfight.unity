@@ -1372,9 +1372,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355543330}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &399825866
 GameObject:
@@ -10808,7 +10808,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   einstellungenHandler: {fileID: 1866549298}
-  einstellungen: {fileID: 1866549298}
   shootInput: {fileID: 223521110745166674, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
   dashInput: {fileID: -6668389131059955495, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
   grenadeInput: {fileID: -2066385763570699288, guid: 419b1cae23492ac4aa560dfa33571208, type: 3}
@@ -11826,7 +11825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 517300742}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &729405488
@@ -30488,14 +30487,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cca9b22e2481340868a0e6a2bc8749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanvasGroupSettings: {fileID: 355543332}
+  canvasGroup: {fileID: 1866549299}
+  canvasGroupSettings: {fileID: 355543332}
   canvasGroupSteuerungUI: {fileID: 1581754106}
-  canvasGroupButtonChange: {fileID: 0}
   sliderSFX: {fileID: 1687468635}
   sliderMusic: {fileID: 1687468635}
   audioMixer: {fileID: 24100000, guid: cd1261a945ccf364a84995458c09d434, type: 2}
-  dropdown: {fileID: 888373755}
+  resolutionDropdown: {fileID: 888373755}
   toggle: {fileID: 315639763}
+  fullscreenToggle: {fileID: 687861860}
   settingsIsOpen: 0
 --- !u!225 &1866549299
 CanvasGroup:
@@ -30505,9 +30505,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866549297}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!224 &1866549300
 RectTransform:
@@ -32082,7 +32082,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

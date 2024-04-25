@@ -3,16 +3,21 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class OpenEinstellungen : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private CanvasGroup canvasGroupSettings;
+    [SerializeField] private CanvasGroup canvasGroupSteuerungUI;
     [SerializeField] private Slider sliderSFX;
     [SerializeField] private Slider sliderMusic;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField] private Toggle toggle;
     [SerializeField] private Toggle fullscreenToggle;
+
+    private bool isOn;
 
     public bool settingsIsOpen = false;
 
@@ -151,6 +156,21 @@ public class OpenEinstellungen : MonoBehaviour
             canvasGroupSettings.interactable = x;
             canvasGroupSettings.enabled = true;
             canvasGroupSettings.blocksRaycasts = x;
+        }
+    }
+    public void ShowSteuerung(bool alpha)
+    {
+        canvasGroupSteuerungUI.alpha = alpha ? 1 : 0;
+        PlayerPrefs.SetInt("Tutorialhelp", alpha ? 1 : 0);
+    }
+
+    private void LoadTutorial()
+    {
+        if (toggle != null)
+        {
+            bool showTutorial = PlayerPrefs.GetInt("Tutorialhelp") == 1;
+            canvasGroupSteuerungUI.alpha = showTutorial ? 1 : 0;
+            toggle.isOn = showTutorial;
         }
     }
 }
