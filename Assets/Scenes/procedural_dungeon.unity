@@ -2906,7 +2906,7 @@ MonoBehaviour:
   randomWalkParameters: {fileID: 11400000, guid: 92901c2b02957aa4fb1274a6e5f86a02, type: 2}
   prefabSpawner: {fileID: 436936002}
   corridorLength: 17
-  corridorCount: 1
+  corridorCount: 8
   roomPercent: 1
 --- !u!4 &436936001
 Transform:
@@ -2947,8 +2947,10 @@ MonoBehaviour:
   ChestSpawnPercantage: 1
   devils: {fileID: 2445331548484148877, guid: 50b750422071ef24f9735d4d4b880cd8, type: 3}
   devilSpawnPercantage: 1
-  wuestengegner: {fileID: 1621385828209257054, guid: 52f0d8d3edb75794c88ac7190d7884a3, type: 3}
+  wuestengegner: {fileID: 1621385828209257054, guid: e2ad38a64fa5c0145a7d5c2431b7e7a0, type: 3}
   wuestengegnerSpawnPercantage: 1
+  mage: {fileID: 5616301966260204912, guid: aadbda8d04f2edb45bc62b72cf38d0e6, type: 3}
+  iceMage: {fileID: 1568432658399287200, guid: 29327654bfc2f8346a060ff9d0c30084, type: 3}
   Saeule: {fileID: 1754359949968514695, guid: a69736be2651e7544b38f68b2a1aa95e, type: 3}
 --- !u!1 &474517641
 GameObject:

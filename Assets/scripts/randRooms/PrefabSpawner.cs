@@ -12,7 +12,6 @@ public class PrefabSpawner : MonoBehaviour
     private int stairnumber = 0;
     private readonly List<Vector2Int> SpawnedPositions = new();
     private bool dontSpawnFirstStair = true;
-    //private bool dontSpawnFirstRoom = true;
 
     [SerializeField]
     private BalancingSystemSO easy;
@@ -43,6 +42,10 @@ public class PrefabSpawner : MonoBehaviour
     [SerializeField]
     [Range(0, 100)]
     private float wuestengegnerSpawnPercantage;
+    [SerializeField] private GameObject mage;
+    [SerializeField] private GameObject iceMage;
+    private float mageSpawnrate;
+    private float icemageSpawnrate;
 
     [SerializeField]
     private GameObject Saeule;
@@ -53,6 +56,8 @@ public class PrefabSpawner : MonoBehaviour
         ChestSpawnPercantage = difficult.spawnChest;
         devilSpawnPercantage = difficult.devilSpawnrate;
         wuestengegnerSpawnPercantage = difficult.wuestengegnerSpawnPercantage;
+        mageSpawnrate = difficult.mageSpawnrate;
+        icemageSpawnrate = difficult.icemageSpawnrate;
     }
 
     public enum WhatGetSpawned
@@ -64,7 +69,9 @@ public class PrefabSpawner : MonoBehaviour
         Down,
         Up,
         Saeule,
-        wuestengegner
+        wuestengegner,
+        icemage,
+        mage
     }
 
     private int biom;
@@ -130,16 +137,18 @@ public class PrefabSpawner : MonoBehaviour
                     case WhichBiom.Default:
                         if (GiveRandomNumber() < SpawnerSpawnPercantage && !SpawnedPositions.Contains(position))
                             InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.RatSpawner);
-                        
                         if (GiveRandomNumber() < devilSpawnPercantage && !SpawnedPositions.Contains(position))
                             InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Devil);
+                        if (GiveRandomNumber() < mageSpawnrate && !SpawnedPositions.Contains(position))
+                            InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.mage);
                         break;
                     case WhichBiom.Jungle:
                         if (GiveRandomNumber() < wuestengegnerSpawnPercantage && !SpawnedPositions.Contains(position))
                             InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.wuestengegner);
                         break;
                     case WhichBiom.Snow:
-                        print("test");
+                        if (GiveRandomNumber() < icemageSpawnrate && !SpawnedPositions.Contains(position))
+                            InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.icemage);
                         break;
                 }              
                 if (GiveRandomNumber() < ChestSpawnPercantage && !SpawnedPositions.Contains(position))
@@ -156,7 +165,6 @@ public class PrefabSpawner : MonoBehaviour
         switch (whatGetGenerated)
         {
             case WhatGetSpawned.RatSpawner:
-                // Instantiate the ratspawner at the chosen position
                 Instantiate(ratspwaner, new Vector3(position.x + 0.5f, position.y + 0.5f, 0f), Quaternion.identity, parentGameobject.transform);
                 break;
             case WhatGetSpawned.Chest:
@@ -176,6 +184,12 @@ public class PrefabSpawner : MonoBehaviour
                 break;
             case WhatGetSpawned.wuestengegner:
                 Instantiate(wuestengegner, new Vector3(position.x + 0.5f, position.y + 1f, 0f), Quaternion.identity, parentGameobject.transform);
+                break;
+            case WhatGetSpawned.mage:
+                Instantiate(mage, new Vector3(position.x + 0.5f, position.y + 1f, 0f), Quaternion.identity, parentGameobject.transform);
+                break;
+            case WhatGetSpawned.icemage:
+                Instantiate(iceMage, new Vector3(position.x + 0.5f, position.y + 1f, 0f), Quaternion.identity, parentGameobject.transform);
                 break;
         }
     }
