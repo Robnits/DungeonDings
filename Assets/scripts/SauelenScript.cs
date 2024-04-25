@@ -29,7 +29,7 @@ public class SauelenScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerIsInRange = true;
-            collision.gameObject.GetComponent<Player_behjaviour>().SprechblasePressE(true);
+            collision.gameObject.GetComponent<PlayerBehaviour>().SprechblasePressE(true);
         }
 
     }
@@ -39,7 +39,7 @@ public class SauelenScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerIsInRange = false;
-            collision.gameObject.GetComponent<Player_behjaviour>().SprechblasePressE(false);
+            collision.gameObject.GetComponent<PlayerBehaviour>().SprechblasePressE(false);
         }
     }
 

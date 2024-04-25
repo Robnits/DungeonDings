@@ -5,14 +5,16 @@ using UnityEngine;
 public class Wuestengegner : EnemysHauptklasse
 {
     private Rigidbody2D rb;
+    
 
     void Start()
     {
+        dealDamageToPlayer = GetComponent<DealDamageToPlayer>();
+        //dealDamageToPlayer.dmg = 7;
         speed = 2.4f;
         maxlife = 3;
         life = maxlife;
         value = 3;
-        damage = 7;
         droprate = 5;
         healthscript.GetMaxhealth(life);
         player = GameObject.FindGameObjectWithTag("Player");

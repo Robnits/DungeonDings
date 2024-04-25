@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rats : EnemysHauptklasse
+public class Rats : EnemysHauptklasse 
 {
 
     private Rigidbody2D rb;
@@ -12,7 +12,8 @@ public class Rats : EnemysHauptklasse
         speed = 1.0f;
         life = 1f;
         value = 1f;
-        damage = 5f;
+        dealDamageToPlayer = GetComponent<DealDamageToPlayer>();
+        dealDamageToPlayer.dmg = 7;
         droprate = 1;
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();

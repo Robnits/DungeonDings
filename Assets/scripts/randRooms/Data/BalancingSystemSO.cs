@@ -8,4 +8,7 @@ public class BalancingSystemSO : ScriptableObject
     public float spawnChest;
     public float spawnSpawner;
     public float devilSpawnrate;
+    public float wuestengegnerSpawnPercantage;
+    public float mageSpawnrate;
+    public float icemageSpawnrate;
 }

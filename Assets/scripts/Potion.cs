@@ -8,7 +8,7 @@ public class Potion : MonoBehaviour
     {
         if (collision.CompareTag("Player")) 
         {
-            collision.GetComponent<Player_Stats>().GetHealth(health);
+            collision.GetComponent<player_Stats>().GetHealth(health);
 
             Destroy(gameObject);
         }

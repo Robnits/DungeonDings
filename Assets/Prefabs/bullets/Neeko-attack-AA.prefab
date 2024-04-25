@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6246535464821561751}
   - component: {fileID: 8621245404152587215}
   - component: {fileID: 6677452030348059677}
-  - component: {fileID: 2442054616016439466}
+  - component: {fileID: 7767918944724559231}
+  - component: {fileID: 3711311413517627173}
   m_Layer: 0
   m_Name: Neeko-attack-AA
   m_TagString: Enemy
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17.07, y: -0.883, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,20 +147,20 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0014667511, y: 0.060173333}
+  m_Offset: {x: -0.003991127, y: 0.32296216}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.82, y: 0.82}
+    oldSize: {x: 2.5625, y: 2.5625}
     newSize: {x: 0.82, y: 0.82}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.19478226, y: 0.69965327}
+  m_Size: {x: 0.5636883, y: 1.8619893}
   m_EdgeRadius: 0
---- !u!114 &2442054616016439466
+--- !u!114 &7767918944724559231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +169,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 5014600387509515146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a92b71d648d557d4980d9a4cace5a35b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c300bda4599652439b9a62a5ee8438d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piercing: 1
+--- !u!114 &3711311413517627173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5014600387509515146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c1208faaa70bc4594b1fb5af65b42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poisondmg: 0
+  firedmg: 0
+  dmg: 1
+  dot: 0
+  damageTime: 0

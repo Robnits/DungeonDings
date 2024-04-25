@@ -13,16 +13,17 @@ public class Scenemanager : MonoBehaviour
         LevelLoaderAnim =  GameObject.Find("Transition").GetComponentInChildren<Animator>();
     }
 
-    public enum Scene
-    {
-        Shop,
-        MainMenu,
-        proceduralDungeon
-    }
-
     public void StartSwitch(int scene)
     {
+        if (scene == 1)
+            Time.timeScale = 1f;
         StartCoroutine(Scenswitch(scene));
+    }
+
+    public void Quit()
+    {
+        Time.timeScale = 1f;
+        Application.Quit();
     }
 
     private IEnumerator Scenswitch(int scene)
@@ -38,10 +39,17 @@ public class Scenemanager : MonoBehaviour
                 SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
                 break;
             case 2:
-                SceneManager.LoadScene("procedural dungeon", LoadSceneMode.Single);
+                GlobalVariables.isInBossFight = false;
+                SceneManager.LoadScene("procedural_dungeon", LoadSceneMode.Single);
                 break;
             case 3:
                 SceneManager.LoadScene("MarcelBossfight", LoadSceneMode.Single);
+                break;
+            case 4:
+                SceneManager.LoadScene("Death", LoadSceneMode.Single);
+                break;
+            case 5:
+                SceneManager.LoadScene("Victory", LoadSceneMode.Single);
                 break;
         }
     }

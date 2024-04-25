@@ -12,10 +12,11 @@ public class EnemysHauptklasse : MonoBehaviour
     public GameObject DropPotion;
     public Healthbarscriptenemys healthscript;
 
+    protected DealDamageToPlayer dealDamageToPlayer;
+
     protected float speed;
     public float life;
     protected float value;
-    protected float damage;
     protected float droprate;
     protected float maxlife;
 
@@ -30,17 +31,11 @@ public class EnemysHauptklasse : MonoBehaviour
             Instantiate(DropPotion, transform.position, Quaternion.identity);
     }
 
-
-    public float GetDamage()
-    {
-        return damage;
-    }
-
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            life -= player.GetComponent<Player_behjaviour>().GetDamage(false);
+            life -= player.GetComponent<PlayerBehaviour>().GetDamage(false);
             if (life <= 0)
                 Death();
 
@@ -54,11 +49,14 @@ public class EnemysHauptklasse : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Granade"))
         {
-            life -= player.GetComponent<Player_behjaviour>().GetDamage(true);
-            if (life <= 0)
-                Death();
-            if (healthscript != null)
-                healthscript.GetDamaged(life);
+            if (collision.gameObject.GetComponent<GranadeScript>().IsExploding())
+            {
+                life -= player.GetComponent<PlayerBehaviour>().GetDamage(true);
+                if (life <= 0)
+                    Death();
+                if (healthscript != null)
+                    healthscript.GetDamaged(life);
+            }
         }
     }
 }

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446af09122c542a4c8b4e3b1bb133d23, type: 3}
   m_Name: easy
   m_EditorClassIdentifier: 
-  spawnChest: 1
-  spawnSpawner: 1
-  devilSpawnrate: 4
+  spawnChest: 5
+  spawnSpawner: 10
+  devilSpawnrate: 1
+  wuestengegnerSpawnPercantage: 1
+  mageSpawnrate: 5
+  icemageSpawnrate: 5
