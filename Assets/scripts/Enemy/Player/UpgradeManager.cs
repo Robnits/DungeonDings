@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class UpgradeManager : MonoBehaviour
     GameObject button2;
     GameObject button3;
 
-    private GameObject canvas;
+    private CanvasGroup canvas;
     private GameObject Player;
     private int hilf;
 
@@ -80,8 +81,8 @@ public class UpgradeManager : MonoBehaviour
     {
         if (!GlobalVariables.isInBossFight)
         {
-            canvas = GameObject.Find("AugmentAuswahl");
-            canvas.SetActive(false);
+            canvas = GameObject.Find("AugmentAuswahl").GetComponent<CanvasGroup>();
+            ShowItemAuswahl(false);
         }
         
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -93,7 +94,7 @@ public class UpgradeManager : MonoBehaviour
         {
 
             chose = false;
-            canvas.SetActive(true);
+            ShowItemAuswahl(true);
             Time.timeScale = 0;
 
             button1 = GameObject.Find("Button1");
@@ -103,8 +104,8 @@ public class UpgradeManager : MonoBehaviour
             buttonText1 = button1.GetComponentInChildren<TextMeshProUGUI>();
             buttonText2 = button2.GetComponentInChildren<TextMeshProUGUI>();
             buttonText3 = button3.GetComponentInChildren<TextMeshProUGUI>();
-           /* if(HasItems())
-            {*/
+            if(HasItems())
+            {
                 for (int i = 0; i <= 2; i++)
                 {
                     int rarity = Random.Range(0, 100);
@@ -123,16 +124,18 @@ public class UpgradeManager : MonoBehaviour
                     else if (rarity >= 20)      
                     {
                         GenerateRandomItem(i, commonItems, Color.green);
+                    }else{
+                        
                     }
                 }
-            /*}else
+            }else
             {
                 Debug.LogError("Keine Items verfügbar!");
                 chose = true; 
-            }*/
+            }
         }
     }
-  /*  private bool HasItems()
+    private bool HasItems()
     {   
         foreach (var list in lists)
     {
@@ -140,42 +143,41 @@ public class UpgradeManager : MonoBehaviour
             return true;
     }
     return false;
-    }*/
+    }
 
 
 
     private void GenerateRandomItem(int i, List<string> itemList, Color buttonColor)
+{
+    // Shuffle the itemList using Fisher-Yates shuffle algorithm
+    for (int index = 0; index < itemList.Count - 1; index++)
     {
-
-        if (itemList.Count >= 3)
-        {
-            do
-            {
-                hilf = Random.Range(0, itemList.Count);
-            } while (hilf == tempaugments[0] || hilf == tempaugments[1] || hilf == tempaugments[2]);
-        }
-        else
-            ItemRoll();
-        
-
-        if (i == 0)
-        {
-            buttonText1.text = itemList[hilf];
-            button1.GetComponent<Image>().color = buttonColor;
-        }
-        else if (i == 1)
-        {
-            buttonText2.text = itemList[hilf];
-            button2.GetComponent<Image>().color = buttonColor;
-        }
-        else if (i == 2)
-        {
-            buttonText3.text = itemList[hilf];
-            button3.GetComponent<Image>().color = buttonColor;
-        }
-
-        tempaugments[i] = hilf; // Update tempaugments after selecting the item
+        int randomIndex = Random.Range(index, itemList.Count);
+        string temp = itemList[index];
+        itemList[index] = itemList[randomIndex];
+        itemList[randomIndex] = temp;
     }
+
+    // Select the first three items from the shuffled list
+    if (i == 0 && itemList.Count > 0)
+    {
+        buttonText1.text = itemList[0];
+        button1.GetComponent<Image>().color = buttonColor;
+        tempaugments[0] = itemList.IndexOf(buttonText1.text); // Store the index of the selected item
+    }
+    else if (i == 1 && itemList.Count > 1)
+    {
+        buttonText2.text = itemList[1];
+        button2.GetComponent<Image>().color = buttonColor;
+        tempaugments[1] = itemList.IndexOf(buttonText2.text); // Store the index of the selected item
+    }
+    else if (i == 2 && itemList.Count > 2)
+    {
+        buttonText3.text = itemList[2];
+        button3.GetComponent<Image>().color = buttonColor;
+        tempaugments[2] = itemList.IndexOf(buttonText3.text); // Store the index of the selected item
+    }
+}
     public void ButtonPressed1()
     {
         Buttonpressed(buttonText1);
@@ -199,7 +201,7 @@ public class UpgradeManager : MonoBehaviour
                 {
                     UpgradeAndDeletion(i, j);
                     Time.timeScale = 1;
-                    canvas.SetActive(false);
+                    ShowItemAuswahl(false);
                 }
             }
         }
@@ -218,5 +220,17 @@ public class UpgradeManager : MonoBehaviour
             legendaryItems.Remove(legendaryItems[positionInList]);
 
         chose = true;
+    }
+
+    public void ShowItemAuswahl(bool hilf){
+        if(hilf){
+            canvas.alpha = 1;
+            canvas.blocksRaycasts = true;
+            canvas.interactable = true;
+        }else{
+            canvas.alpha = 0;
+            canvas.blocksRaycasts = false;
+            canvas.interactable = false;
+        }
     }
 }
