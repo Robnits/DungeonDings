@@ -103,29 +103,46 @@ public class UpgradeManager : MonoBehaviour
             buttonText1 = button1.GetComponentInChildren<TextMeshProUGUI>();
             buttonText2 = button2.GetComponentInChildren<TextMeshProUGUI>();
             buttonText3 = button3.GetComponentInChildren<TextMeshProUGUI>();
-
-            for (int i = 0; i <= 2; i++)
+           /* if(HasItems())
+            {*/
+                for (int i = 0; i <= 2; i++)
+                {
+                    int rarity = Random.Range(0, 100);
+                    if (rarity == 0)
+                    {
+                        GenerateRandomItem(i, legendaryItems, Color.yellow);
+                    }
+                    else if (rarity < 6 && rarity > 0)
+                    {
+                        GenerateRandomItem(i, epicItems, Color.magenta);
+                    }
+                    else if (rarity < 20 && rarity >= 6)
+                    {
+                        GenerateRandomItem(i, rareItems, Color.blue);
+                    }
+                    else if (rarity >= 20)      
+                    {
+                        GenerateRandomItem(i, commonItems, Color.green);
+                    }
+                }
+            /*}else
             {
-                int rarity = Random.Range(0, 100);
-                if (rarity == 0)
-                {
-                    GenerateRandomItem(i, legendaryItems, Color.yellow);
-                }
-                else if (rarity < 6 && rarity > 0)
-                {
-                    GenerateRandomItem(i, epicItems, Color.magenta);
-                }
-                else if (rarity < 20 && rarity >= 6)
-                {
-                    GenerateRandomItem(i, rareItems, Color.blue);
-                }
-                else if (rarity >= 20)      
-                {
-                    GenerateRandomItem(i, commonItems, Color.green);
-                }
-            }
+                Debug.LogError("Keine Items verfügbar!");
+                chose = true; 
+            }*/
         }
     }
+  /*  private bool HasItems()
+    {   
+        foreach (var list in lists)
+    {
+        if (list.Count > 0)
+            return true;
+    }
+    return false;
+    }*/
+
+
 
     private void GenerateRandomItem(int i, List<string> itemList, Color buttonColor)
     {
