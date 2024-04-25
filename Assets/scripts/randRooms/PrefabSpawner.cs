@@ -139,6 +139,8 @@ public class PrefabSpawner : MonoBehaviour
                             InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.wuestengegner);
                         break;
                     case WhichBiom.Snow:
+                        if (GiveRandomNumber() < icemageSpawnrate && !SpawnedPositions.Contains(position))
+                            InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.icemage);
                         break;
                 }              
                 if (GiveRandomNumber() < ChestSpawnPercantage && !SpawnedPositions.Contains(position))

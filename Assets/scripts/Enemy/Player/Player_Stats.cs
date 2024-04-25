@@ -74,7 +74,6 @@ public class player_Stats : MonoBehaviour
         baseDamage = 1f + GlobalVariables.damageUpgrade - 1;
         damage = 2f;
         dashmaxCooldown = 5f;
-
     }
 
     
