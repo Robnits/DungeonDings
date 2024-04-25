@@ -9,9 +9,6 @@ public class InputHandler : MonoBehaviour
 
     [SerializeField]
     private OpenEinstellungen einstellungenHandler;
-    [SerializeField]
-    private OpenEinstellungen einstellungen;
-
     public InputActionReference shootInput;
     public InputActionReference dashInput;
     public InputActionReference grenadeInput;
@@ -25,7 +22,7 @@ public class InputHandler : MonoBehaviour
     {
         
         player = GameObject.FindGameObjectWithTag("Player");
-        if(player != null)
+        if(player != null || einstellungenHandler.settingsIsOpen == true)
         {
             shootInput.action.performed += OnShoot;
             dashInput.action.performed += OnDash;
@@ -39,7 +36,7 @@ public class InputHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(player != null)
+        if(player != null || einstellungenHandler.settingsIsOpen == true)
         {
             shootInput.action.performed -= OnShoot;
             dashInput.action.performed -= OnDash;
@@ -55,61 +52,66 @@ public class InputHandler : MonoBehaviour
     {
         if (!ctx.performed) return;
         if(player != null)
-            player.GetComponent<PlayerBehaviour>().Shooting();
+            if(!einstellungenHandler.settingsIsOpen)
+                player.GetComponent<PlayerBehaviour>().Shooting();
     }
 
     private void OnDash(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
-        if(player != null)
-            player.GetComponent<PlayerBehaviour>().Dash();
+        if(player != null || einstellungenHandler.settingsIsOpen == true)
+            if(!einstellungenHandler.settingsIsOpen)
+                player.GetComponent<PlayerBehaviour>().Dash();
     }
 
     private void OnGrenade(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
-        if(player != null)
-            player.GetComponent<PlayerBehaviour>().ThrowGranade();
+        if(player != null || einstellungenHandler.settingsIsOpen == true)
+            if(!einstellungenHandler.settingsIsOpen)
+                player.GetComponent<PlayerBehaviour>().ThrowGranade();
     }
 
     private void OnInteract(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
-        if(player != null)
+        if(player != null || einstellungenHandler.settingsIsOpen == true)
             isInteracting = true;
     }
 
     private void OnCoursorPositionChanged(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
-        if(player != null)
+        if(player != null || einstellungenHandler.settingsIsOpen == true)
             player.GetComponent<PlayerBehaviour>().LookAtPlayerCoursor(ctx.ReadValue<Vector2>());
     }
     private void OnMousePositionChanged(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
-        if(player != null)
+        if(player != null || einstellungenHandler.settingsIsOpen == true)
             player.GetComponent<PlayerBehaviour>().LookAtPlayerMouse(Camera.main.ScreenToWorldPoint(ctx.ReadValue<Vector2>()));
     }
 
     private void OnSettings(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
-        if(player != null)
+        if(player != null || einstellungenHandler.settingsIsOpen == true)
             if (einstellungenHandler.settingsIsOpen)
                 einstellungenHandler.OpenSettings(0);
             else
-                einstellungen.OpenSettings(1);
+                einstellungenHandler.OpenSettings(1);
     }
 
     private void Update()
     {
         if(player != null)
+        {
             if(movementInput != null)
                 movement = movementInput.action.ReadValue<Vector2>();
-            if (player != null)
-                player.GetComponent<PlayerBehaviour>().MousePosition(Camera.main.ScreenToWorldPoint(mousePosition.action.ReadValue<Vector2>()));
-        HandlePlayerInput();
+            player.GetComponent<PlayerBehaviour>().MousePosition(Camera.main.ScreenToWorldPoint(mousePosition.action.ReadValue<Vector2>()));
+            if(!einstellungenHandler.settingsIsOpen)
+                HandlePlayerInput();
+        }
     }
 
     private void HandlePlayerInput()
@@ -117,7 +119,7 @@ public class InputHandler : MonoBehaviour
         if(player != null)
             player.GetComponent<PlayerBehaviour>().Movement(movement.x, movement.y);
         if(interactInput != null)
-        isInteracting = interactInput.action.triggered;
+            isInteracting = interactInput.action.triggered;
     }
 
     public bool IsPlayerInteracting() 
