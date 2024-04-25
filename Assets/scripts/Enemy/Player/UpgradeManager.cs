@@ -36,7 +36,6 @@ public class UpgradeManager : MonoBehaviour
     {
         commonItems = new List<string>
     {
-        "Piercing 1",
         "Hartes Geschoss",
         "Helm",
         "Laufschuhe",
@@ -51,35 +50,27 @@ public class UpgradeManager : MonoBehaviour
 
         rareItems = new List<string>
     {
-        "Piercing 2",
         "Ruestungsschuhe",
-        "Kaktus an die Ruestung geklebt",
         "Schulausbildung(Amerika)",
         "Gewichte",
-        "Marcels Faulheit",
+        "Flower of Speed",
         "Waffenwissen"
     };
 
         epicItems = new List<string>
     {
-        "Piercing 3",
         "Maschine Pistole",
         "Marksmanrifle",
         "Glass Cannon",
-        "Ruestung",
-        "Laufschuhe",
-        "Robins T-Shirt",
-        "Robins Melder",
-        "Robins IQ",
-        "Cedrics Fettruestung"
+        "Schwere Ruestung"
     };
 
         legendaryItems = new List<string>
     {
-        "Alle Waffen im Besitz",
+        "Deathsentence",
         "Minigun",
-        "50.Cal",
-        "Kartenbetrug"
+        "Ultra Boots",
+        "Legendary Dash"
     };
 
         lists = new List<List<string>> { commonItems, rareItems, epicItems, legendaryItems };

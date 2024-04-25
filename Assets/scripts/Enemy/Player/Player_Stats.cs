@@ -140,41 +140,41 @@ public class Player_Stats : MonoBehaviour
 
         commonItems = new List<string>
         {
-            "Piercing 1", "Hartes Geschoss", "Helm", "Laufschuhe", "Super Dash", "Grosses Magazin", "Energy Drink", "Schneller Schuss",
-            "Kleines Waffenwissen", "Licht und Schatten", "Big Shot"
+            "Hartes Geschoss", 
+            "Helm", 
+            "Laufschuhe", 
+            "Super Dash", 
+            "Grosses Magazin", 
+            "Energy Drink", 
+            "Schneller Schuss",
+            "Kleines Waffenwissen", 
+            "Licht und Schatten", 
+            "Big Shot"
         };
 
         rareItems = new List<string>
         {
-            "Piercing 2",
-            "Ruestungsschuhe",
-            "Kaktus an die Ruestung geklebt",
-            "Schulausbildung(Amerika)",
+            "Ruestungsschuhe",  
+            "Schulausbildung(Amerika)", 
             "Gewichte",
-            "Marcels Faulheit",
-            "Waffenwissen"
+            "Flower of Speed",
+            "Waffenwissen"  
         };
 
         epicItems = new List<string>
         {
-            "Piercing 3",
             "Maschine Pistole",
             "Marksmanrifle",
             "Glass Cannon",
-            "Ruestung",
-            "Laufschuhe",
-            "Robins T-Shirt",
-            "Robins Melder",
-            "Robins IQ",
-            "Cedrics Fettruestung"
+            "Schwere Ruestung"
         };
 
         legendaryItems = new List<string>
         {
-            "Alle Waffen im Besitz",
+            "Deathsentence",
             "Minigun",
-            "50.Cal",
-            "Kartenbetrug"
+            "Ultra Boots",
+            "Legendary Dash"
         };
 
     }
@@ -188,14 +188,14 @@ public class Player_Stats : MonoBehaviour
         {
             0 => new Dictionary<string, Action>
                 {
-                    { "Hartes Geschoss", () => damage += 1f },
+                    { "Hartes Geschoss", () => damage += 0.2f },
                     { "Helm", () => {maxlife += 5f; GetHealth(5); } },
                     { "Laufschuhe", () => moveSpeed += 0.4f },
                     { "Super Dash", () => dashmaxCooldown -= 1f },
                     { "Energy Drink", () => {moveSpeed += 0.3f; dashmaxCooldown -= 0.5f; } },
                     { "Schneller Schuss", () => {attackSpeed *= 0.9f; fireForce += 10f; } },
                     { "Kleines Waffenwissen", () => { attackSpeed *= 0.95f; damage += 0.5f; } },
-                    { "Big Shot", () => damage += 2f },
+                    { "Big Shot", () => damage += 0.3f },
                     { "Grosses Magazin", () => {maxAmmunition += 1; BulletChanges(maxAmmunition); } },
                     { "Licht und Schatten", () => {{attackSpeed += 5f; maxAmmunition -= 1; BulletChanges(maxAmmunition);  } } }
 
@@ -203,23 +203,24 @@ public class Player_Stats : MonoBehaviour
             1 => new Dictionary<string, Action>
                 {
                     { "Ruestungsschuhe", () => {maxlife += 5; GetHealth(5); moveSpeed -= 0.5f; } },
-                    { "Waffenwissen", () => {attackSpeed *= 0.8f; damage += 1.5f; maxlife -= 3; moveSpeed -= 0.5f;} },// need fixing movespeed
+                    { "Waffenwissen", () => {attackSpeed *= 0.8f; damage += 0.5f; maxlife -= 3; moveSpeed -= 0.5f;} },// need fixing movespeed
                     { "Schulausbildung(Amerika)", () => {attackSpeed *= 0.8f; } },
-                    { "Gewichte", () => {} },
-                    { "Marcels Faulheit", () => {} }
+                    { "Gewichte", () => {moveSpeed -= 0.4f; damage += 2f;} },
+                    { "Flower of Speed", () => {moveSpeed += 0.5f;} }
                 },
             2 => new Dictionary<string, Action>
                 {
-                    { "Maschine Pistole", () => {/* Add implementation for epic items */} },
-                    { "Marksmanrifle", () => {/* Add implementation for epic items */} },
-                    { "Glass Cannon", () => {/* Add implementation for epic items */} },
-                    { "Cedrics Fettruestung", () => {/* Add implementation for epic items */} }
+                    { "Maschine Pistole", () => {attackSpeed *= 1f;} },
+                    { "Marksmanrifle", () => {damage += 1f; attackSpeed *= 0.5f;} },
+                    { "Glass Cannon", () => {maxlife -= 99f; damage += 3f;} },
+                    { "Schwere Ruestung", () => {maxlife += 20f; GetHealth(20);} }
                 },
             3 => new Dictionary<string, Action>
                 {
-                    { "Minigun", () => {/* Add implementation for legendary items */} },
-                    { "50.Cal", () => {/* Add implementation for legendary items */} },
-                    { "Kartenbetrug", () => {/* Add implementation for legendary items */} }
+                    { "Minigun", () => {damage -= 1f; attackSpeed *= 5f;} },
+                    { "Deathsentence", () => {damage += 5f;} },
+                    { "Ultra Boots", () => {moveSpeed += 2.5f;} },
+                    { "Legendary Dash", () => {/* Add implementation for legendary items */} }
                 },
             _ => throw new System.NotImplementedException()
         };
