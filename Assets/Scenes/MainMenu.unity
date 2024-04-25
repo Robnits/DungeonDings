@@ -2027,10 +2027,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: OpenEinstellungen, Assembly-CSharp
+      - m_Target: {fileID: 1959542342}
+        m_TargetAssemblyTypeName: UIMainMenu, Assembly-CSharp
         m_MethodName: SetMusicVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2219,7 +2219,6 @@ GameObject:
   m_Component:
   - component: {fileID: 912982483}
   - component: {fileID: 912982484}
-  - component: {fileID: 912982485}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -2297,18 +2296,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!114 &912982485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 912982482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27efe4f0ab397474bacc1976093ef523, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &976478977
 GameObject:
   m_ObjectHideFlags: 0
@@ -3535,10 +3522,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: OpenEinstellungen, Assembly-CSharp
+      - m_Target: {fileID: 1959542342}
+        m_TargetAssemblyTypeName: UIMainMenu, Assembly-CSharp
         m_MethodName: SetSFXVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3647,7 +3634,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1959542342}
         m_TargetAssemblyTypeName: UIMainMenu, Assembly-CSharp
-        m_MethodName: FullScreen
+        m_MethodName: SetFullscreen
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5281,12 +5268,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 406542574}
-  CanvasGroupSettings: {fileID: 1769771339}
+  canvasGroupSettings: {fileID: 1769771339}
   sliderSFX: {fileID: 827344518}
   sliderMusic: {fileID: 1406449307}
   audioMixer: {fileID: 24100000, guid: cd1261a945ccf364a84995458c09d434, type: 2}
-  dropdown: {fileID: 370324830}
-  toggle: {fileID: 1473098722}
+  resolutionDropdown: {fileID: 370324830}
+  fullscreenToggle: {fileID: 1473098722}
   settingsIsOpen: 1
 --- !u!1 &1997627945
 GameObject:

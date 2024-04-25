@@ -62,15 +62,13 @@ public class PhaseTrackScript : MonoBehaviour
 
     private IEnumerator Sprechblase()
     {
-        StartCoroutine(Neeko.Sprechblaseninhalt("Ich habe schon viel von dir geh�rt...", 2));
+        StartCoroutine(Neeko.Sprechblaseninhalt("Ich habe schon viel von dir gehoert...", 2));
         yield return new WaitForSeconds(2);
-        StartCoroutine(Neeko.Sprechblaseninhalt("Dein Ruhm bl�ht wie eine zarte Knospe,...", 3)); 
+        StartCoroutine(Neeko.Sprechblaseninhalt("Dein Ruhm blueht wie eine zarte Knospe,...", 3)); 
         yield return new WaitForSeconds(3);
-        StartCoroutine(Neeko.Sprechblaseninhalt("...doch ich werde dich wie Unkraut ausrei�en", 3));
+        StartCoroutine(Neeko.Sprechblaseninhalt("...doch ich werde dich wie Unkraut ausreissen", 3));
         yield return new WaitForSeconds(3);
         StartCoroutine(Neeko.Sprechblaseninhalt("Es wird Zeit dir ein Ende zu setzen!", 3)); 
-        yield return new WaitForSeconds(3);
-         StartCoroutine(Neeko.Sprechblaseninhalt("Ich habe einen Samenerguss", 3)); 
         yield return new WaitForSeconds(3);
         StartCoroutine(DunkelHell());
     }
@@ -98,7 +96,7 @@ public class PhaseTrackScript : MonoBehaviour
         LevelLoaderAnim.SetTrigger("Start");
         StartCoroutine(Loadhealthbar());
         yield return new WaitForSeconds(2);
-        
+        Neeko.NextPhase();
     }
 
     private IEnumerator Loadhealthbar()
@@ -133,5 +131,9 @@ public class PhaseTrackScript : MonoBehaviour
     private void Update()
     {
         transform.Rotate(Vector3.forward, 35 * Time.deltaTime);
+        if(Neeko == null){
+            
+            GameObject.Find("EventSystem").GetComponent<Scenemanager>().StartSwitch(5);
+        }
     }
 }

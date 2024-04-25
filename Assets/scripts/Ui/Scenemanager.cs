@@ -17,11 +17,13 @@ public class Scenemanager : MonoBehaviour
     {
         if (scene == 1)
             Time.timeScale = 1f;
+            print("test");
         StartCoroutine(Scenswitch(scene));
     }
 
     public void Quit()
     {
+        Time.timeScale = 1f;
         Application.Quit();
     }
 
@@ -46,6 +48,9 @@ public class Scenemanager : MonoBehaviour
                 break;
             case 4:
                 SceneManager.LoadScene("Death", LoadSceneMode.Single);
+                break;
+            case 5:
+                SceneManager.LoadScene("Victory", LoadSceneMode.Single);
                 break;
         }
     }

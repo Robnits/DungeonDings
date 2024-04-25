@@ -673,7 +673,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1866549298}
         m_TargetAssemblyTypeName: OpenEinstellungen, Assembly-CSharp
         m_MethodName: SetSFXVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11584,7 +11584,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1866549298}
         m_TargetAssemblyTypeName: OpenEinstellungen, Assembly-CSharp
-        m_MethodName: FullScreen
+        m_MethodName: SetFullscreen
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29510,7 +29510,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1866549298}
         m_TargetAssemblyTypeName: OpenEinstellungen, Assembly-CSharp
         m_MethodName: SetMusicVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

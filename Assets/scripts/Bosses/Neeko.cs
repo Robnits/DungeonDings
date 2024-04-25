@@ -24,12 +24,15 @@ public class Neeko : BossHauptklasse
     private float randomMoveDuration = 1.0f;
     private float randomMoveTimer = 1f;
 
+    private Scenemanager scenemanager;
+
     public bool playerIsInRange;
     public float delay = 0.0f;
 
     private int counter = 0;
     private void Start()
     {
+        scenemanager = GameObject.Find("EventSystem").GetComponent<Scenemanager>();
         rb = GetComponent<Rigidbody2D>();
         if (phaseTrackScript == null)
             phaseTrackScript = GameObject.Find("PhaseTracker").GetComponent<PhaseTrackScript>();
@@ -88,7 +91,7 @@ public class Neeko : BossHauptklasse
                 
                 break;
             case 3:
-                Destroy(transform.parent.gameObject);
+                scenemanager.StartSwitch(5);
                 break;
         }
     }

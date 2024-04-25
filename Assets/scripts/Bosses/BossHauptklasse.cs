@@ -37,33 +37,36 @@ public class BossHauptklasse : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            life -= player.GetComponent<PlayerBehaviour>().GetDamage(false);
-            if (life <= 0 && neeko.BattlePhase == 1){
+            if(gameObject.GetComponent<NeekoClones>() == null)
+                if(neeko.BattlePhase == 1 || neeko.BattlePhase == 2)
+                    life -= player.GetComponent<PlayerBehaviour>().GetDamage(false);
+            if (life <= 0 && neeko.phaseTrackScript.phasen == 1){
                 StartCoroutine(phaseTrackScript.PhaseChange());
-                neeko.NextPhase();
             }else if (life <= 0 && neeko.phaseTrackScript.phasen == 2)
             {
+                life = 0;
+                neeko.SetHealthbar();
                 Destroy(transform.parent.gameObject);
             }
-            if(neeko != null)
-            {
-                if(neeko.BattlePhase == 2)
-                    neeko.SetHealthbar();
-            }        
+            if (neeko != null)
+                neeko.SetHealthbar();
             if (neekoClones != null)
-                StartCoroutine(neekoClones.GetComponent<NeekoClones>().Banter());                
+                StartCoroutine(neekoClones.GetComponent<NeekoClones>().Banter());           
         }
     }
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Granade"))
         {
-            life -= player.GetComponent<PlayerBehaviour>().GetDamage(true);
+            if(gameObject.GetComponent<NeekoClones>() == null)
+                if(neeko.BattlePhase == 1 || neeko.BattlePhase == 2)
+                    life -= player.GetComponent<PlayerBehaviour>().GetDamage(true);
             if (life <= 0 && neeko.phaseTrackScript.phasen == 1){
                 StartCoroutine(phaseTrackScript.PhaseChange());
-                neeko.NextPhase();
             }else if (life <= 0 && neeko.phaseTrackScript.phasen == 2)
             {
+                life = 0;
+                neeko.SetHealthbar();
                 Destroy(transform.parent.gameObject);
             }
             if (neeko != null)

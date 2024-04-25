@@ -38,7 +38,7 @@ public class NeekoClones : BossHauptklasse
             if(canshootagain)
                 StartCoroutine(Shoot());
         }
-        if (phaseTrackScript.phasen	== 2)
+        if (phaseTrackScript.phasen	== 2 || life <= 0)
             Destroy(transform.parent.gameObject);
         
     }

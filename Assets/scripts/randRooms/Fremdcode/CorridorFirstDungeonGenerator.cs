@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
-
+/// <summary>
+/// ///////////////////////////////////////////////////////////////////////////////
+/// Fremdcode Sunny Valley Studio Folge 1 - 12
+/// https://www.youtube.com/watch?v=-QOCX6SVFsk&list=PLcRSafycjWFenI87z7uZHFv6cUG2Tzu9v
+/// </summary>
 public class CorridorFirstDungeonGenerator : SimpleRandomWalkMapGenerator
 {
     [SerializeField]

@@ -3329,7 +3329,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1933180674}
         m_TargetAssemblyTypeName: OpenEinstellungen, Assembly-CSharp
         m_MethodName: SetSFXVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10100,7 +10100,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1933180674}
         m_TargetAssemblyTypeName: OpenEinstellungen, Assembly-CSharp
         m_MethodName: SetMusicVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -17538,7 +17538,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1933180674}
         m_TargetAssemblyTypeName: OpenEinstellungen, Assembly-CSharp
-        m_MethodName: FullScreen
+        m_MethodName: SetFullscreen
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26002,9 +26002,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1654815167}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &1673922513
 GameObject:

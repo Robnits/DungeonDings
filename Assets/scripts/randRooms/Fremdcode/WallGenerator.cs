@@ -4,14 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-// Eine statische Klasse für die Erzeugung von Wänden basierend auf Bodenpositionen
+// Eine statische Klasse fï¿½r die Erzeugung von Wï¿½nden basierend auf Bodenpositionen
+/// <summary>
+/// ///////////////////////////////////////////////////////////////////////////////
+/// Fremdcode Sunny Valley Studio Folge 1 - 12
+/// https://www.youtube.com/watch?v=-QOCX6SVFsk&list=PLcRSafycjWFenI87z7uZHFv6cUG2Tzu9v
+/// </summary>
+
 public static class WallGenerator
 {
-    // Methode zum Erzeugen von Wänden auf der TilemapVisualiser anhand von Bodenpositionen
+    // Methode zum Erzeugen von Wï¿½nden auf der TilemapVisualiser anhand von Bodenpositionen
     public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualiser tilemapVisualiser)
     {
         
-        // Wandpositionen finden und einfache Wände darstellen
+        // Wandpositionen finden und einfache Wï¿½nde darstellen
         var basicWallPositions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionList);
         var cornerWallPositions = FindCornerWalls(floorPositions, Direction2D.diagonalDirectionList);
 
@@ -26,10 +32,10 @@ public static class WallGenerator
     // Methode zum Finden von Wandpositionen in bestimmten Richtungen
     private static HashSet<Vector2Int> FindWallsInDirections(HashSet<Vector2Int> floorPositions, List<Vector2Int> directionList)
     {
-        // Menge für Wandpositionen
+        // Menge fï¿½r Wandpositionen
         HashSet<Vector2Int> wallPositions = new();
 
-        // Für jede Bodenposition prüfen, ob sie Nachbarn in bestimmten Richtungen hat
+        // Fï¿½r jede Bodenposition prï¿½fen, ob sie Nachbarn in bestimmten Richtungen hat
         foreach (var position in floorPositions)
         {
             foreach (var direction in directionList)
