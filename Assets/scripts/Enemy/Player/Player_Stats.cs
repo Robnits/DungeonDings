@@ -66,7 +66,7 @@ public class player_Stats : MonoBehaviour
         moveSpeed = maxMoveSpeed;
         maxlife = 100f + GlobalVariables.healthUpgrade - 1;
         life = maxlife;
-        maxAmmunition = 6;
+        maxAmmunition = 2;
         ammunition = maxAmmunition;
         fireForce = 30f;
         attackSpeed = 1f;
