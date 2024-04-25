@@ -17,7 +17,6 @@ public class Scenemanager : MonoBehaviour
     {
         if (scene == 1)
             Time.timeScale = 1f;
-            print("test");
         StartCoroutine(Scenswitch(scene));
     }
 

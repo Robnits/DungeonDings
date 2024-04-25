@@ -139,7 +139,6 @@ public class PrefabSpawner : MonoBehaviour
                             InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.wuestengegner);
                         break;
                     case WhichBiom.Snow:
-                        print("test");
                         break;
                 }              
                 if (GiveRandomNumber() < ChestSpawnPercantage && !SpawnedPositions.Contains(position))

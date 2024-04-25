@@ -6,7 +6,6 @@ using UnityEngine.Rendering.Universal;
 
 public class GranadeScript : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Animator anim;
     public CircleCollider2D circleCollidertrigger;
     public Light2D light2D;
