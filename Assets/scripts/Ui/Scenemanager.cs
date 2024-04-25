@@ -43,6 +43,7 @@ public class Scenemanager : MonoBehaviour
                 SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
                 break;
             case 2:
+                GlobalVariables.isInBossFight = false;
                 SceneManager.LoadScene("procedural_dungeon", LoadSceneMode.Single);
                 break;
             case 3:

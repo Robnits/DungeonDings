@@ -128,9 +128,12 @@ public class Neeko : BossHauptklasse
 
     private void LookAtPlayer()
     {
-        Vector2 aimdirection = new Vector2(player.transform.position.x,player.transform.position.y) - rb.position;
-        float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg + 90;
-        rb.rotation = aimangle;
+        if (player != null)
+        {
+            Vector2 aimdirection = new Vector2(player.transform.position.x, player.transform.position.y) - rb.position;
+            float aimangle = Mathf.Atan2(aimdirection.y, aimdirection.x) * Mathf.Rad2Deg + 90;
+            rb.rotation = aimangle;
+        }
     }
 
 

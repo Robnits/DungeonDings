@@ -34,8 +34,6 @@ public class UpgradeManager : MonoBehaviour
 
     private void Awake()
     {
-        canvas.SetActive(false);
-
         commonItems = new List<string>
     {
         "Piercing 1",
