@@ -75,6 +75,7 @@ public class PhaseTrackScript : MonoBehaviour
 
     IEnumerator DunkelHell()
     {
+        yield return new WaitForSeconds(3);
         LevelLoaderAnim.SetTrigger("Start");
         yield return new WaitForSeconds(0.6f);
         globalLight.intensity = 0.01f;

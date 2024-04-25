@@ -30,7 +30,7 @@ public class Chest : MonoBehaviour
     IEnumerator Animation()
     {
         anim.SetTrigger("Open");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0);
         upgrademanager.ItemRoll();
         Destroy(gameObject);
     }
