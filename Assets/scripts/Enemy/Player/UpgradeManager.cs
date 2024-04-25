@@ -25,6 +25,8 @@ public class UpgradeManager : MonoBehaviour
     private GameObject Player;
     private int hilf;
 
+   
+
 
     private bool chose = true;
 
@@ -32,6 +34,8 @@ public class UpgradeManager : MonoBehaviour
 
     private void Awake()
     {
+        canvas.SetActive(false);
+
         commonItems = new List<string>
     {
         "Piercing 1",
