@@ -44,6 +44,12 @@ public class PrefabSpawner : MonoBehaviour
     [Range(0, 100)]
     private float wuestengegnerSpawnPercantage;
 
+    private float iceMageSpawnrate;
+    [SerializeField]
+    private GameObject iceMage;
+    
+    private float mageSpawnrate;
+
     [SerializeField]
     private GameObject Saeule;
 
@@ -53,6 +59,8 @@ public class PrefabSpawner : MonoBehaviour
         ChestSpawnPercantage = difficult.spawnChest;
         devilSpawnPercantage = difficult.devilSpawnrate;
         wuestengegnerSpawnPercantage = difficult.wuestengegnerSpawnPercantage;
+        iceMageSpawnrate = difficult.icemageSpawnrate;  
+        mageSpawnrate = difficult.mageSpawnrate;
     }
 
     public enum WhatGetSpawned
@@ -64,7 +72,9 @@ public class PrefabSpawner : MonoBehaviour
         Down,
         Up,
         Saeule,
-        wuestengegner
+        wuestengegner,
+        iceMage,
+        mage
     }
 
     private int biom;
@@ -139,8 +149,8 @@ public class PrefabSpawner : MonoBehaviour
                             InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.wuestengegner);
                         break;
                     case WhichBiom.Snow:
-                        if (GiveRandomNumber() < IceMageSpawnrate && !SpawnedPositions.Contains(position))
-                            InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.IceMage);
+                        if (GiveRandomNumber() < iceMageSpawnrate && !SpawnedPositions.Contains(position))
+                            InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.iceMage);
                         break;
                 }              
                 if (GiveRandomNumber() < ChestSpawnPercantage && !SpawnedPositions.Contains(position))

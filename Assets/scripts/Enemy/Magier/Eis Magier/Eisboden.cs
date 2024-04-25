@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Eisboden : MonoBehaviour
 {
-    public PlayerBehaviour player; 
+    private PlayerBehaviour player; 
     public GameObject damagePrefab; 
 
     private float lastSpawnTime;
