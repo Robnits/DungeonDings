@@ -14,7 +14,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Animator levelLoader;
 
     [SerializeField] private Animator anim;
-    private Player_Stats stats;
+    private player_Stats stats;
 
     private Vector2 moveDirection;
     private Vector2 mousePosition;
@@ -54,7 +54,7 @@ public class PlayerBehaviour : MonoBehaviour
         speechBubbleText = speechBubble.GetComponentInChildren<TextMeshPro>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponentInChildren<Cam_Follow>();
         levelLoader = GameObject.Find("LevelLoader").GetComponentInChildren<Canvas>().GetComponentInChildren<Image>().GetComponentInChildren<Animator>();
-        stats = gameObject.GetComponent<Player_Stats>();
+        stats = gameObject.GetComponent<player_Stats>();
         sceneChange = GameObject.FindGameObjectWithTag("Respawn");
         rb = GetComponent<Rigidbody2D>();
         light2d = speechBubble.GetComponent<Light2D>();

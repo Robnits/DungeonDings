@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Player_Stats : MonoBehaviour
+public class player_Stats : MonoBehaviour
 {
     [SerializeField]
     private Weapon weapon;
@@ -66,7 +66,7 @@ public class Player_Stats : MonoBehaviour
         moveSpeed = maxMoveSpeed;
         maxlife = 100f + GlobalVariables.healthUpgrade - 1;
         life = maxlife;
-        maxAmmunition = 2;
+        maxAmmunition = 6;
         ammunition = maxAmmunition;
         fireForce = 30f;
         attackSpeed = 1f;

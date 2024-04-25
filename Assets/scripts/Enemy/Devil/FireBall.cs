@@ -29,11 +29,7 @@ public class FireBall : MonoBehaviour
         {
 
             Vector3 directionToPlayer = player.transform.position - transform.position;
-
-            // Calculate the angle to rotate towards the player
             float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
-
-            // Rotate the enemy to face the player
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             if (Vector3.Distance(transform.position, player.transform.position) > 0f)
@@ -42,20 +38,20 @@ public class FireBall : MonoBehaviour
                 FireBallRB.velocity = moveDirection * speed;
             }
 
-            StartCoroutine(DestroyAfterTime());
+            StartCoroutine(DestroyAfterTime(3));
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);        
+        StartCoroutine(DestroyAfterTime(0.1f));
     }
 
-    IEnumerator DestroyAfterTime()
+    IEnumerator DestroyAfterTime(float time)
     { 
         if (fireBallActive)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(time);
             Destroy(gameObject);
             fireBallActive = false;
         }

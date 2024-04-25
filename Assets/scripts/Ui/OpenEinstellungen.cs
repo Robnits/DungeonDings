@@ -33,6 +33,7 @@ public class OpenEinstellungen : MonoBehaviour
         LoadVolumeSettings();
         LoadResolutionSettings();
         LoadFullscreenSettings();
+        LoadTutorial();
     }
 
     private void LoadVolumeSettings()
@@ -172,5 +173,10 @@ public class OpenEinstellungen : MonoBehaviour
             canvasGroupSteuerungUI.alpha = showTutorial ? 1 : 0;
             toggle.isOn = showTutorial;
         }
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

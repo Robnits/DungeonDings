@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     private GameObject bulletPrefab;
     [SerializeField] 
     private Transform firepoint;
-    private Player_Stats stats;
+    private player_Stats stats;
     [SerializeField] 
     private GameObject granadePrefab;
 
@@ -17,17 +17,29 @@ public class Weapon : MonoBehaviour
 
     private int ammunition = 2;
     private bool hasGranade = true;
+    private int currentmaxammo;
 
     public void ChangeBullets(int changedBullets)
     {
         ammunition += changedBullets;
     }
 
-    private void Awake()
+    private void Start()
     {
-        stats = gameObject.GetComponentInParent<Player_Stats>();
+        
+        stats = gameObject.GetComponentInParent<player_Stats>();
+        ammunition = stats.maxAmmunition;
+        currentmaxammo = stats.maxAmmunition;
     }
 
+    private void Update()
+    {
+        if(currentmaxammo  < stats.maxAmmunition)
+        {
+            ammunition++;
+            currentmaxammo = stats.maxAmmunition;   
+        }
+    }
     public void Granade()
     {
         if (hasGranade)

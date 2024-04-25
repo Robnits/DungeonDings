@@ -176,6 +176,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poisondmg: 0
   firedmg: 0
-  dmg: 0
+  dmg: 10
   dot: 0
   damageTime: 0

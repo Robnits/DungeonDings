@@ -190,7 +190,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void UpgradeAndDeletion(int positionInList, int rarity)
     {
-        Player.GetComponent<Player_Stats>().Upgrades(positionInList, rarity);
+        Player.GetComponent<player_Stats>().Upgrades(positionInList, rarity);
         if (rarity == 0)
             commonItems.Remove(commonItems[positionInList]);
         else if (rarity == 1)
