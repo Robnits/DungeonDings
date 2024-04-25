@@ -15,7 +15,6 @@ public class Player_Stats : MonoBehaviour
     private PlayerBehaviour playerScript;
 
 
-    // Player stats
     public float maxMoveSpeed;
     public float moveSpeed;
 
@@ -30,7 +29,6 @@ public class Player_Stats : MonoBehaviour
     public float damage;
     public float dashmaxCooldown;
 
-    // Item lists
     private List<string> commonItems;
     private List<string> rareItems;
     private List<string> epicItems;
@@ -64,7 +62,6 @@ public class Player_Stats : MonoBehaviour
 
     private void InstantiateStats()
     {
-        // Initialize player stats
         maxMoveSpeed = 2.5f;
         moveSpeed = maxMoveSpeed;
         maxlife = 100f + GlobalVariables.healthUpgrade - 1;
@@ -165,7 +162,7 @@ public class Player_Stats : MonoBehaviour
         {
             "Maschine Pistole",
             "Marksmanrifle",
-            "Glass Cannon",
+            "Bumm Bumm Frucht",
             "Schwere Ruestung"
         };
 
@@ -174,7 +171,8 @@ public class Player_Stats : MonoBehaviour
             "Deathsentence",
             "Minigun",
             "Ultra Boots",
-            "Legendary Dash"
+            "Legendary Dash",
+            "Glass Cannon"
         };
 
     }
@@ -183,21 +181,21 @@ public class Player_Stats : MonoBehaviour
     {
 
 
-        // Map item names to actions using a dictionary
+    
         Dictionary<string, Action> upgradeActions = rarity switch
         {
             0 => new Dictionary<string, Action>
                 {
                     { "Hartes Geschoss", () => damage += 0.2f },
                     { "Helm", () => {maxlife += 5f; GetHealth(5); } },
-                    { "Laufschuhe", () => moveSpeed += 0.4f },
+                    { "Laufschuhe", () => moveSpeed += 0.3f },
                     { "Super Dash", () => dashmaxCooldown -= 1f },
-                    { "Energy Drink", () => {moveSpeed += 0.3f; dashmaxCooldown -= 0.5f; } },
+                    { "Energy Drink", () => {moveSpeed += 0.2f; dashmaxCooldown -= 0.5f; } },
                     { "Schneller Schuss", () => {attackSpeed *= 0.9f; fireForce += 10f; } },
                     { "Kleines Waffenwissen", () => { attackSpeed *= 0.95f; damage += 0.5f; } },
                     { "Big Shot", () => damage += 0.3f },
                     { "Grosses Magazin", () => {maxAmmunition += 1; BulletChanges(maxAmmunition); } },
-                    { "Licht und Schatten", () => {{attackSpeed += 5f; maxAmmunition -= 1; BulletChanges(maxAmmunition);  } } }
+                    { "Licht und Schatten", () => {{attackSpeed -= 0.5f; maxAmmunition -= 1; BulletChanges(maxAmmunition);  } } }
 
                 },
             1 => new Dictionary<string, Action>
@@ -212,15 +210,16 @@ public class Player_Stats : MonoBehaviour
                 {
                     { "Maschine Pistole", () => {attackSpeed *= 1f;} },
                     { "Marksmanrifle", () => {damage += 1f; attackSpeed *= 0.5f;} },
-                    { "Glass Cannon", () => {maxlife -= 99f; damage += 3f;} },
-                    { "Schwere Ruestung", () => {maxlife += 20f; GetHealth(20);} }
+                    { "Bumm Bumm Frucht", () => {maxlife -= 50f; damage += 2.5f; GetHealth(0);} },
+                    { "Schwere Ruestung", () => {maxlife += 50f; GetHealth(50);} }
                 },
             3 => new Dictionary<string, Action>
                 {
-                    { "Minigun", () => {damage -= 1f; attackSpeed *= 5f;} },
+                    { "Minigun", () => {damage /= 2f; attackSpeed -= 3f;} },
                     { "Deathsentence", () => {damage += 5f;} },
-                    { "Ultra Boots", () => {moveSpeed += 2.5f;} },
-                    { "Legendary Dash", () => {/* Add implementation for legendary items */} }
+                    { "Ultra Boots", () => {moveSpeed += 1.5f;} },
+                    { "Legendary Dash", () => {dashmaxCooldown -= 4f;} },
+                    { "Glass Cannon", () => {maxlife = 1f; damage += 8f; GetHealth(0);} }
                 },
             _ => throw new System.NotImplementedException()
         };

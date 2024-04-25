@@ -30,7 +30,7 @@ public class UpgradeManager : MonoBehaviour
 
     private bool chose = true;
 
-    private readonly int[] tempaugments = new int[3]; // Initialize the array with size 3
+    private readonly int[] tempaugments = new int[3]; 
 
     private void Awake()
     {
@@ -61,7 +61,7 @@ public class UpgradeManager : MonoBehaviour
     {
         "Maschine Pistole",
         "Marksmanrifle",
-        "Glass Cannon",
+        "Bumm Bumm Frucht",
         "Schwere Ruestung"
     };
 
@@ -70,7 +70,8 @@ public class UpgradeManager : MonoBehaviour
         "Deathsentence",
         "Minigun",
         "Ultra Boots",
-        "Legendary Dash"
+        "Legendary Dash",
+        "Glass Cannon"
     };
 
         lists = new List<List<string>> { commonItems, rareItems, epicItems, legendaryItems };
@@ -110,15 +111,15 @@ public class UpgradeManager : MonoBehaviour
                 {
                     GenerateRandomItem(i, legendaryItems, Color.yellow);
                 }
-                else if (rarity < 5 && rarity > 0)
+                else if (rarity < 6 && rarity > 0)
                 {
                     GenerateRandomItem(i, epicItems, Color.magenta);
                 }
-                else if (rarity < 15 && rarity >= 5)
+                else if (rarity < 20 && rarity >= 6)
                 {
                     GenerateRandomItem(i, rareItems, Color.blue);
                 }
-                else if (rarity >= 15)
+                else if (rarity >= 20)      
                 {
                     GenerateRandomItem(i, commonItems, Color.green);
                 }
