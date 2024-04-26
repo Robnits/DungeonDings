@@ -15,6 +15,6 @@ MonoBehaviour:
   spawnChest: 5
   spawnSpawner: 10
   devilSpawnrate: 1
-  wuestengegnerSpawnPercantage: 1
+  wuestengegnerSpawnPercantage: 5
   mageSpawnrate: 5
   icemageSpawnrate: 5

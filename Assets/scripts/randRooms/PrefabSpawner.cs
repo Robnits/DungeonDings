@@ -12,7 +12,6 @@ public class PrefabSpawner : MonoBehaviour
     private int stairnumber = 0;
     private readonly List<Vector2Int> SpawnedPositions = new();
     private bool dontSpawnFirstStair = true;
-    //private bool dontSpawnFirstRoom = true;
 
     [SerializeField]
     private BalancingSystemSO easy;
@@ -47,7 +46,10 @@ public class PrefabSpawner : MonoBehaviour
     private float iceMageSpawnrate;
     [SerializeField]
     private GameObject iceMage;
-    
+
+    [SerializeField]
+    private GameObject mage;
+
     private float mageSpawnrate;
 
     [SerializeField]
@@ -143,6 +145,8 @@ public class PrefabSpawner : MonoBehaviour
                         
                         if (GiveRandomNumber() < devilSpawnPercantage && !SpawnedPositions.Contains(position))
                             InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.Devil);
+                        if (GiveRandomNumber() < iceMageSpawnrate && !SpawnedPositions.Contains(position))
+                            InstantiatePrefabsThatSpawnOnMap(position, WhatGetSpawned.mage);
                         break;
                     case WhichBiom.Jungle:
                         if (GiveRandomNumber() < wuestengegnerSpawnPercantage && !SpawnedPositions.Contains(position))
@@ -167,7 +171,6 @@ public class PrefabSpawner : MonoBehaviour
         switch (whatGetGenerated)
         {
             case WhatGetSpawned.RatSpawner:
-                // Instantiate the ratspawner at the chosen position
                 Instantiate(ratspwaner, new Vector3(position.x + 0.5f, position.y + 0.5f, 0f), Quaternion.identity, parentGameobject.transform);
                 break;
             case WhatGetSpawned.Chest:
@@ -187,6 +190,12 @@ public class PrefabSpawner : MonoBehaviour
                 break;
             case WhatGetSpawned.wuestengegner:
                 Instantiate(wuestengegner, new Vector3(position.x + 0.5f, position.y + 1f, 0f), Quaternion.identity, parentGameobject.transform);
+                break;
+            case WhatGetSpawned.iceMage:
+                Instantiate(iceMage, new Vector3(position.x + 0.5f, position.y + 1f, 0f), Quaternion.identity, parentGameobject.transform);
+                break;
+            case WhatGetSpawned.mage:
+                Instantiate(mage, new Vector3(position.x + 0.5f, position.y + 1f, 0f), Quaternion.identity, parentGameobject.transform);
                 break;
         }
     }
