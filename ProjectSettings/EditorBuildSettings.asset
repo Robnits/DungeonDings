@@ -12,10 +12,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Shop.unity
     guid: 595432ac5601ba34fbcbe24a32cb8a60
   - enabled: 1
-    path: Assets/Scenes/procedural dungeon.unity
-    guid: b1652e18db607da4cbc704161a67f5f5
+    path: Assets/Scenes/procedural_dungeon.unity
+    guid: 818678a15e5618c4eb2cbf0c2d266744
   - enabled: 1
     path: Assets/Scenes/MarcelBossfight.unity
     guid: f35a2ebbb1f7f4946ba53145c0be1901
+  - enabled: 1
+    path: Assets/Scenes/Death.unity
+    guid: 57878f89a31110f43aab1cd11708bbec
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: b5b7feb59b889f44088eea1a186c16e3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ad31d63ef9d7d584ea2baf493af91a0f, type: 2}

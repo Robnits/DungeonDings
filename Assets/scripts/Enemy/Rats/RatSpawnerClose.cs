@@ -23,7 +23,7 @@ public class RatSpawnerClose : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInRange = true;
-            player.GetComponent<Player_behjaviour>().SprechblasePressE(true);
+            player.GetComponent<PlayerBehaviour>().SprechblasePressE(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -32,7 +32,7 @@ public class RatSpawnerClose : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInRange = false;
-            player.GetComponent<Player_behjaviour>().SprechblasePressE(false);
+            player.GetComponent<PlayerBehaviour>().SprechblasePressE(false);
         }
     }
 

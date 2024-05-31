@@ -71,7 +71,7 @@ public class Stairs : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player_behjaviour>().SprechblasePressE(true);
+            collision.gameObject.GetComponent<PlayerBehaviour>().SprechblasePressE(true);
             isPlayerInRange = true;
         }
     }
@@ -80,7 +80,7 @@ public class Stairs : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player_behjaviour>().SprechblasePressE(false);
+            collision.gameObject.GetComponent<PlayerBehaviour>().SprechblasePressE(false);
             isPlayerInRange = false;
         }
     }

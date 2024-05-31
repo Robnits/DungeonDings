@@ -30,7 +30,7 @@ public class Chest : MonoBehaviour
     IEnumerator Animation()
     {
         anim.SetTrigger("Open");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0);
         upgrademanager.ItemRoll();
         Destroy(gameObject);
     }
@@ -39,7 +39,7 @@ public class Chest : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInRange = true;
-            collision.gameObject.GetComponent<Player_behjaviour>().SprechblasePressE(true);
+            collision.gameObject.GetComponent<PlayerBehaviour>().SprechblasePressE(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -47,7 +47,7 @@ public class Chest : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInRange = false;
-            collision.gameObject.GetComponent<Player_behjaviour>().SprechblasePressE(false);
+            collision.gameObject.GetComponent<PlayerBehaviour>().SprechblasePressE(false);
         }
     }
 }
